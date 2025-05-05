@@ -2,13 +2,14 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-05 18:31:16
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-05 19:29:39
+ * @LastEditTime: 2025-05-05 19:56:15
  * @FilePath: /24k-finance-website/app/page.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import Image from "next/image"; // 保留 Image 组件导入，可能之后会用到
 import CaseStudyCard from "@/app/components/CaseStudyCard"; // 导入 CaseStudyCard 组件
 import CallToAction from "@/app/components/CallToAction"; 
+import SolanaConnectButton from "@/app/components/SolanaConnectButton"; // 导入 SolanaConnectButton 组件
 
 // 定义 “我的金矿” 卡片数据
 const goldMineItems = [
@@ -71,9 +72,7 @@ export default function Home() {
         {/* <h2 className="text-3xl font-bold mb-8">我的金矿</h2> */}
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold">我的金矿</h2>
-          <button className="text-sm border border-gray-600 rounded-full px-4 py-2 text-gray-300 hover:bg-white/10 hover:border-white transition-colors flex items-center gap-2">
-            Connect Wallet <span aria-hidden="true">→</span>
-          </button>
+          <SolanaConnectButton />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
