@@ -1,0 +1,26 @@
+{
+    "step1Title": "步骤 1: 个人信息",
+    "fullName": "全名",
+    "enterFullName": "请输入您的全名",
+    "idType": "证件类型",
+    "idNumber": "证件号码",
+    "enterIdNumber": "请输入您的证件号码",
+    "country": "国家/地区",
+    "address": "居住地址",
+    "phone": "手机号码",
+    "email": "电子邮箱",
+    "next": "下一步",
+    "back": "上一步",
+    "submit": "提交",
+    "selfie": "自拍照片",
+    "upload": "上传",
+    "kycStatus": "KYC状态",
+    "statusPending": "审核中",
+    "statusApproved": "已通过",
+    "statusRejected": "已拒绝",
+    "messagePending": "您的KYC申请正在审核中，请耐心等待。审核通常需要1-3个工作日。",
+    "messageApproved": "恭喜！您的KYC申请已通过审核。",
+    "messageRejected": "很遗憾，您的KYC申请未通过审核。请检查您提供的信息是否准确，然后重新提交。",
+    "connectWallet": "请先连接钱包"
+  }
+  

@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-07 17:36:24
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-07 20:55:50
+ * @LastEditTime: 2025-05-07 21:26:01
  * @FilePath: /24k-finance-website/app/utils/index.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -23,6 +23,8 @@ export async function getMessages(locale: string) {
     miningPlatform: (await import(`@/locales/${locale}/miningPlatform.json`)).default,
     footers: (await import(`@/locales/${locale}/footers.json`)).default,
     common: (await import(`@/locales/${locale}/common.json`)).default,
+    cta: (await import(`@/locales/${locale}/cta.json`)).default,
+    kyc: (await import(`@/locales/${locale}/kyc.json`)).default,
   };
   
   return messages;

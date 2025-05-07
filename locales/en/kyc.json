@@ -1,0 +1,26 @@
+{
+    "step1Title": "Step 1: Personal Information",
+    "fullName": "Full Name",
+    "enterFullName": "Enter your full name",
+    "idType": "ID Type",
+    "idNumber": "ID Number",
+    "enterIdNumber": "Enter your ID number",
+    "country": "Country/Region",
+    "address": "Residential Address",
+    "phone": "Phone Number",
+    "email": "Email",
+    "next": "Next",
+    "back": "Back",
+    "submit": "Submit",
+    "selfie": "Selfie Photo",
+    "upload": "Upload",
+    "kycStatus": "KYC Status",
+    "statusPending": "Pending",
+    "statusApproved": "Approved",
+    "statusRejected": "Rejected",
+    "messagePending": "Your KYC application is under review. Please wait 1–3 business days.",
+    "messageApproved": "Congratulations! Your KYC is approved.",
+    "messageRejected": "Sorry, your KYC was rejected. Please check your information and resubmit.",
+    "connectWallet": "Please connect your wallet first"
+  }
+  
