@@ -3,8 +3,10 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
+import { useTranslations } from "next-intl"
 
 export function MiningPlatformHero() {
+  const t = useTranslations('miningPlatform');
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [particles, setParticles] = useState<any[]>([])
   
@@ -61,7 +63,7 @@ export function MiningPlatformHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          区块链矿场质押-融资平台
+          {t('title')}
         </motion.h1>
         
         <motion.p 
@@ -70,7 +72,7 @@ export function MiningPlatformHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          安全 · 高效 · 透明的矿场质押与融资服务
+          {t('subtitle')}
         </motion.p>
         
         <motion.div
@@ -83,7 +85,7 @@ export function MiningPlatformHero() {
             // className="bg-gradient-to-r from-[#9945FF] to-[#14F195] hover:from-[#8752F3] hover:to-[#00C2FF] text-white px-8 py-6 rounded-lg text-lg font-medium shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-[#14F195]/30"
             className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-6 rounded-lg text-lg font-medium shadow-lg transition-colors duration-300 cursor-pointer"
           >
-            立即体验
+            {t('button')}
           </Button>
         </motion.div>
       </div>

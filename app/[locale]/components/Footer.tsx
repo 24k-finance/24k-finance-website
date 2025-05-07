@@ -2,37 +2,70 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-05 19:25:10
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-05 19:25:16
+ * @LastEditTime: 2025-05-07 20:58:53
  * @FilePath: /24k-finance-website/app/components/Footer.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
-import React from 'react';
+"use client";
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { Youtube, Twitter, Github, Send, Globe } from 'lucide-react'; // 导入一些社交图标和地球图标
+import { useTranslations, useLocale } from 'next-intl';
+import { Link, useRouter, usePathname } from '@/i18n/navigation';
+import { Youtube, Twitter, Github, Send, Globe } from 'lucide-react';
 
 const Footer: React.FC = () => {
+  const t = useTranslations('footers');
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // 关闭下拉菜单的点击外部处理器
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleLanguageChange = (newLocale: string) => {
+    router.replace(pathname, { locale: newLocale });
+    setIsOpen(false);
+  };
+
+  const toggleDropdown = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsOpen(!isOpen);
+  };
+
   const socialLinks = [
     { Icon: Youtube, href: '#', label: 'YouTube' },
     { Icon: Twitter, href: '#', label: 'Twitter' },
-    // { Icon: Discord, href: '#', label: 'Discord' }, // 需要找到合适的 Discord 图标或使用文字
+    // { Icon: Discord, href: '#', label: 'Discord' },
     { Icon: Github, href: '#', label: 'GitHub' },
-    { Icon: Send, href: '#', label: 'Telegram' }, // 使用 Send 图标代替 Telegram
+    { Icon: Send, href: '#', label: 'Telegram' },
   ];
 
   const footerLinks = {
-    '24K Finance': [ // 使用你的项目名称
-      { name: '关于我们', href: '#' },
-      { name: '路线图', href: '#' },
-      { name: '媒体资料', href: '#' },
-      { name: '加入我们', href: '#' },
-      { name: '免责声明', href: '#' },
-      { name: '隐私政策', href: '#' },
+    [t('company')]: [
+      { name: t('about'), href: '#' },
+      { name: t('roadmap'), href: '#' },
+      { name: t('media'), href: '#' },
+      { name: t('joinUs'), href: '#' },
+      { name: t('disclaimer'), href: '#' },
+      { name: t('privacy'), href: '#' },
     ],
-    '取得联系': [
-      { name: '博客', href: '#' },
-      { name: '新闻通讯', href: '#' },
-      { name: '联系我们', href: '#' },
+    [t('contact')]: [
+      { name: t('blog'), href: '#' },
+      { name: t('newsletter'), href: '#' },
+      { name: t('contactUs'), href: '#' },
     ],
   };
 
@@ -41,14 +74,13 @@ const Footer: React.FC = () => {
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Left Section: Logo, Socials, Copyright */}
         <div className="md:col-span-1 space-y-4">
-          <p className="text-xs font-semibold text-gray-500 uppercase">管理者</p>
+          <p className="text-xs font-semibold text-gray-500 uppercase">{t('administrator')}</p>
           <Link href="/" className="inline-block">
-            {/* 使用你的 Logo */}
             <Image
-              src="/24k.svg" // 确保 public 目录下有这个 logo 文件
+              src="/24k.svg"
               alt="24K Logo"
-              width={150} // 调整尺寸
-              height={36} // 调整尺寸
+              width={150}
+              height={36}
             />
           </Link>
           <div className="flex space-x-3">
@@ -60,7 +92,7 @@ const Footer: React.FC = () => {
             ))}
           </div>
           <p className="text-xs text-gray-500 pt-4">
-            © {new Date().getFullYear()} 24K Finance 版权所有
+            © {new Date().getFullYear()} {t('copyright')}
           </p>
         </div>
 
@@ -80,14 +112,42 @@ const Footer: React.FC = () => {
               </ul>
             </div>
           ))}
-           {/* Language Selector Placeholder */}
-           <div>
-             <h3 className="text-sm font-semibold text-gray-200 mb-4 uppercase invisible">语言</h3> {/* Invisible title for alignment */}
-             <button className="flex items-center text-sm hover:text-white transition-colors">
+           {/* 语言选择器 */}
+           <div ref={dropdownRef} className="relative">
+             <h3 className="text-sm font-semibold text-gray-200 mb-4 uppercase">{t('language')}</h3>
+             <button 
+               onClick={toggleDropdown}
+               className="flex items-center text-sm hover:text-white transition-colors"
+             >
                <Globe size={16} className="mr-2" />
-               ZH
+               {locale === "zh" ? "中文" : "English"}
                <span className="ml-1 text-xs">▾</span>
              </button>
+             
+             {isOpen && (
+               <div className="absolute mt-2 w-32 bg-gray-900 border border-gray-700 rounded-md shadow-lg z-50">
+                 <button
+                   onClick={() => handleLanguageChange("zh")}
+                   className={`block w-full text-left px-4 py-2 text-sm ${
+                     locale === "zh"
+                       ? "bg-purple-900/50 text-white"
+                       : "text-gray-300 hover:bg-gray-800"
+                   }`}
+                 >
+                   中文
+                 </button>
+                 <button
+                   onClick={() => handleLanguageChange("en")}
+                   className={`block w-full text-left px-4 py-2 text-sm ${
+                     locale === "en"
+                       ? "bg-purple-900/50 text-white"
+                       : "text-gray-300 hover:bg-gray-800"
+                   }`}
+                 >
+                   English
+                 </button>
+               </div>
+             )}
            </div>
         </div>
       </div>
