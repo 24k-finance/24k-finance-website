@@ -1,0 +1,74 @@
+{
+    "common": {
+      "home": "Home",
+      "kyc": "KYC Verification",
+      "launch": "LAUNCH Mining",
+      "market": "Mining Market",
+      "staking": "My Staking",
+      "connectWallet": "Connect Wallet",
+      "connecting": "Connecting...",
+      "connected": "Connected: {address}"
+    },
+    "home": {
+      "hero": {
+        "title": "Blockchain Mining Staking-Financing Platform",
+        "subtitle": "Safe · Efficient · Transparent Mining Staking and Financing Services",
+        "cta": "Get Started"
+      },
+      "myGoldMine": "My Gold Mine",
+      "activeMining": "Active Mining",
+      "todayEstimate": "Today's Estimate",
+      "caseStudies": "Case Studies",
+      "viewCaseStudies": "View Case Studies",
+      "joinUs": {
+        "title": "It's time to join thousands of creators, artists, and developers using 24K.",
+        "cta": "Subscribe Now"
+      }
+    },
+    "launch": {
+      "title": "LAUNCH Mining",
+      "subtitle": "Publish your mining project to attract investors",
+      "success": "Mining project published successfully!",
+      "successMessage": "Your mining project has been submitted successfully. We will review it within 24 hours. After approval, your mining will be displayed in the market.",
+      "connectWalletPrompt": "Please connect your wallet to publish a mining project",
+      "miningInfo": "Mining Information",
+      "name": "Mining Name",
+      "type": "Mining Type",
+      "description": "Mining Description",
+      "coverImage": "Mining Cover Image",
+      "uploadPrompt": "Click to upload or drag and drop files here",
+      "selectFile": "Select File",
+      "imageRequirements": "Supports JPG, PNG formats, recommended size 1200x630, file size not exceeding 5MB",
+      "technicalSpecs": "Technical Specifications",
+      "hashRate": "Hash Rate",
+      "powerConsumption": "Power Consumption",
+      "location": "Mining Location",
+      "investmentInfo": "Investment Information",
+      "price": "Price",
+      "roi": "Expected Return Rate",
+      "duration": "Contract Period",
+      "totalUnits": "Total Shares",
+      "minInvestment": "Minimum Investment",
+      "contactInfo": "Contact Information",
+      "email": "Contact Email",
+      "phone": "Contact Phone",
+      "publish": "Publish Mining",
+      "submitting": "Submitting...",
+      "notes": {
+        "title": "Mining Publication Notes",
+        "review": "All mining projects need to be reviewed by the platform, which usually takes 1-2 business days",
+        "accuracy": "Please ensure that you provide true and accurate mining information, false information will result in the project being rejected",
+        "fee": "Publishing mining requires a 0.1 SOL on-chain fee to ensure project authenticity",
+        "management": "After the mining goes online, the platform will charge a 5% management fee",
+        "support": "If you have any questions, please contact our customer service team: support@24k-finance.com"
+      }
+    },
+    "miningTypes": {
+      "BTC": "Bitcoin",
+      "ETH": "Ethereum",
+      "SOL": "Solana",
+      "FIL": "Filecoin",
+      "DOGE": "Dogecoin",
+      "OTHER": "Other"
+    }
+  }

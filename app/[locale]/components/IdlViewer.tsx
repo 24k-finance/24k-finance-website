@@ -8,7 +8,7 @@
  */
 "use client"
 
-import { useIdl } from '@/app/hooks/useIdl';
+import { useIdl } from '@/app/[locale]/hooks/useIdl';
 import { useState } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 

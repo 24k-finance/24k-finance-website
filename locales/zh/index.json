@@ -1,0 +1,74 @@
+{
+    "common": {
+      "home": "首页",
+      "kyc": "KYC认证",
+      "launch": "LAUNCH矿场",
+      "market": "矿场市场",
+      "staking": "我的质押",
+      "connectWallet": "连接钱包",
+      "connecting": "连接中...",
+      "connected": "已连接: {address}"
+    },
+    "home": {
+      "hero": {
+        "title": "区块链矿场质押-融资平台",
+        "subtitle": "安全 · 高效 · 透明的矿场质押与融资服务",
+        "cta": "立即体验"
+      },
+      "myGoldMine": "我的金矿",
+      "activeMining": "活跃矿机",
+      "todayEstimate": "今日预估",
+      "caseStudies": "案例研究",
+      "viewCaseStudies": "前往案例研究",
+      "joinUs": {
+        "title": "是时候加入成千上万的创作者、艺术家和开发者们，一起使用 24K 了。",
+        "cta": "立即认购"
+      }
+    },
+    "launch": {
+      "title": "LAUNCH矿场",
+      "subtitle": "发布您的矿场项目，吸引投资者参与",
+      "success": "矿场发布成功！",
+      "successMessage": "您的矿场项目已成功提交，我们将在24小时内审核。审核通过后，您的矿场将在市场中展示。",
+      "connectWalletPrompt": "请先连接您的钱包以发布矿场项目",
+      "miningInfo": "矿场信息",
+      "name": "矿场名称",
+      "type": "矿场类型",
+      "description": "矿场描述",
+      "coverImage": "矿场封面图片",
+      "uploadPrompt": "点击上传或拖拽文件到此处",
+      "selectFile": "选择文件",
+      "imageRequirements": "支持JPG, PNG格式，建议尺寸1200x630，文件大小不超过5MB",
+      "technicalSpecs": "技术规格",
+      "hashRate": "算力",
+      "powerConsumption": "功耗",
+      "location": "矿场位置",
+      "investmentInfo": "投资信息",
+      "price": "价格",
+      "roi": "预期回报率",
+      "duration": "合约期限",
+      "totalUnits": "总份额",
+      "minInvestment": "最小投资额",
+      "contactInfo": "联系信息",
+      "email": "联系邮箱",
+      "phone": "联系电话",
+      "publish": "发布矿场",
+      "submitting": "提交中...",
+      "notes": {
+        "title": "矿场发布说明",
+        "review": "所有矿场项目需要经过平台审核，审核通常需要1-2个工作日",
+        "accuracy": "请确保提供真实、准确的矿场信息，虚假信息将导致项目被拒绝",
+        "fee": "发布矿场需要支付0.1 SOL的上链费用，用于确保项目真实性",
+        "management": "矿场上线后，平台将收取5%的管理费用",
+        "support": "如有任何问题，请联系我们的客服团队: support@24k-finance.com"
+      }
+    },
+    "miningTypes": {
+      "BTC": "比特币",
+      "ETH": "以太坊",
+      "SOL": "Solana",
+      "FIL": "Filecoin",
+      "DOGE": "Dogecoin",
+      "OTHER": "其他"
+    }
+  }

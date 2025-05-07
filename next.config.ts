@@ -1,7 +1,11 @@
-import type { NextConfig } from "next";
+import { config } from 'process';
+import createNextIntlPlugin from 'next-intl/plugin';
 
-const nextConfig: NextConfig = {
-  /* config options here */
+const withNextIntl = createNextIntlPlugin();
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // 您的其他 Next.js 配置
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

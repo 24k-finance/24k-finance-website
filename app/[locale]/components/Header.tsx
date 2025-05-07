@@ -2,21 +2,26 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-05 19:07:58
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-07 16:35:45
+ * @LastEditTime: 2025-05-07 20:37:00
  * @FilePath: /24k-finance-website/app/components/Header.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
+"use client";
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Header: React.FC = () => {
+  const t = useTranslations('header.header');
+  
   const navItems = [
-    { name: '首页', href: '/' },
-    { name: 'KYC认证', href: '/kyc' },
-    { name: 'LAUNCH矿场', href: '/launch' },
-    { name: '矿场市场', href: '/market' },
-    { name: '我的质押', href: '/staking' },
+    { name: t('home'), href: '/' },
+    { name: t('kyc'), href: '/kyc' },
+    { name: t('launch'), href: '/launch' },
+    { name: t('market'), href: '/market' },
+    { name: t('staking'), href: '/staking' },
   ];
 
   return (
@@ -50,9 +55,7 @@ const Header: React.FC = () => {
               </Link>
             ))}
           </nav>
-
-          {/* Search Button (注释掉的部分保持不变) */}
-          {/* ... existing code ... */}
+          <LanguageSwitcher />
         </div>
       </div>
     </header>

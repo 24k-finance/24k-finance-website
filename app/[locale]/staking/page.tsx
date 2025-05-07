@@ -4,7 +4,16 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useWallet } from "@solana/wallet-adapter-react";
-import SolanaConnectButton from "@/app/components/SolanaConnectButton";
+import dynamic from "next/dynamic";
+// import SolanaConnectButton from "@/app/components/SolanaConnectButton";
+
+const SolanaConnectButton = dynamic(
+  () => import('../components/SolanaConnectButton').then((mod) => mod.SolanaConnectButton),
+  {
+    ssr: false, // 关键：禁用服务器端渲染
+    loading: () => <p>正在加载登录组件...</p> // 可选：添加加载状态指示器
+  }
+);
 
 // 模拟质押数据
 const stakingPools = [

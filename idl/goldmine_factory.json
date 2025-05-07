@@ -1,0 +1,111 @@
+{
+    "address": "91N4aCumtu3x4E4SgqS8cKfKXk3LdHuHqN5xZ1qnunkV",
+    "metadata": {
+      "name": "goldmine_factory",
+      "version": "0.1.0",
+      "spec": "0.1.0"
+    },
+    "instructions": [
+      {
+        "name": "create_instance",
+        "discriminator": [
+          144,
+          215,
+          115,
+          236,
+          153,
+          53,
+          87,
+          28
+        ],
+        "accounts": [
+          {
+            "name": "instance",
+            "writable": true,
+            "pda": {
+              "seeds": [
+                {
+                  "kind": "const",
+                  "value": [
+                    105,
+                    110,
+                    115,
+                    116,
+                    97,
+                    110,
+                    99,
+                    101
+                  ]
+                },
+                {
+                  "kind": "arg",
+                  "path": "name"
+                }
+              ]
+            }
+          },
+          {
+            "name": "authority",
+            "writable": true,
+            "signer": true
+          },
+          {
+            "name": "system_program",
+            "address": "11111111111111111111111111111111"
+          }
+        ],
+        "args": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "program_id",
+            "type": "pubkey"
+          }
+        ]
+      }
+    ],
+    "accounts": [
+      {
+        "name": "Instance",
+        "discriminator": [
+          202,
+          22,
+          81,
+          185,
+          174,
+          92,
+          85,
+          47
+        ]
+      }
+    ],
+    "types": [
+      {
+        "name": "Instance",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "name",
+              "type": {
+                "array": [
+                  "u8",
+                  32
+                ]
+              }
+            },
+            {
+              "name": "program_id",
+              "type": "pubkey"
+            },
+            {
+              "name": "authority",
+              "type": "pubkey"
+            }
+          ]
+        }
+      }
+    ]
+  }
