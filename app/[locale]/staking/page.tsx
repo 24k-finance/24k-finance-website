@@ -5,13 +5,14 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useWallet } from "@solana/wallet-adapter-react";
 import dynamic from "next/dynamic";
+import { useTranslations } from "next-intl";
 // import SolanaConnectButton from "@/app/components/SolanaConnectButton";
 
 const SolanaConnectButton = dynamic(
   () => import('../components/SolanaConnectButton').then((mod) => mod.SolanaConnectButton),
   {
     ssr: false, // 关键：禁用服务器端渲染
-    loading: () => <p></p> // 可选：添加加载状态指示器
+    loading: () => <p>正在加载登录组件...</p> // 可选：添加加载状态指示器
   }
 );
 
@@ -53,6 +54,7 @@ const stakingPools = [
 ];
 
 export default function StakingIndex() {
+  const t = useTranslations('staking');
   const [activeTab, setActiveTab] = useState("active");
   const [stakeAmount, setStakeAmount] = useState("");
   const [selectedPool, setSelectedPool] = useState<number | null>(null);
@@ -61,7 +63,7 @@ export default function StakingIndex() {
   // 处理质押操作
   const handleStake = (poolId: number) => {
     if (!connected) {
-      alert("请先连接钱包");
+      alert(t('connectWalletAlert'));
       return;
     }
     setSelectedPool(poolId);
@@ -72,7 +74,7 @@ export default function StakingIndex() {
   // 处理提取操作
   const handleWithdraw = (poolId: number) => {
     if (!connected) {
-      alert("请先连接钱包");
+      alert(t('connectWalletAlert'));
       return;
     }
     // 这里可以添加提取逻辑
@@ -82,7 +84,7 @@ export default function StakingIndex() {
   // 处理收获奖励操作
   const handleHarvest = (poolId: number) => {
     if (!connected) {
-      alert("请先连接钱包");
+      alert(t('connectWalletAlert'));
       return;
     }
     // 这里可以添加收获奖励逻辑
@@ -95,8 +97,8 @@ export default function StakingIndex() {
         {/* 页面标题和连接钱包按钮 */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
           <div>
-            <h1 className="text-4xl font-bold mb-2">我的质押</h1>
-            <p className="text-gray-400">安全、高收益的矿机质押服务</p>
+            <h1 className="text-4xl font-bold mb-2">{t('title')}</h1>
+            <p className="text-gray-400">{t('subtitle')}</p>
           </div>
           <div className="mt-4 md:mt-0">
             <SolanaConnectButton />
@@ -111,7 +113,7 @@ export default function StakingIndex() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <h3 className="text-gray-400 mb-2">总质押金额</h3>
+            <h3 className="text-gray-400 mb-2">{t('totalStaked')}</h3>
             <p className="text-3xl font-bold">{connected ? "7,500 USDT" : "-- USDT"}</p>
           </motion.div>
           
@@ -121,7 +123,7 @@ export default function StakingIndex() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.1 }}
           >
-            <h3 className="text-gray-400 mb-2">累计收益</h3>
+            <h3 className="text-gray-400 mb-2">{t('totalRewards')}</h3>
             <p className="text-3xl font-bold">{connected ? "880 USDT" : "-- USDT"}</p>
           </motion.div>
           
@@ -131,7 +133,7 @@ export default function StakingIndex() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.2 }}
           >
-            <h3 className="text-gray-400 mb-2">活跃质押池</h3>
+            <h3 className="text-gray-400 mb-2">{t('activePools')}</h3>
             <p className="text-3xl font-bold">{connected ? "2" : "--"}</p>
           </motion.div>
         </div>
@@ -146,7 +148,7 @@ export default function StakingIndex() {
             }`}
             onClick={() => setActiveTab("active")}
           >
-            活跃质押
+            {t('activeStaking')}
           </button>
           <button
             className={`py-2 px-4 font-medium ${
@@ -156,7 +158,7 @@ export default function StakingIndex() {
             }`}
             onClick={() => setActiveTab("history")}
           >
-            历史记录
+            {t('history')}
           </button>
         </div>
 
@@ -195,21 +197,21 @@ export default function StakingIndex() {
                     {/* 质押状态 */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                       <div>
-                        <p className="text-gray-400 text-sm">总质押</p>
+                        <p className="text-gray-400 text-sm">{t('totalPoolStaked')}</p>
                         <p className="font-medium">{pool.totalStaked}</p>
                       </div>
                       <div>
-                        <p className="text-gray-400 text-sm">您的质押</p>
+                        <p className="text-gray-400 text-sm">{t('yourStake')}</p>
                         <p className="font-medium">{connected ? pool.yourStake : "-- USDT"}</p>
                       </div>
                       <div>
-                        <p className="text-gray-400 text-sm">待领取奖励</p>
+                        <p className="text-gray-400 text-sm">{t('pendingRewards')}</p>
                         <p className="font-medium text-green-400">{connected ? pool.rewards : "-- USDT"}</p>
                       </div>
                       <div>
-                        <p className="text-gray-400 text-sm">状态</p>
+                        <p className="text-gray-400 text-sm">{t('status')}</p>
                         <p className={`font-medium ${pool.status === "活跃" ? "text-green-400" : "text-yellow-400"}`}>
-                          {pool.status}
+                          {pool.status === "活跃" ? t('statusActive') : t('statusComing')}
                         </p>
                       </div>
                     </div>
@@ -226,7 +228,7 @@ export default function StakingIndex() {
                           : "bg-gray-700 text-gray-400 cursor-not-allowed"
                       }`}
                     >
-                      质押
+                      {t('stake')}
                     </button>
                     <button
                       onClick={() => handleWithdraw(pool.id)}
@@ -237,7 +239,7 @@ export default function StakingIndex() {
                           : "bg-gray-800 text-gray-400 cursor-not-allowed"
                       }`}
                     >
-                      提取
+                      {t('withdraw')}
                     </button>
                     <button
                       onClick={() => handleHarvest(pool.id)}
@@ -248,7 +250,7 @@ export default function StakingIndex() {
                           : "bg-gray-800 text-gray-400 cursor-not-allowed"
                       }`}
                     >
-                      收获奖励
+                      {t('harvest')}
                     </button>
                   </div>
                 </div>
@@ -256,30 +258,30 @@ export default function StakingIndex() {
                 {/* 质押表单 - 仅在选中时显示 */}
                 {selectedPool === pool.id && (
                   <div className="p-6 bg-gray-800/50 border-t border-gray-700">
-                    <h4 className="font-medium mb-3">质押到 {pool.name}</h4>
+                    <h4 className="font-medium mb-3">{t('stakeTo')} {pool.name}</h4>
                     <div className="flex gap-3">
                       <input
                         type="text"
                         value={stakeAmount}
                         onChange={(e) => setStakeAmount(e.target.value)}
-                        placeholder="输入质押金额"
+                        placeholder={t('enterStakeAmount')}
                         className="flex-1 bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 focus:outline-none focus:border-purple-500"
                       />
                       <button
                         onClick={() => handleStake(pool.id)}
                         className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 px-4 py-2 rounded-lg font-medium"
                       >
-                        确认
+                        {t('confirm')}
                       </button>
                       <button
                         onClick={() => setSelectedPool(null)}
                         className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg font-medium"
                       >
-                        取消
+                        {t('cancel')}
                       </button>
                     </div>
                     <p className="text-sm text-gray-400 mt-2">
-                      预计年化收益: {parseFloat(stakeAmount || "0") * parseFloat(pool.apr.replace("%", "")) / 100} USDT
+                      {t('estimatedAnnualReturn')}: {parseFloat(stakeAmount || "0") * parseFloat(pool.apr.replace("%", "")) / 100} USDT
                     </p>
                   </div>
                 )}
@@ -296,41 +298,41 @@ export default function StakingIndex() {
                 <table className="w-full">
                   <thead>
                     <tr className="text-left border-b border-gray-800">
-                      <th className="pb-3 font-medium text-gray-400">池名称</th>
-                      <th className="pb-3 font-medium text-gray-400">操作</th>
-                      <th className="pb-3 font-medium text-gray-400">金额</th>
-                      <th className="pb-3 font-medium text-gray-400">时间</th>
-                      <th className="pb-3 font-medium text-gray-400">状态</th>
+                      <th className="pb-3 font-medium text-gray-400">{t('poolName')}</th>
+                      <th className="pb-3 font-medium text-gray-400">{t('action')}</th>
+                      <th className="pb-3 font-medium text-gray-400">{t('amount')}</th>
+                      <th className="pb-3 font-medium text-gray-400">{t('time')}</th>
+                      <th className="pb-3 font-medium text-gray-400">{t('status')}</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr className="border-b border-gray-800">
                       <td className="py-4">BTC 矿机质押池</td>
-                      <td className="py-4">质押</td>
+                      <td className="py-4">{t('stakeAction')}</td>
                       <td className="py-4">2,500 USDT</td>
                       <td className="py-4">2025-04-15 14:30</td>
-                      <td className="py-4 text-green-400">成功</td>
+                      <td className="py-4 text-green-400">{t('success')}</td>
                     </tr>
                     <tr className="border-b border-gray-800">
                       <td className="py-4">ETH 矿机质押池</td>
-                      <td className="py-4">质押</td>
+                      <td className="py-4">{t('stakeAction')}</td>
                       <td className="py-4">1,500 USDT</td>
                       <td className="py-4">2025-04-10 09:15</td>
-                      <td className="py-4 text-green-400">成功</td>
+                      <td className="py-4 text-green-400">{t('success')}</td>
                     </tr>
                     <tr>
                       <td className="py-4">BTC 矿机质押池</td>
-                      <td className="py-4">收获奖励</td>
+                      <td className="py-4">{t('harvestAction')}</td>
                       <td className="py-4">125 USDT</td>
                       <td className="py-4">2025-04-05 16:45</td>
-                      <td className="py-4 text-green-400">成功</td>
+                      <td className="py-4 text-green-400">{t('success')}</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             ) : (
               <div className="text-center py-10">
-                <p className="text-gray-400 mb-4">请连接钱包查看您的质押历史记录</p>
+                <p className="text-gray-400 mb-4">{t('connectWalletToViewHistory')}</p>
                 <SolanaConnectButton />
               </div>
             )}
@@ -339,15 +341,15 @@ export default function StakingIndex() {
 
         {/* 底部说明 */}
         <div className="mt-10 bg-gray-900/30 p-6 rounded-xl border border-gray-800">
-          <h3 className="text-xl font-bold mb-3">质押说明</h3>
+          <h3 className="text-xl font-bold mb-3">{t('stakingNotes')}</h3>
           <ul className="list-disc list-inside space-y-2 text-gray-400">
-            <li>质押期间，您的资金将用于购买和运营矿机，获取挖矿收益</li>
-            <li>质押收益根据矿机运行状况和市场行情可能有所波动</li>
-            <li>提前解除质押可能会产生一定的手续费</li>
-            <li>请确保您已了解质押风险，并在充分了解的情况下进行操作</li>
+            <li>{t('stakingNote1')}</li>
+            <li>{t('stakingNote2')}</li>
+            <li>{t('stakingNote3')}</li>
+            <li>{t('stakingNote4')}</li>
           </ul>
         </div>
       </div>
     </div>
   );
-};
+}
