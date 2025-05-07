@@ -3,7 +3,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-05 18:31:16
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-07 12:24:28
+ * @LastEditTime: 2025-05-07 14:32:30
  * @FilePath: /24k-finance-website/app/page.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -24,6 +24,14 @@ const MiningPlatformHero = dynamic(
 
 const SolanaConnectButton = dynamic(
   () => import('./components/SolanaConnectButton').then((mod) => mod.SolanaConnectButton),
+  {
+    ssr: false, // 关键：禁用服务器端渲染
+    loading: () => <p>正在加载登录组件...</p> // 可选：添加加载状态指示器
+  }
+);
+
+const IdlViewer = dynamic(
+  () => import('./components/IdlViewer').then((mod) => mod.default),
   {
     ssr: false, // 关键：禁用服务器端渲染
     loading: () => <p>正在加载登录组件...</p> // 可选：添加加载状态指示器
@@ -86,6 +94,7 @@ export default function Home() {
     <div className="min-h-screen bg-[#0a0a10] text-white p-8 sm:p-16 font-[family-name:var(--font-geist-sans)]">
     <div className="max-w-6xl mx-auto">
       <MiningPlatformHero />
+      <IdlViewer />
       {/* 我的金矿 Section */}
       <div className="mb-12 mt-12"> {/* 添加一些底部间距 */}
         {/* <h2 className="text-3xl font-bold mb-8">我的金矿</h2> */}
