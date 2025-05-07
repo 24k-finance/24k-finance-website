@@ -2,22 +2,21 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-05 19:07:58
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-05 19:23:27
+ * @LastEditTime: 2025-05-07 12:16:26
  * @FilePath: /24k-finance-website/app/components/Header.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Search } from 'lucide-react'; // 使用 lucide-react 提供图标
 
 const Header: React.FC = () => {
   const navItems = [
-    { name: '学习', href: '#' },
-    { name: '开发者', href: '#' },
-    { name: '解决方案', href: '#' },
-    { name: '网络', href: '#' },
-    { name: '社区', href: '#' },
+    { name: '首页', href: '#' },
+    { name: 'KYC认证', href: '#' },
+    { name: 'LAUNCH矿场', href: '#' },
+    { name: '矿场市场', href: '#' },
+    { name: '我的质押', href: '#' },
   ];
 
   return (

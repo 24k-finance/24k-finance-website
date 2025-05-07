@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-05 19:55:39
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-05 19:56:59
+ * @LastEditTime: 2025-05-07 12:24:54
  * @FilePath: /24k-finance-website/app/components/SolanaConnectButton.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -12,7 +12,7 @@ import React, { useCallback } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 
-const SolanaConnectButton: React.FC = () => {
+export const SolanaConnectButton: React.FC = () => {
   // 从 @solana/wallet-adapter-react 获取钱包状态和方法
   const { publicKey, wallet, connecting, connected } = useWallet();
   // 从 @solana/wallet-adapter-react-ui 获取控制模态框的方法
