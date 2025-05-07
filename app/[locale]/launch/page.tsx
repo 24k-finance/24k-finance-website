@@ -9,7 +9,7 @@ const SolanaConnectButton = dynamic(
     () => import('../components/SolanaConnectButton').then((mod) => mod.SolanaConnectButton),
     {
       ssr: false, // 关键：禁用服务器端渲染
-      loading: () => <p>正在加载登录组件...</p> // 可选：添加加载状态指示器
+      loading: () => <p></p> // 可选：添加加载状态指示器
     }
   );
 
