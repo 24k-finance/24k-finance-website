@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-05 19:07:58
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-07 12:16:26
+ * @LastEditTime: 2025-05-07 16:35:45
  * @FilePath: /24k-finance-website/app/components/Header.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -12,11 +12,11 @@ import Link from 'next/link';
 
 const Header: React.FC = () => {
   const navItems = [
-    { name: '首页', href: '#' },
-    { name: 'KYC认证', href: '#' },
-    { name: 'LAUNCH矿场', href: '#' },
-    { name: '矿场市场', href: '#' },
-    { name: '我的质押', href: '#' },
+    { name: '首页', href: '/' },
+    { name: 'KYC认证', href: '/kyc' },
+    { name: 'LAUNCH矿场', href: '/launch' },
+    { name: '矿场市场', href: '/market' },
+    { name: '我的质押', href: '/staking' },
   ];
 
   return (
@@ -46,7 +46,7 @@ const Header: React.FC = () => {
                 className="text-sm font-medium text-gray-300 hover:text-white transition-colors flex items-center"
               >
                 {item.name}
-                <span className="ml-1 text-xs">▾</span> {/* 简单的下拉箭头 */}
+                <span className="ml-1 text-xs">▾</span>
               </Link>
             ))}
           </nav>

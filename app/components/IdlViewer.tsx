@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-07 14:30:27
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-07 14:35:02
+ * @LastEditTime: 2025-05-07 16:22:54
  * @FilePath: /24k-finance-website/app/components/IdlViewer.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -10,14 +10,31 @@
 
 import { useIdl } from '@/app/hooks/useIdl';
 import { useState } from 'react';
+import { useWallet } from '@solana/wallet-adapter-react';
+
+// 8TpsAjmnaBoFZr7qzymizcQ25MYiNB2pSYtyEb5jg6Xi
+// 91N4aCumtu3x4E4SgqS8cKfKXk3LdHuHqN5xZ1qnunkV
+
+// Raydium: RVKd61ztZW9DQvVQKmt2Yf7WgRkQjz6hZ9z3dPz2kZL
+// Chainlink: HEvSKofvBgfaexv23kMabbYqxasxU3mQ4ibBMEmJWHny
 
 interface IdlViewerProps {
   programId?: string;
 }
 
-export default function IdlViewer({ programId = '91N4aCumtu3x4E4SgqS8cKfKXk3LdHuHqN5xZ1qnunkV' }: IdlViewerProps) {
+export default function IdlViewer({ programId = 'HEvSKofvBgfaexv23kMabbYqxasxU3mQ4ibBMEmJWHny' }: IdlViewerProps) {
   const { idl, loading, error } = useIdl(programId);
   const [expanded, setExpanded] = useState<boolean>(false);
+  const { connected } = useWallet();
+
+  // 添加钱包未连接的提示
+  if (!connected) {
+    return (
+      <div className="p-4 bg-slate-800 rounded-lg">
+        <p className="text-yellow-400">请先连接钱包以加载IDL数据</p>
+      </div>
+    );
+  }
 
   if (loading) {
     return (
@@ -44,9 +61,9 @@ export default function IdlViewer({ programId = '91N4aCumtu3x4E4SgqS8cKfKXk3LdHu
   }
 
   return (
-    <div className="p-4 bg-slate-800 rounded-lg border border-slate-700">
+    <div className="p-4 bg-slate-800 rounded-lg border border-slate-700 mt-12">
       <div className="flex justify-between items-center mb-4">
-        {/* <h3 className="text-xl font-bold text-white">{idl.metadata} IDL</h3> */}
+        {/* <h3 className="text-xl font-bold text-white">{idl.name} IDL</h3> */}
         <button 
           onClick={() => setExpanded(!expanded)}
           className="px-3 py-1 bg-blue-600 hover:bg-blue-700 rounded text-sm"
@@ -61,7 +78,7 @@ export default function IdlViewer({ programId = '91N4aCumtu3x4E4SgqS8cKfKXk3LdHu
         </pre>
       ) : (
         <div>
-          <p className="text-slate-300 mb-2">程序版本: {idl.address}</p>
+          {/* <p className="text-slate-300 mb-2">程序版本: {idl.version}</p> */}
           <p className="text-slate-300 mb-2">指令数量: {idl.instructions?.length || 0}</p>
           <p className="text-slate-300 mb-2">账户数量: {idl.accounts?.length || 0}</p>
           <p className="text-slate-300">点击"展开"查看完整IDL</p>

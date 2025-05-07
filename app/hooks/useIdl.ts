@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-07 14:29:54
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-07 14:30:00
+ * @LastEditTime: 2025-05-07 16:16:49
  * @FilePath: /24k-finance-website/app/hooks/useIdl.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -30,7 +30,9 @@ export const useIdl = (programId: string) => {
         setError(null);
         
         // 创建连接到devnet的Connection对象
-        const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
+        const apiURI = clusterApiUrl('devnet');
+        console.log('apiURI:', apiURI);
+        const connection = new Connection(apiURI, 'confirmed');
         
         // 创建AnchorProvider
         const provider = new AnchorProvider(
@@ -44,11 +46,13 @@ export const useIdl = (programId: string) => {
         
         // 获取IDL
         const fetchedIdl = await Program.fetchIdl(programPubkey, provider);
+
+        console.log('fetchedIdl:', fetchedIdl, programId); // Add this line to log the fetchedIdl t
         
         if (fetchedIdl) {
           setIdl(fetchedIdl);
         } else {
-          throw new Error('无法获取IDL，可能程序ID不正确或IDL不存在');
+          // throw new Error('无法获取IDL，可能程序ID不正确或IDL不存在');
         }
       } catch (err) {
         console.error('获取IDL时出错:', err);
