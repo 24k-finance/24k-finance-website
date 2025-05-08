@@ -1,13 +1,22 @@
 "use client"
-
+import dynamic from "next/dynamic";
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { Link } from '@/i18n/navigation'
-import { Youtube, Twitter, Github, Send } from 'lucide-react'
+import { Youtube, Twitter, Github, Send, Wallet } from 'lucide-react'
+
+const SolanaConnectButton = dynamic<{ className?: string }>(
+  () => import('../components/SolanaConnectButton').then((mod) => mod.SolanaConnectButton),
+  {
+    ssr: false, // 关键：禁用服务器端渲染
+    loading: () => <p></p> // 可选：添加加载状态指示器
+  }
+);
 
 export function MiningPlatformHero() {
   const t = useTranslations('miningPlatform');
+  const tCommon = useTranslations('common');
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [particles, setParticles] = useState<any[]>([])
   
@@ -99,6 +108,15 @@ export function MiningPlatformHero() {
               </Link>
             </motion.div>
           ))}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mt-8"
+        >
+          <SolanaConnectButton className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-[#FF3E9D] to-[#7000FF] rounded-full text-white font-medium hover:shadow-lg hover:shadow-[#FF3E9D]/20 transition-all duration-300 border border-white/20 backdrop-blur-sm cursor-pointer"></SolanaConnectButton>
         </motion.div>
       </div>
       

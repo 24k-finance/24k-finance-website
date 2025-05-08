@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-05 18:57:17
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-05 19:03:56
+ * @LastEditTime: 2025-05-08 17:45:51
  * @FilePath: /24k-finance-website/app/components/CaseStudyCard.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -20,7 +20,7 @@ interface CaseStudyCardProps {
 // 使用接口更新组件签名
 const CaseStudyCard: React.FC<CaseStudyCardProps> = ({ tag, title, description, imageUrl, large }) => (
     <div
-      className={`relative rounded-xl overflow-hidden p-6 flex flex-col justify-between text-white bg-gradient-to-br from-[#1a1a2e] to-[#161625] shadow-lg ${
+      className={`relative rounded-xl overflow-hidden p-6 flex flex-col justify-between text-white bg-gradient-to-br from-[#1a1a2e] to-[#161625] shadow-lg cursor-pointer ${
         large ? "lg:col-span-2 min-h-[250px]" : "min-h-[200px]" // 调整 large 样式应用逻辑，确保它只影响布局相关的类
       } hover:shadow-purple-500/30 transition-shadow duration-300`}
       style={{
