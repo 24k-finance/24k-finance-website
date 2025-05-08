@@ -1,0 +1,46 @@
+{
+    "pageTitle": "金矿市场",
+    "pageSubtitle": "加入投资金矿的高收益机会",
+    "stats": {
+      "availableMachinesLabel": "开采中",
+      "availableMachinesCount": "6 座",
+      "avgRoiPeriodLabel": "平均年化",
+      "avgRoiPeriodValue": "20%",
+      "machineTypesLabel": "金矿类型",
+      "machineTypesCount": "2 种"
+    },
+    "filters": {
+      "all": "全部金矿",
+      "mali": "马里",
+      "cotedivoire": "科特迪瓦",
+      "kenya": "肯尼亚",
+      "tajikistan": "塔吉克斯坦"
+    },
+    "machineCard": {
+      "gradeLabel": "品位",
+      "reservesLabel": "储量",
+      "annualReturnLabel": "年化",
+      "stakingPeriodLabel": "质押周期",
+      "remainingQuotaLabel": "剩余额度",
+      "stakeButton": "质押",
+      "soldOutButton": "售罄"
+    },
+    "purchaseModal": {
+      "buyTitle": "购买",
+      "quantityLabel": "数量",
+      "unitPriceLabel": "单价",
+      "quantityCountLabel": "数量",
+      "totalPriceLabel": "总价",
+      "confirmStakeButton": "确认质押",
+      "cancelButton": "取消"
+    },
+    "alerts": {
+      "connectWalletFirst": "请先连接钱包",
+      "purchaseSuccess": "购买成功！您已购买 {quantity} 台 {machineName}"
+    },
+    "footer": {
+      "title": "金矿质押说明",
+      "items": "[\"项目以实体金矿作为数字资产的质押资产，确保其真实价值与投资者权益。\", \"金矿已获得合法采矿权及环境审批，具备合规性与可持续性。\", \"矿山具备稳定的生产能力，黄金储量可验证。\", \"所有质押资产将通过链下实物托管（off-chain custody）、链上证明机制（on-chain proof）实现黄金资源与数字资产之间的1:1锚定关系。\", \"项目将定期披露金矿产量、黄金库存变化、第三方审计报告，确保运营透明合规。\"]"
+    },
+    "machines": "[{\"id\":1,\"name\":\"库雷马莱\",\"price\":\"5,000,000 USD\",\"hashRate\":\"2 g/t\",\"powerConsumption\":\"40 Tonnes\",\"dailyReturn\":\"20%\",\"roi\":\"预计12个月\",\"type\":\"btc\"},{\"id\":2,\"name\":\"科特迪瓦\",\"price\":\"3,000,000 USD\",\"hashRate\":\"3 g/t\",\"powerConsumption\":\"40 Tonnes\",\"dailyReturn\":\"20%\",\"roi\":\"预计14个月\",\"type\":\"eth\"},{\"id\":3,\"name\":\"肯尼亚\",\"price\":\"2,500,000 USD\",\"hashRate\":\"3 g/t\",\"powerConsumption\":\"50 Tonnes\",\"dailyReturn\":\"20%\",\"roi\":\"预计10个月\",\"type\":\"sol\"},{\"id\":4,\"name\":\"塔吉克斯坦\",\"price\":\"2,800,000 USD\",\"hashRate\":\"3 g/t\",\"powerConsumption\":\"50 Tonnes\",\"dailyReturn\":\"30%\",\"roi\":\"预计13个月\",\"type\":\"other\"}]"
+  }

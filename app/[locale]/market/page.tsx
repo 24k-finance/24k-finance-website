@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useWallet } from "@solana/wallet-adapter-react";
 import dynamic from "next/dynamic";
+import { useTranslations } from "next-intl";
 
 const SolanaConnectButton = dynamic(
     () => import('../components/SolanaConnectButton').then((mod) => mod.SolanaConnectButton),
@@ -11,7 +12,7 @@ const SolanaConnectButton = dynamic(
       ssr: false, // 关键：禁用服务器端渲染
       loading: () => <p></p> // 可选：添加加载状态指示器
     }
-  );
+);
 
 // 模拟矿机数据
 const miningMachines = [
@@ -70,6 +71,7 @@ const miningMachines = [
 ];
 
 export default function MarketIndex() {
+  const t = useTranslations('market'); // 添加这一行
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [selectedMachine, setSelectedMachine] = useState<number | null>(null);
   const [quantity, setQuantity] = useState<number>(1);
@@ -78,7 +80,7 @@ export default function MarketIndex() {
   // 处理购买操作
   const handlePurchase = (machineId: number) => {
     if (!connected) {
-      alert("请先连接钱包");
+      alert(t('alerts.connectWalletFirst'));
       return;
     }
     setSelectedMachine(machineId);
@@ -88,7 +90,7 @@ export default function MarketIndex() {
   // 确认购买
   const confirmPurchase = () => {
     if (!connected) {
-      alert("请先连接钱包");
+      alert(t('alerts.connectWalletFirst'));
       return;
     }
     
@@ -101,7 +103,7 @@ export default function MarketIndex() {
     setQuantity(1);
     
     // 显示成功消息
-    alert(`购买成功！您已购买 ${quantity} 台 ${machine?.name}`);
+    alert(t('alerts.purchaseSuccess'));
   };
 
   // 过滤矿机
@@ -115,8 +117,8 @@ export default function MarketIndex() {
         {/* 页面标题和连接钱包按钮 */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
           <div>
-            <h1 className="text-4xl font-bold mb-2">金矿市场</h1>
-            <p className="text-gray-400">加入投资金矿的高收益机会</p>
+            <h1 className="text-4xl font-bold mb-2">{t('pageTitle')}</h1>
+            <p className="text-gray-400">{t('pageSubtitle')}</p>
           </div>
           <div className="mt-4 md:mt-0">
             <SolanaConnectButton />
@@ -131,8 +133,8 @@ export default function MarketIndex() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <h3 className="text-gray-400 mb-2">开采中</h3>
-            <p className="text-3xl font-bold">6 座</p>
+            <h3 className="text-gray-400 mb-2">{t('stats.availableMachinesLabel')}</h3>
+            <p className="text-3xl font-bold">{t('stats.availableMachinesCount')}</p>
           </motion.div>
           
           <motion.div 
@@ -141,8 +143,8 @@ export default function MarketIndex() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.1 }}
           >
-            <h3 className="text-gray-400 mb-2">平均年化</h3>
-            <p className="text-3xl font-bold">20%</p>
+            <h3 className="text-gray-400 mb-2">{t('stats.avgRoiPeriodLabel')}</h3>
+            <p className="text-3xl font-bold">{t('stats.avgRoiPeriodValue')}</p>
           </motion.div>
           
           <motion.div 
@@ -151,8 +153,8 @@ export default function MarketIndex() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.2 }}
           >
-            <h3 className="text-gray-400 mb-2">金矿类型</h3>
-            <p className="text-3xl font-bold">2 种</p>
+            <h3 className="text-gray-400 mb-2">{t('stats.machineTypesLabel')}</h3>
+            <p className="text-3xl font-bold">{t('stats.machineTypesCount')}</p>
           </motion.div>
         </div>
 
@@ -166,7 +168,7 @@ export default function MarketIndex() {
             }`}
             onClick={() => setActiveFilter("all")}
           >
-            全部金矿
+            {t('filters.all')}
           </button>
           <button
             className={`py-2 px-4 font-medium cursor-pointer ${
@@ -176,8 +178,7 @@ export default function MarketIndex() {
             }`}
             onClick={() => setActiveFilter("btc")}
           >
-            
-            马里
+            {t('filters.mali')}
           </button>
           <button
             className={`py-2 px-4 font-medium cursor-pointer ${
@@ -187,7 +188,7 @@ export default function MarketIndex() {
             }`}
             onClick={() => setActiveFilter("eth")}
           >
-            科特迪瓦 
+            {t('filters.cotedivoire')}
           </button>
           <button
             className={`py-2 px-4 font-medium cursor-pointer ${
@@ -197,7 +198,7 @@ export default function MarketIndex() {
             }`}
             onClick={() => setActiveFilter("sol")}
           >
-            肯尼亚
+            {t('filters.kenya')}
           </button>
           <button
             className={`py-2 px-4 font-medium cursor-pointer ${
@@ -207,7 +208,7 @@ export default function MarketIndex() {
             }`}
             onClick={() => setActiveFilter("other")}
           >
-            塔吉克斯坦
+            {t('filters.tajikistan')}
           </button>
         </div>
 
@@ -248,19 +249,19 @@ export default function MarketIndex() {
                 {/* 矿机规格 */}
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <div>
-                    <p className="text-gray-400 text-sm">品位</p>
+                    <p className="text-gray-400 text-sm">{t('machineCard.gradeLabel')}</p>
                     <p className="font-medium">{machine.hashRate}</p>
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm">储量</p>
+                    <p className="text-gray-400 text-sm">{t('machineCard.reservesLabel')}</p>
                     <p className="font-medium">{machine.powerConsumption}</p>
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm">年化</p>
+                    <p className="text-gray-400 text-sm">{t('machineCard.annualReturnLabel')}</p>
                     <p className="font-medium text-green-400">{machine.dailyReturn}</p>
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm">质押周期</p>
+                    <p className="text-gray-400 text-sm">{t('machineCard.stakingPeriodLabel')}</p>
                     <p className="font-medium">{machine.roi}</p>
                   </div>
                 </div>
@@ -268,7 +269,7 @@ export default function MarketIndex() {
                 {/* 库存和购买按钮 */}
                 <div className="flex justify-between items-center">
                   <div className="text-sm text-gray-400">
-                    剩余额度: <span className="text-white">{machine.available}</span>/{machine.total}
+                    {t('machineCard.remainingQuotaLabel')}: <span className="text-white">{machine.available}</span>/{machine.total}
                   </div>
                   <button
                     onClick={() => handlePurchase(machine.id)}
@@ -279,7 +280,7 @@ export default function MarketIndex() {
                         : "bg-gray-700 text-gray-400 cursor-not-allowed"
                     }`}
                   >
-                    {machine.available > 0 ? "质押" : "售罄"}
+                    {machine.available > 0 ? t('machineCard.stakeButton') : t('machineCard.soldOutButton')}
                   </button>
                 </div>
               </div>
@@ -302,11 +303,11 @@ export default function MarketIndex() {
               onClick={(e) => e.stopPropagation()}
             >
               <h3 className="text-xl font-bold mb-4">
-                购买 {miningMachines.find(m => m.id === selectedMachine)?.name}
+                {t('purchaseModal.buyTitle')} {miningMachines.find(m => m.id === selectedMachine)?.name}
               </h3>
               
               <div className="mb-4">
-                <label className="block text-gray-400 text-sm mb-2">数量</label>
+                <label className="block text-gray-400 text-sm mb-2">{t('purchaseModal.quantityLabel')}</label>
                 <div className="flex items-center">
                   <button 
                     className="bg-gray-800 px-3 py-1 rounded-l-lg"
@@ -332,15 +333,15 @@ export default function MarketIndex() {
               
               <div className="mb-6">
                 <div className="flex justify-between mb-2">
-                  <span className="text-gray-400">单价:</span>
+                  <span className="text-gray-400">{t('purchaseModal.unitPriceLabel')}:</span>
                   <span>{miningMachines.find(m => m.id === selectedMachine)?.price}</span>
                 </div>
                 <div className="flex justify-between mb-2">
-                  <span className="text-gray-400">数量:</span>
+                  <span className="text-gray-400">{t('purchaseModal.quantityCountLabel')}:</span>
                   <span>{quantity} 台</span>
                 </div>
                 <div className="flex justify-between font-bold">
-                  <span>总价:</span>
+                  <span>{t('purchaseModal.totalPriceLabel')}:</span>
                   <span className="text-purple-400">
                     {parseInt(miningMachines.find(m => m.id === selectedMachine)?.price.replace(/,/g, '').split(' ')[0] || "0") * quantity} USDT
                   </span>
@@ -352,13 +353,13 @@ export default function MarketIndex() {
                   onClick={confirmPurchase}
                   className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 px-4 py-2 rounded-lg font-medium"
                 >
-                  确认质押
+                  {t('purchaseModal.confirmStakeButton')}
                 </button>
                 <button
                   onClick={() => setSelectedMachine(null)}
                   className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg font-medium"
                 >
-                  取消
+                  {t('purchaseModal.cancelButton')}
                 </button>
               </div>
             </motion.div>
@@ -367,13 +368,11 @@ export default function MarketIndex() {
 
         {/* 底部说明 */}
         <div className="mt-10 bg-gray-900/30 p-6 rounded-xl border border-gray-800">
-          <h3 className="text-xl font-bold mb-3">金矿质押说明</h3>
+          <h3 className="text-xl font-bold mb-3">{t('footer.title')}</h3>
           <ul className="list-disc list-inside space-y-2 text-gray-400">
-            <li>项目以实体金矿作为数字资产的质押资产，确保其真实价值与投资者权益。</li>
-            <li>金矿已获得合法采矿权及环境审批，具备合规性与可持续性。</li>
-            <li>矿山具备稳定的生产能力，黄金储量可验证。</li>
-            <li>所有质押资产将通过链下实物托管（off-chain custody）、链上证明机制（on-chain proof）实现黄金资源与数字资产之间的1:1锚定关系。</li>
-            <li>项目将定期披露金矿产量、黄金库存变化、第三方审计报告，确保运营透明合规。</li>
+            {JSON.parse(t('footer.items')).map((item: string, index: number) => (
+              <li key={index}>{item}</li>
+            ))}
           </ul>
         </div>
       </div>

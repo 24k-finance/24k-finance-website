@@ -12,57 +12,9 @@ const SolanaConnectButton = dynamic(
   () => import('../components/SolanaConnectButton').then((mod) => mod.SolanaConnectButton),
   {
     ssr: false, // 关键：禁用服务器端渲染
-    loading: () => <p>正在加载登录组件...</p> // 可选：添加加载状态指示器
+    loading: () => <p>...</p> // 可选：添加加载状态指示器
   }
 );
-
-// 模拟质押数据
-const stakingPools = [
-  {
-    id: 1,
-    name: "马里 库雷马莱 ",
-    icon: "/assets_5.png", // 确保有此图标
-    apr: "12.5%",
-    totalStaked: "5,000,000 USDT",
-    yourStake: "5,000 USDT",
-    rewards: "625 USDT",
-    duration: "预计12个月",
-    status: "活跃",
-  },
-  {
-    id: 2,
-    name: "科特迪瓦 丁博克罗 ",
-    icon: "/assets_6.jpg", // 确保有此图标
-    apr: "10.2%",
-    totalStaked: "980,000 USDT",
-    yourStake: "2,500 USDT",
-    rewards: "255 USDT",
-    duration: "预计14个月",
-    status: "活跃",
-  },
-  {
-    id: 3,
-    name: "肯尼亚 ",
-    icon: "/assets_7.jpg", // 确保有此图标
-    apr: "15.8%",
-    totalStaked: "750,000 USDT",
-    yourStake: "0 USDT",
-    rewards: "0 USDT",
-    duration: "预计10个月",
-    status: "即将开放",
-  },
-  {
-    id: 4,
-    name: "塔吉克斯坦 ",
-    icon: "/assets_8.jpg", // 确保有此图标
-    apr: "15.8%",
-    totalStaked: "750,000 USDT",
-    yourStake: "0 USDT",
-    rewards: "0 USDT",
-    duration: "预计13个月",
-    status: "即将开放",
-  },
-];
 
 export default function StakingIndex() {
   const t = useTranslations('staking');
@@ -70,6 +22,58 @@ export default function StakingIndex() {
   const [stakeAmount, setStakeAmount] = useState("");
   const [selectedPool, setSelectedPool] = useState<number | null>(null);
   const { connected } = useWallet();
+
+  // 从翻译文件获取池数据
+  // const poolsData = t('pools');
+  // console.log(poolsData);
+  
+  // 模拟质押数据
+  const stakingPools = [
+    {
+      id: 1,
+      name: t('pools.0.name'),
+      icon: "/assets_5.png", // 确保有此图标
+      apr: "12.5%",
+      totalStaked: "5,000,000 USDT",
+      yourStake: "5,000 USDT",
+      rewards: "625 USDT",
+      duration: t('pools.0.duration'),
+      status: t('pools.0.status'),
+    },
+    {
+      id: 2,
+      name: t('pools.1.name'),
+      icon: "/assets_6.jpg", // 确保有此图标
+      apr: "10.2%",
+      totalStaked: "980,000 USDT",
+      yourStake: "2,500 USDT",
+      rewards: "255 USDT",
+      duration: t('pools.1.duration'),
+      status: t('pools.1.status'),
+    },
+    {
+      id: 3,
+      name: t('pools.2.name'),
+      icon: "/assets_7.jpg", // 确保有此图标
+      apr: "15.8%",
+      totalStaked: "750,000 USDT",
+      yourStake: "0 USDT",
+      rewards: "0 USDT",
+      duration: t('pools.2.duration'),
+      status: t('pools.2.status'),
+    },
+    {
+      id: 4,
+      name: t('pools.3.name'),
+      icon: "/assets_8.jpg", // 确保有此图标
+      apr: "15.8%",
+      totalStaked: "750,000 USDT",
+      yourStake: "0 USDT",
+      rewards: "0 USDT",
+      duration: t('pools.3.duration'),
+      status: t('pools.3.status'),
+    },
+  ];
 
   // 处理质押操作
   const handleStake = (poolId: number) => {
@@ -79,7 +83,7 @@ export default function StakingIndex() {
     }
     setSelectedPool(poolId);
     // 这里可以添加质押逻辑
-    console.log(`质押到池 ${poolId}, 金额: ${stakeAmount}`);
+    // console.log(t('consoleMessages.stakeToPool', { poolId, amount: stakeAmount }));
   };
 
   // 处理提取操作
@@ -89,7 +93,7 @@ export default function StakingIndex() {
       return;
     }
     // 这里可以添加提取逻辑
-    console.log(`从池 ${poolId} 提取`);
+    // console.log(t('consoleMessages.withdrawFromPool', { poolId }));
   };
 
   // 处理收获奖励操作
@@ -99,7 +103,7 @@ export default function StakingIndex() {
       return;
     }
     // 这里可以添加收获奖励逻辑
-    console.log(`从池 ${poolId} 收获奖励`);
+    // console.log(t('consoleMessages.harvestFromPool', { poolId }));
   };
 
   return (
@@ -226,8 +230,8 @@ export default function StakingIndex() {
                       </div>
                       <div>
                         <p className="text-gray-400 text-sm">{t('status')}</p>
-                        <p className={`font-medium ${pool.status === "活跃" ? "text-green-400" : "text-yellow-400"}`}>
-                          {pool.status === "活跃" ? t('statusActive') : t('statusComing')}
+                        <p className={`font-medium ${pool.status === t('statusActive') ? "text-green-400" : "text-yellow-400"}`}>
+                          {pool.status}
                         </p>
                       </div>
                     </div>
@@ -237,9 +241,9 @@ export default function StakingIndex() {
                   <div className="mt-6 flex flex-wrap gap-3">
                     <button
                       onClick={() => handleStake(pool.id)}
-                      disabled={pool.status !== "活跃" || !connected}
+                      disabled={pool.status !== t('statusActive') || !connected}
                       className={`px-4 py-2 rounded-lg font-medium ${
-                        pool.status === "活跃" && connected
+                        pool.status === t('statusActive') && connected
                           ? "bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
                           : "bg-gray-700 text-gray-400 cursor-not-allowed"
                       }`}
@@ -323,21 +327,21 @@ export default function StakingIndex() {
                   </thead>
                   <tbody>
                     <tr className="border-b border-gray-800">
-                      <td className="py-4">马里 库雷马莱</td>
+                      <td className="py-4">{t('pools.0.name')}</td>
                       <td className="py-4">{t('stakeAction')}</td>
                       <td className="py-4">2,500 USDT</td>
                       <td className="py-4">2025-04-15 14:30</td>
                       <td className="py-4 text-green-400">{t('success')}</td>
                     </tr>
                     <tr className="border-b border-gray-800">
-                      <td className="py-4">科特迪瓦 丁博克罗 </td>
+                      <td className="py-4">{t('pools.1.name')}</td>
                       <td className="py-4">{t('stakeAction')}</td>
                       <td className="py-4">1,500 USDT</td>
                       <td className="py-4">2025-04-10 09:15</td>
                       <td className="py-4 text-green-400">{t('success')}</td>
                     </tr>
                     <tr>
-                      <td className="py-4">肯尼亚 </td>
+                      <td className="py-4">{t('pools.2.name')}</td>
                       <td className="py-4">{t('harvestAction')}</td>
                       <td className="py-4">125 USDT</td>
                       <td className="py-4">2025-04-05 16:45</td>

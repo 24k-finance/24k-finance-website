@@ -1,0 +1,46 @@
+{
+    "pageTitle": "Gold Mine Market",
+    "pageSubtitle": "Join high-yield gold mine investment opportunities",
+    "stats": {
+      "availableMachinesLabel": "Mining",
+      "availableMachinesCount": "6 sites",
+      "avgRoiPeriodLabel": "Average Annual Return",
+      "avgRoiPeriodValue": "20%",
+      "machineTypesLabel": "Mine Types",
+      "machineTypesCount": "2 types"
+    },
+    "filters": {
+      "all": "All Mines",
+      "mali": "Mali",
+      "cotedivoire": "Côte d'Ivoire",
+      "kenya": "Kenya",
+      "tajikistan": "Tajikistan"
+    },
+    "machineCard": {
+      "gradeLabel": "Grade",
+      "reservesLabel": "Reserves",
+      "annualReturnLabel": "Annual Return",
+      "stakingPeriodLabel": "Staking Period",
+      "remainingQuotaLabel": "Remaining",
+      "stakeButton": "Stake",
+      "soldOutButton": "Sold Out"
+    },
+    "purchaseModal": {
+      "buyTitle": "Purchase",
+      "quantityLabel": "Quantity",
+      "unitPriceLabel": "Unit Price",
+      "quantityCountLabel": "Quantity",
+      "totalPriceLabel": "Total Price",
+      "confirmStakeButton": "Confirm Stake",
+      "cancelButton": "Cancel"
+    },
+    "alerts": {
+      "connectWalletFirst": "Please connect your wallet first",
+      "purchaseSuccess": "Purchase successful! You have purchased {quantity} units of {machineName}"
+    },
+    "footer": {
+      "title": "Gold Mine Staking Information",
+      "items": "[\"The project uses physical gold mines as collateral for digital assets, ensuring real value and investor interests.\", \"The gold mines have obtained legal mining rights and environmental approvals, ensuring compliance and sustainability.\", \"The mines have stable production capacity with verifiable gold reserves.\", \"All staked assets will achieve a 1:1 anchoring relationship between gold resources and digital assets through off-chain custody and on-chain proof mechanisms.\", \"The project will regularly disclose gold mine production, gold inventory changes, and third-party audit reports to ensure operational transparency and compliance.\"]"
+    },
+    "machines": "[{\"id\":1,\"name\":\"Kouremale\",\"price\":\"5,000,000 USD\",\"hashRate\":\"2 g/t\",\"powerConsumption\":\"40 Tonnes\",\"dailyReturn\":\"20%\",\"roi\":\"Est. 12 months\",\"type\":\"btc\"},{\"id\":2,\"name\":\"Côte d'Ivoire\",\"price\":\"3,000,000 USD\",\"hashRate\":\"3 g/t\",\"powerConsumption\":\"40 Tonnes\",\"dailyReturn\":\"20%\",\"roi\":\"Est. 14 months\",\"type\":\"eth\"},{\"id\":3,\"name\":\"Kenya\",\"price\":\"2,500,000 USD\",\"hashRate\":\"3 g/t\",\"powerConsumption\":\"50 Tonnes\",\"dailyReturn\":\"20%\",\"roi\":\"Est. 10 months\",\"type\":\"sol\"},{\"id\":4,\"name\":\"Tajikistan\",\"price\":\"2,800,000 USD\",\"hashRate\":\"3 g/t\",\"powerConsumption\":\"50 Tonnes\",\"dailyReturn\":\"30%\",\"roi\":\"Est. 13 months\",\"type\":\"other\"}]"
+  }

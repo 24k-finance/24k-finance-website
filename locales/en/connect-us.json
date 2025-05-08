@@ -1,0 +1,51 @@
+{
+    "company": {
+      "title": "Company",
+      "description": {
+        "paragraph1": "24K Finance is an innovative blockchain financial technology company dedicated to combining traditional finance with blockchain technology to provide users with secure, transparent, and efficient digital asset management services. Our mission is to reshape the financial infrastructure through blockchain technology, making financial services more inclusive, convenient, and efficient.",
+        "paragraph2": "As a pioneer in the blockchain field, we have a professional team composed of financial experts and technical elites. Team members come from top global financial institutions and technology companies, with rich industry experience and deep technical accumulation. We believe that only by combining financial expertise with cutting-edge technology can we truly achieve financial innovation.",
+        "paragraph3": "Our core business includes digital asset mining, staking, and trading services. Through self-developed smart contracts and risk control systems, we provide users with comprehensive digital asset value-added solutions. We pay special attention to user experience and security, and all products undergo strict security audits and testing to ensure the safety of user assets.",
+        "paragraph4": "24K Finance upholds the values of 'openness, transparency, and innovation', actively embraces regulation, and operates in compliance. We believe that only within a compliant framework can blockchain finance develop healthily and sustainably. We are committed to working with regulatory authorities, industry partners, and users to build a more open and inclusive financial ecosystem.",
+        "paragraph5": "Looking to the future, we will continue to explore innovative applications of blockchain technology in the financial field, continuously optimize products and services, and create greater value for users. We firmly believe that blockchain technology will reshape the future of finance, and 24K Finance will be an important driver of this transformation."
+      }
+    },
+    "team": {
+      "title": "Team",
+      "subtitle": "We are a professional team composed of elites from around the world.",
+      "members": [
+        {
+          "name": "Ben Huang",
+          "title": "CEO (Founding Partner)",
+          "bio": "A passionate entrepreneur with 10 years of entrepreneurial experience. Focused on blockchain and fintech, dedicated to applying innovative technology to practical business. Has held executive positions in several well-known technology companies, leading teams to successfully develop multiple influential products. Believes in the power of technology to change the financial world."
+        },
+        {
+          "name": "David Chen",
+          "title": "CTO",
+          "bio": "Senior technical expert with rich blockchain development experience. Has participated in the architectural design and implementation of multiple large blockchain projects. Proficient in mainstream blockchain technologies such as Solana and Ethereum, with in-depth research on smart contracts and decentralized applications."
+        },
+        {
+          "name": "Sarah Li",
+          "title": "CMO",
+          "bio": "Marketing expert with over 8 years of experience in digital marketing and brand building. Has been responsible for market strategy formulation and execution in many well-known technology companies, skilled in community building and user growth. Has unique insights into the cryptocurrency market."
+        }
+      ]
+    },
+    "contact": {
+      "title": "Contact Us",
+      "description": "If you have any questions or suggestions, please feel free to contact us. Our team will be at your service.",
+      "info": {
+        "email": "Email: contact@24k-finance.com",
+        "phone": "Phone: +86 123 4567 8910",
+        "address": "Address: Zhangjiang Hi-Tech Park, Pudong New Area, Shanghai, China"
+      },
+      "form": {
+        "nameLabel": "Your Name",
+        "namePlaceholder": "Please enter your name",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Please enter your email",
+        "messageLabel": "Message",
+        "messagePlaceholder": "Please enter your message",
+        "submitButton": "Submit Message"
+      }
+    }
+  }
