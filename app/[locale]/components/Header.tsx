@@ -51,7 +51,7 @@ const Header: React.FC = () => {
                 key={item.name}
                 href={item.href}
                 target={item.target}
-                className="text-sm font-medium text-gray-300 hover:text-white transition-colors flex items-center"
+                className="text-sm font-medium text-gray-300 hover:text-white transition-colors flex items-center tracking-wide"
               >
                 {item.name}
                 <span className="ml-1 text-xs">▾</span>

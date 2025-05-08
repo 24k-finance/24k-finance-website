@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-05 18:31:16
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-07 19:41:08
+ * @LastEditTime: 2025-05-08 16:21:56
  * @FilePath: /24k-finance-website/app/layout.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -10,7 +10,7 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import type { Metadata } from "next";
 import Header from "@/app/[locale]/components/Header";
 import Footer from "@/app/[locale]/components/Footer"; // 导入 Footer 组件
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import WalletContextProvider from "@/app/[locale]/provider/WalletContextProvider"; // 导入 WalletContextProvider
 import { getMessages } from "./utils/index"
 import "./globals.css";
@@ -28,17 +28,17 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// export const metadata: Metadata = {
-//   title: "24K Finance Web",
-//   description: "24K Finance Web",
-// };
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+});
 
-// export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
-//   return {
-//     title: locale === 'zh' ? '24K 金融网站' : '24K Finance Web',
-//     description: locale === 'zh' ? '区块链矿场质押-融资平台' : 'Blockchain Mining Staking-Financing Platform',
-//   };
-// }
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+});
+
 
 export async function generateMetadata({ params }: { params: { locale: string } }) {
   const { locale } = await params;
@@ -67,7 +67,8 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} antialiased`}
       >
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Header />
