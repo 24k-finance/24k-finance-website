@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-05 19:07:58
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-08 13:42:56
+ * @LastEditTime: 2025-05-08 16:09:46
  * @FilePath: /24k-finance-website/app/components/Header.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -22,11 +22,13 @@ const Header: React.FC = () => {
     { name: t('launch'), href: '/launch' },
     { name: t('market'), href: '/market' },
     { name: t('staking'), href: '/staking' },
+    { name: t('contactUs'), href: '/connect-us' },
+    { name: t('whitePaper'), href: 'https://j7vjbcs7d1nu3sfb.public.blob.vercel-storage.com/24k%20Finance%20%E7%99%BD%E7%9A%AE%E4%B9%A6-FlKFFYJzTQ09tmTc9ID5xYDB0XAG53.pdf', target: '_blank'  },
   ];
 
   return (
     // 将 px-8 sm:px-16 应用到 header 元素
-    <header className="sticky top-0 z-50 w-full bg-[#161616]/80 backdrop-blur-sm border-b border-gray-800 px-8 sm:px-16">
+    <header className="sticky top-0 z-50 w-full bg-[#0a0a10] backdrop-blur-sm border-b border-gray-800 px-8 sm:px-16">
       {/* 移除这里的 px-8 sm:px-16 */}
       <div className="max-w-6xl mx-auto">
         <div className="flex h-16 items-center justify-between">
@@ -48,6 +50,7 @@ const Header: React.FC = () => {
               <Link
                 key={item.name}
                 href={item.href}
+                target={item.target}
                 className="text-sm font-medium text-gray-300 hover:text-white transition-colors flex items-center"
               >
                 {item.name}

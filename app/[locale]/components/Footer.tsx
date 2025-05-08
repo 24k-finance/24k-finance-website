@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-05 19:25:10
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-08 13:43:33
+ * @LastEditTime: 2025-05-08 16:05:21
  * @FilePath: /24k-finance-website/app/components/Footer.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -47,10 +47,9 @@ const Footer: React.FC = () => {
 
   const socialLinks = [
     { Icon: Youtube, href: '#', label: 'YouTube' },
-    { Icon: Twitter, href: '#', label: 'Twitter' },
-    // { Icon: Discord, href: '#', label: 'Discord' },
-    { Icon: Github, href: '#', label: 'GitHub' },
-    { Icon: Send, href: '#', label: 'Telegram' },
+    { Icon: Twitter, href: 'https://x.com/24K_finance', label: 'Twitter' },
+    { Icon: Github, href: 'https://github.com/24k-finance', label: 'GitHub' },
+    { Icon: Send, href: 'https://t.me/Finance24K', label: 'Telegram' },
   ];
 
   const footerLinks = {

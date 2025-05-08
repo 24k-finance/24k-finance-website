@@ -1,9 +1,10 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import { useTranslations } from "next-intl"
+import { Link } from '@/i18n/navigation'
+import { Youtube, Twitter, Github, Send } from 'lucide-react'
 
 export function MiningPlatformHero() {
   const t = useTranslations('miningPlatform');
@@ -36,6 +37,14 @@ export function MiningPlatformHero() {
       window.removeEventListener("mousemove", handleMouseMove)
     }
   }, [])
+  
+  // 社交媒体链接
+  const socialLinks = [
+    { Icon: Youtube, href: '#', label: 'YouTube' },
+    { Icon: Twitter, href: 'https://x.com/24K_finance', label: 'Twitter' },
+    { Icon: Github, href: 'https://github.com/24k-finance', label: 'GitHub' },
+    { Icon: Send, href: 'https://t.me/Finance24K', label: 'Telegram' },
+  ];
   
   return (
     <div className="relative w-full h-[500px] overflow-hidden rounded-2xl">
@@ -79,14 +88,16 @@ export function MiningPlatformHero() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          whileHover={{ scale: 1.05 }}
+          className="flex space-x-4"
         >
-          <Button 
-            // className="bg-gradient-to-r from-[#9945FF] to-[#14F195] hover:from-[#8752F3] hover:to-[#00C2FF] text-white px-8 py-6 rounded-lg text-lg font-medium shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-[#14F195]/30"
-            className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-6 rounded-lg text-lg font-medium shadow-lg transition-colors duration-300 cursor-pointer"
-          >
-            {t('button')}
-          </Button>
+          {socialLinks.map(({ Icon, href, label }) => (
+            <motion.div key={label} whileHover={{ scale: 1.1 }}>
+              <Link href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
+                    className="w-12 h-12 rounded-full bg-gray-800/50 hover:bg-gray-700/70 flex items-center justify-center transition-colors border border-white/20 backdrop-blur-sm">
+                <Icon size={20} className="text-white" />
+              </Link>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
       
