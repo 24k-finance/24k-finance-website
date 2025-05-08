@@ -3,7 +3,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-05 18:31:16
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-08 21:54:44
+ * @LastEditTime: 2025-05-08 23:09:23
  * @FilePath: /24k-finance-website/app/page.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -52,6 +52,7 @@ export default function Home() {
       description: t('caseStudies.item1.description'),
       imageUrl: "/assets_5.png", // 替换为实际图片路径
       large: true, // 标记这个卡片是否是大尺寸的
+      href: '/market', // 替换为实际的链接
     },
     {
       tag: t('caseStudies.item2.tag'),
@@ -59,6 +60,7 @@ export default function Home() {
       description: t('caseStudies.item2.description'),
       imageUrl: "/assets_6.jpg", // 替换为实际图片路径
       large: false,
+      href: '/market', // 替换为实际的链接
     },
     {
       tag: t('caseStudies.item3.tag'),
@@ -66,6 +68,7 @@ export default function Home() {
       description: t('caseStudies.item3.description'),
       imageUrl: "/assets_7.jpg", // 替换为实际图片路径
       large: false,
+      href: '/market', // 替换为实际的链接
     },
     {
       tag: t('caseStudies.item4.tag'),
@@ -73,6 +76,7 @@ export default function Home() {
       description: t('caseStudies.item4.description'),
       imageUrl: "/assets_8.jpg", // 替换为实际图片路径
       large: false,
+      href: '/market', // 替换为实际的链接
     },
   ];
 

@@ -2,11 +2,12 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-05 18:57:17
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-08 17:45:51
+ * @LastEditTime: 2025-05-08 23:11:04
  * @FilePath: /24k-finance-website/app/components/CaseStudyCard.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import React from 'react'; // 导入 React 以便使用 FC
+import { Link } from "@/i18n/navigation";
 
 // 定义 Props 接口
 interface CaseStudyCardProps {
@@ -15,10 +16,11 @@ interface CaseStudyCardProps {
   description: string;
   imageUrl: string; // 假设 imageUrl 是一个字符串路径或 URL
   large: boolean;
+  href: string;
 }
 
 // 使用接口更新组件签名
-const CaseStudyCard: React.FC<CaseStudyCardProps> = ({ tag, title, description, imageUrl, large }) => (
+const CaseStudyCard: React.FC<CaseStudyCardProps> = ({ tag, title, description, imageUrl, large, href }) => (
     <div
       className={`relative rounded-xl overflow-hidden p-6 flex flex-col justify-between text-white bg-gradient-to-br from-[#1a1a2e] to-[#161625] shadow-lg cursor-pointer ${
         large ? "lg:col-span-2 min-h-[250px]" : "min-h-[200px]" // 调整 large 样式应用逻辑，确保它只影响布局相关的类
@@ -40,11 +42,14 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({ tag, title, description, 
         <h3 className="text-2xl font-bold mb-2">{title}</h3>
         <p className="text-sm text-gray-300">{description}</p>
       </div>
-      <div className="relative z-10 self-end mt-4">
-        <button className="w-8 h-8 rounded-full border border-gray-500 flex items-center justify-center text-gray-300 hover:bg-white/10 hover:border-white transition-colors">
-          →
-        </button>
-      </div>
+        <div className="relative z-10 self-end mt-4 cursor-pointer">
+        <Link href={href}>
+          <button className="w-8 h-8 rounded-full border border-gray-500 flex items-center justify-center text-gray-300 hover:bg-white/10 hover:border-white transition-colors cursor-pointer">
+            →
+          </button>
+          </Link>
+        </div>
+     
     </div>
   );
 
