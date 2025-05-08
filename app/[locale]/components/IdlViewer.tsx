@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-07 14:30:27
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-08 10:15:28
+ * @LastEditTime: 2025-05-08 10:20:39
  * @FilePath: /24k-finance-website/app/components/IdlViewer.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -69,7 +69,7 @@ export default function IdlViewer({ programId = 'HEvSKofvBgfaexv23kMabbYqxasxU3m
         {/* <h3 className="text-xl font-bold text-white">{idl.name} IDL</h3> */}
         <button 
           onClick={() => {
-            createInstance("my_farm_02".padEnd(32, "_"), programId).then((res) => {
+            createInstance("my_farm_03".padEnd(32, "_"), programId).then((res) => {
               console.log(res);
             }).catch((err) => {
               console.log(err);
