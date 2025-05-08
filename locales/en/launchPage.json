@@ -1,0 +1,80 @@
+{
+    "title": "LAUNCH Farm",
+    "subtitle": "Launch your mining project and attract investors",
+    "successMessage": {
+      "title": "Farm Published Successfully!",
+      "description": "Your mining project has been submitted successfully. We will review it within 24 hours. Once approved, your farm will be displayed on the market."
+    },
+    "formSectionTitles": {
+      "farmInfo": "Farm Information",
+      "techSpecs": "Technical Specifications",
+      "investmentInfo": "Investment Information",
+      "contactInfo": "Contact Information"
+    },
+    "formLabels": {
+      "name": "Farm Name",
+      "type": "Farm Type",
+      "description": "Farm Description",
+      "coverImage": "Cover Image",
+      "hashRate": "Hash Rate",
+      "powerConsumption": "Power Consumption",
+      "location": "Farm Location",
+      "price": "Price",
+      "roi": "Expected ROI",
+      "duration": "Contract Duration (months)",
+      "totalUnits": "Total Units",
+      "minInvestment": "Minimum Investment",
+      "contactEmail": "Contact Email",
+      "contactPhone": "Contact Phone"
+    },
+    "placeholders": {
+      "farmName": "Enter farm name",
+      "farmDescription": "Describe your farm project in detail, including advantages and features",
+      "hashRate": "e.g., 100 TH/s",
+      "powerConsumption": "e.g., 3,200 W",
+      "location": "e.g., Texas, USA",
+      "price": "e.g., 5,000 USDT",
+      "roi": "e.g., 12% annual",
+      "totalUnits": "e.g., 100",
+      "minInvestment": "e.g., 500 USDT",
+      "contactEmail": "e.g., contact@example.com",
+      "contactPhone": "e.g., +86 123 4567 8901"
+    },
+    "miningTypes": {
+      "BTC": "Bitcoin",
+      "ETH": "Ethereum",
+      "SOL": "Solana",
+      "FIL": "Filecoin",
+      "DOGE": "Dogecoin",
+      "OTHER": "Other"
+    },
+    "coverImage": {
+      "uploadPrompt": "Click to upload or drag and drop your file here",
+      "selectFile": "Select File",
+      "requirements": "Supports JPG, PNG formats. Recommended size: 1200x630, max file size: 5MB"
+    },
+    "altTexts": {
+      "coverPreview": "Cover Image Preview"
+    },
+    "durations": {
+      "6months": "6 Months",
+      "12months": "12 Months",
+      "24months": "24 Months",
+      "36months": "36 Months"
+    },
+    "submitButton": "Publish Farm",
+    "validation": {
+      "fillField": "Please fill in {field}",
+      "uploadCoverImage": "Please upload a cover image",
+      "connectWalletFirst": "Please connect your wallet first"
+    },
+    "instructions": {
+      "title": "Farm Publishing Instructions",
+      "item1": "All farm projects are subject to platform review, which usually takes 1–2 business days.",
+      "item2": "Please ensure the provided farm information is truthful and accurate. False information will result in rejection.",
+      "item3": "Publishing a farm requires a 0.1 SOL on-chain fee to ensure project authenticity.",
+      "item4": "After the farm goes live, the platform will charge a 5% management fee.",
+      "item5": "If you have any questions, please contact our support team: {email}"
+    }
+  }
+  

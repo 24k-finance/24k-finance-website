@@ -1,0 +1,79 @@
+{
+    "title": "LAUNCH矿场",
+    "subtitle": "发布您的矿场项目，吸引投资者参与",
+    "successMessage": {
+      "title": "矿场发布成功！",
+      "description": "您的矿场项目已成功提交，我们将在24小时内审核。审核通过后，您的矿场将在市场中展示。"
+    },
+    "formSectionTitles": {
+      "farmInfo": "矿场信息",
+      "techSpecs": "技术规格",
+      "investmentInfo": "投资信息",
+      "contactInfo": "联系信息"
+    },
+    "formLabels": {
+      "name": "矿场名称",
+      "type": "矿场类型",
+      "description": "矿场描述",
+      "coverImage": "矿场封面图片",
+      "hashRate": "算力",
+      "powerConsumption": "功耗",
+      "location": "矿场位置",
+      "price": "价格",
+      "roi": "预期回报率",
+      "duration": "合约期限 (月)",
+      "totalUnits": "总份额",
+      "minInvestment": "最小投资额",
+      "contactEmail": "联系邮箱",
+      "contactPhone": "联系电话"
+    },
+    "placeholders": {
+      "farmName": "请输入矿场名称",
+      "farmDescription": "请详细描述您的矿场项目，包括优势、特点等",
+      "hashRate": "例如: 100 TH/s",
+      "powerConsumption": "例如: 3,200 W",
+      "location": "例如: 美国德克萨斯州",
+      "price": "例如: 5,000 USDT",
+      "roi": "例如: 12% 年化",
+      "totalUnits": "例如: 100",
+      "minInvestment": "例如: 500 USDT",
+      "contactEmail": "例如: contact@example.com",
+      "contactPhone": "例如: +86 123 4567 8901"
+    },
+    "miningTypes": {
+      "BTC": "比特币",
+      "ETH": "以太坊",
+      "SOL": "Solana",
+      "FIL": "Filecoin",
+      "DOGE": "Dogecoin",
+      "OTHER": "其他"
+    },
+    "coverImage": {
+      "uploadPrompt": "点击上传或拖拽文件到此处",
+      "selectFile": "选择文件",
+      "requirements": "支持JPG, PNG格式，建议尺寸1200x630，文件大小不超过5MB"
+    },
+    "altTexts": {
+      "coverPreview": "矿场封面预览"
+    },
+    "durations": {
+      "6months": "6个月",
+      "12months": "12个月",
+      "24months": "24个月",
+      "36months": "36个月"
+    },
+    "submitButton": "发布矿场",
+    "validation": {
+      "fillField": "请填写{field}",
+      "uploadCoverImage": "请上传矿场封面图片",
+      "connectWalletFirst": "请先连接钱包"
+    },
+    "instructions": {
+      "title": "矿场发布说明",
+      "item1": "所有矿场项目需要经过平台审核，审核通常需要1-2个工作日",
+      "item2": "请确保提供真实、准确的矿场信息，虚假信息将导致项目被拒绝",
+      "item3": "发布矿场需要支付0.1 SOL的上链费用，用于确保项目真实性",
+      "item4": "矿场上线后，平台将收取5%的管理费用",
+      "item5": "如有任何问题，请联系我们的客服团队: {email}"
+    }
+  }

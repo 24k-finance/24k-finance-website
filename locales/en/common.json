@@ -1,3 +1,9 @@
 {
-    "currentLanguage": "EN"
+    "currentLanguage": "EN",
+    "connecting": "Connecting...",
+  "connectedAddress": "Connected: {address}",
+  "connectWalletName": "Connect ({walletName})",
+  "connectWallet": "Connect Wallet",
+   "connectWalletPrompt": "Please connect your wallet to start the KYC process",
+    "submitting": "Submitting..."
   }

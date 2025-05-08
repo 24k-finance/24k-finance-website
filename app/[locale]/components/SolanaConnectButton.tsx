@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-05 19:55:39
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-07 12:24:54
+ * @LastEditTime: 2025-05-08 09:02:26
  * @FilePath: /24k-finance-website/app/components/SolanaConnectButton.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -11,8 +11,10 @@
 import React, { useCallback } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
+import { useTranslations } from 'next-intl';
 
 export const SolanaConnectButton: React.FC = () => {
+  const t = useTranslations('common'); 
   // 从 @solana/wallet-adapter-react 获取钱包状态和方法
   const { publicKey, wallet, connecting, connected } = useWallet();
   // 从 @solana/wallet-adapter-react-ui 获取控制模态框的方法
@@ -31,21 +33,20 @@ export const SolanaConnectButton: React.FC = () => {
     return `${key.substring(0, 4)}...${key.substring(key.length - 4)}`;
   };
 
-  // 决定按钮文本
   const buttonText = () => {
     if (connecting) {
-      return "Connecting...";
+      return t('connecting');
     }
     if (connected && publicKey) {
       // 显示已连接钱包的部分公钥
-      return `Connected: ${formatPublicKey(publicKey.toBase58())}`;
+      return t('connectedAddress', { address: formatPublicKey(publicKey.toBase58()) });
     }
     if (wallet) {
       // 如果选择了钱包但尚未连接（例如，在模态框中选择了但取消了）
-      return `Connect (${wallet.adapter.name})`;
+      return t('connectWalletName', { walletName: wallet.adapter.name });
     }
     // 默认状态
-    return "Connect Wallet";
+    return t('connectWallet');
   };
 
   return (

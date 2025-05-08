@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-07 14:30:27
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-07 16:22:54
+ * @LastEditTime: 2025-05-08 08:57:13
  * @FilePath: /24k-finance-website/app/components/IdlViewer.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -30,8 +30,8 @@ export default function IdlViewer({ programId = 'HEvSKofvBgfaexv23kMabbYqxasxU3m
   // 添加钱包未连接的提示
   if (!connected) {
     return (
-      <div className="p-4 bg-slate-800 rounded-lg">
-        <p className="text-yellow-400">请先连接钱包以加载IDL数据</p>
+      <div className="p-4 bg-slate-800 rounded-lg mb-4">
+        <p className="text-yellow-400">请先连接钱包以加载数据</p>
       </div>
     );
   }

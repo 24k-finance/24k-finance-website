@@ -1,3 +1,9 @@
 {
-    "currentLanguage": "ZH"
+    "currentLanguage": "ZH",
+    "connecting": "连接中...",
+    "connectedAddress": "已连接: {address}",
+    "connectWalletName": "连接 ({walletName})",
+    "connectWallet": "连接钱包",
+    "connectWalletPrompt": "请先连接您的钱包以开始KYC认证流程",
+    "submitting": "提交中..."
   }

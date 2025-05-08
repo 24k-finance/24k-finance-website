@@ -4,8 +4,14 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useWallet } from "@solana/wallet-adapter-react";
 import dynamic from "next/dynamic";
-// import SolanaConnectButton from "@/app/components/SolanaConnectButton";
-// import Image from "next/image";
+
+const NotConnectWallet = dynamic(
+    () => import('../components/NotConnectWallet').then((mod) => mod.NotConnectWallet),
+    {
+      ssr: false, // 关键：禁用服务器端渲染
+      loading: () => <p></p> // 可选：添加加载状态指示器
+    }
+  );
 
 const SolanaConnectButton = dynamic(
     () => import('../components/SolanaConnectButton').then((mod) => mod.SolanaConnectButton),
@@ -14,6 +20,7 @@ const SolanaConnectButton = dynamic(
       loading: () => <p></p> // 可选：添加加载状态指示器
     }
   );
+
 
 // KYC状态枚举
 enum KycStatus {
@@ -509,17 +516,7 @@ export default function KycPage() {
         {kycStatus !== KycStatus.NOT_STARTED && renderStatusCard()}
 
         {/* 未连接钱包提示 */}
-        {!connected && kycStatus === KycStatus.NOT_STARTED && (
-          <motion.div 
-            className="bg-gray-900/50 p-6 rounded-xl border border-gray-800 mb-8 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-          >
-            <p className="text-gray-300 mb-4">请先连接您的钱包以开始KYC认证流程</p>
-            <SolanaConnectButton />
-          </motion.div>
-        )}
+        {!connected && kycStatus === KycStatus.NOT_STARTED && <NotConnectWallet />}
 
         {/* KYC表单 */}
         {connected && kycStatus === KycStatus.NOT_STARTED && (

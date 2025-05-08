@@ -20,7 +20,7 @@ const SolanaConnectButton = dynamic(
 const stakingPools = [
   {
     id: 1,
-    name: "BTC 矿机质押池",
+    name: "BTC ",
     icon: "/btc-icon.svg", // 确保有此图标
     apr: "12.5%",
     totalStaked: "1,250,000 USDT",
@@ -31,7 +31,7 @@ const stakingPools = [
   },
   {
     id: 2,
-    name: "ETH 矿机质押池",
+    name: "ETH ",
     icon: "/eth-icon.svg", // 确保有此图标
     apr: "10.2%",
     totalStaked: "980,000 USDT",
@@ -42,7 +42,7 @@ const stakingPools = [
   },
   {
     id: 3,
-    name: "SOL 矿机质押池",
+    name: "SOL ",
     icon: "/sol-icon.svg", // 确保有此图标
     apr: "15.8%",
     totalStaked: "750,000 USDT",
@@ -307,21 +307,21 @@ export default function StakingIndex() {
                   </thead>
                   <tbody>
                     <tr className="border-b border-gray-800">
-                      <td className="py-4">BTC 矿机质押池</td>
+                      <td className="py-4">BTC </td>
                       <td className="py-4">{t('stakeAction')}</td>
                       <td className="py-4">2,500 USDT</td>
                       <td className="py-4">2025-04-15 14:30</td>
                       <td className="py-4 text-green-400">{t('success')}</td>
                     </tr>
                     <tr className="border-b border-gray-800">
-                      <td className="py-4">ETH 矿机质押池</td>
+                      <td className="py-4">ETH </td>
                       <td className="py-4">{t('stakeAction')}</td>
                       <td className="py-4">1,500 USDT</td>
                       <td className="py-4">2025-04-10 09:15</td>
                       <td className="py-4 text-green-400">{t('success')}</td>
                     </tr>
                     <tr>
-                      <td className="py-4">BTC 矿机质押池</td>
+                      <td className="py-4">BTC </td>
                       <td className="py-4">{t('harvestAction')}</td>
                       <td className="py-4">125 USDT</td>
                       <td className="py-4">2025-04-05 16:45</td>
