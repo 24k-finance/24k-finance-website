@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-05 19:07:58
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-07 20:37:00
+ * @LastEditTime: 2025-05-08 13:42:56
  * @FilePath: /24k-finance-website/app/components/Header.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -34,9 +34,9 @@ const Header: React.FC = () => {
           <Link href="/" className="flex items-center">
             {/* 保持 Logo 尺寸，如果需要可以调整 */}
             <Image
-              src="/24k.svg" // 确保 public 目录下有这个 logo 文件
+              src="/24K_Logo.png" // 确保 public 目录下有这个 logo 文件
               alt="24K Logo"
-              width={100} // 保持宽度，或根据视觉效果调整
+              width={62} // 保持宽度，或根据视觉效果调整
               height={24} // 保持高度，或根据视觉效果调整
               priority
             />
