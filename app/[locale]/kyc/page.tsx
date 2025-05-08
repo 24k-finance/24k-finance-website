@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useWallet } from "@solana/wallet-adapter-react";
 import dynamic from "next/dynamic";
+import { useTranslations } from "next-intl";
 
 const NotConnectWallet = dynamic(
     () => import('../components/NotConnectWallet').then((mod) => mod.NotConnectWallet),
@@ -21,24 +22,33 @@ const SolanaConnectButton = dynamic(
     }
   );
 
+// KYC状态枚举
+// enum KycStatus {
+//   NOT_STARTED = "未开始",
+//   PENDING = "审核中",
+//   APPROVED = "已通过",
+//   REJECTED = "已拒绝"
+// }
 
 // KYC状态枚举
 enum KycStatus {
-  NOT_STARTED = "未开始",
-  PENDING = "审核中",
-  APPROVED = "已通过",
-  REJECTED = "已拒绝"
+  NOT_STARTED = "notStarted",
+  PENDING = "pending",
+  APPROVED = "approved",
+  REJECTED = "rejected"
 }
 
 export default function KycPage() {
+  const t = useTranslations('kyc'); 
+  const tCommon = useTranslations('common');
   const { connected } = useWallet();
   const [kycStatus, setKycStatus] = useState<KycStatus>(KycStatus.NOT_STARTED);
   const [activeStep, setActiveStep] = useState(1);
   const [formData, setFormData] = useState({
     fullName: "",
-    idType: "身份证",
+    idType: t('formDefaults.idType'),
     idNumber: "",
-    country: "中国",
+    country: t('formDefaults.country'),
     address: "",
     phone: "",
     email: "",
@@ -88,7 +98,7 @@ export default function KycPage() {
   // 提交KYC申请
   const submitKyc = async () => {
     if (!connected) {
-      alert("请先连接钱包");
+      alert(tCommon('alert.connectWalletFirst'));
       return;
     }
 
@@ -143,19 +153,19 @@ export default function KycPage() {
         statusColor = "text-yellow-400";
         statusBg = "bg-yellow-900/30";
         statusIcon = "⏳";
-        statusMessage = "您的KYC申请正在审核中，请耐心等待。审核通常需要1-3个工作日。";
+        statusMessage = t('statusMessages.pending');
         break;
       case KycStatus.APPROVED:
         statusColor = "text-green-400";
         statusBg = "bg-green-900/30";
         statusIcon = "✅";
-        statusMessage = "恭喜！您的KYC申请已通过审核。您现在可以使用平台的所有功能。";
+        statusMessage = t('statusMessages.approved');
         break;
       case KycStatus.REJECTED:
         statusColor = "text-red-400";
         statusBg = "bg-red-900/30";
         statusIcon = "❌";
-        statusMessage = "很遗憾，您的KYC申请未通过审核。请检查您提供的信息是否准确，然后重新提交。";
+        statusMessage = t('statusMessages.rejected');
         break;
       default:
         return null;
@@ -172,7 +182,7 @@ export default function KycPage() {
           <span className="text-2xl mr-3">{statusIcon}</span>
           <div>
             <h3 className={`text-xl font-bold ${statusColor} mb-2`}>
-              KYC状态: {kycStatus}
+              {t('statusLabels.title')}: {t(`kycStatus.${kycStatus}`)}
             </h3>
             <p className="text-gray-300">{statusMessage}</p>
           </div>
@@ -219,11 +229,11 @@ export default function KycPage() {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
-        <h3 className="text-xl font-bold mb-4">步骤 1: 个人信息</h3>
+        <h3 className="text-xl font-bold mb-4">{t('steps.step1.title')}</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-400 mb-1">
-              全名
+              {t('steps.step1.fields.fullName.label')}
             </label>
             <input
               type="text"
@@ -231,12 +241,12 @@ export default function KycPage() {
               value={formData.fullName}
               onChange={handleInputChange}
               className="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 focus:outline-none focus:border-purple-500"
-              placeholder="请输入您的全名"
+              placeholder={t('steps.step1.fields.fullName.placeholder')}
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-400 mb-1">
-              证件类型
+              {t('steps.step1.fields.idType.label')}
             </label>
             <select
               name="idType"
@@ -244,14 +254,14 @@ export default function KycPage() {
               onChange={handleInputChange}
               className="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 focus:outline-none focus:border-purple-500"
             >
-              <option value="身份证">身份证</option>
-              <option value="护照">护照</option>
-              <option value="驾照">驾照</option>
+              <option value="身份证">{t('steps.step1.fields.idType.options.idCard')}</option>
+              <option value="护照">{t('steps.step1.fields.idType.options.passport')}</option>
+              <option value="驾照">{t('steps.step1.fields.idType.options.driverLicense')}</option>
             </select>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-400 mb-1">
-              证件号码
+              {t('steps.step1.fields.idNumber.label')}
             </label>
             <input
               type="text"
@@ -259,12 +269,12 @@ export default function KycPage() {
               value={formData.idNumber}
               onChange={handleInputChange}
               className="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 focus:outline-none focus:border-purple-500"
-              placeholder="请输入您的证件号码"
+              placeholder={t('steps.step1.fields.idNumber.placeholder')}
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-400 mb-1">
-              国家/地区
+              {t('steps.step1.fields.country.label')}
             </label>
             <select
               name="country"
@@ -272,17 +282,17 @@ export default function KycPage() {
               onChange={handleInputChange}
               className="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 focus:outline-none focus:border-purple-500"
             >
-              <option value="中国">中国</option>
-              <option value="美国">美国</option>
-              <option value="日本">日本</option>
-              <option value="韩国">韩国</option>
-              <option value="新加坡">新加坡</option>
-              <option value="其他">其他</option>
+              <option value="中国">{t('steps.step1.fields.country.options.china')}</option>
+              <option value="美国">{t('steps.step1.fields.country.options.usa')}</option>
+              <option value="日本">{t('steps.step1.fields.country.options.japan')}</option>
+              <option value="韩国">{t('steps.step1.fields.country.options.korea')}</option>
+              <option value="新加坡">{t('steps.step1.fields.country.options.singapore')}</option>
+              <option value="其他">{t('steps.step1.fields.country.options.other')}</option>
             </select>
           </div>
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-400 mb-1">
-              居住地址
+              {t('steps.step1.fields.address.label')}
             </label>
             <input
               type="text"
@@ -290,12 +300,12 @@ export default function KycPage() {
               value={formData.address}
               onChange={handleInputChange}
               className="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 focus:outline-none focus:border-purple-500"
-              placeholder="请输入您的详细地址"
+              placeholder={t('steps.step1.fields.address.placeholder')}
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-400 mb-1">
-              手机号码
+              {t('steps.step1.fields.phone.label')}
             </label>
             <input
               type="tel"
@@ -303,12 +313,12 @@ export default function KycPage() {
               value={formData.phone}
               onChange={handleInputChange}
               className="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 focus:outline-none focus:border-purple-500"
-              placeholder="请输入您的手机号码"
+              placeholder={t('steps.step1.fields.phone.placeholder')}
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-400 mb-1">
-              电子邮箱
+              {t('steps.step1.fields.email.label')}
             </label>
             <input
               type="email"
@@ -316,7 +326,7 @@ export default function KycPage() {
               value={formData.email}
               onChange={handleInputChange}
               className="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 focus:outline-none focus:border-purple-500"
-              placeholder="请输入您的电子邮箱"
+              placeholder={t('steps.step1.fields.email.placeholder')}
             />
           </div>
         </div>
@@ -326,24 +336,26 @@ export default function KycPage() {
 
   // 渲染证件上传表单
   const renderIdDocumentsForm = () => {
+    const items = t('steps.step2.requirements.items');
+    const requirements = JSON.parse(items);
     return (
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
-        <h3 className="text-xl font-bold mb-4">步骤 2: 上传证件照片</h3>
+        <h3 className="text-xl font-bold mb-4">{t('steps.step2.title')}</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-medium text-gray-400 mb-2">
-              证件正面照片
+              {t('steps.step2.fields.idFront.label')}
             </label>
             <div className="border-2 border-dashed border-gray-700 rounded-lg p-4 text-center">
               {idFrontPreview ? (
                 <div className="relative">
                   <img 
                     src={idFrontPreview} 
-                    alt="证件正面预览" 
+                    alt={t('steps.step2.fields.idFront.previewAlt')} 
                     className="max-h-40 mx-auto rounded"
                   />
                   <button
@@ -358,7 +370,7 @@ export default function KycPage() {
                 </div>
               ) : (
                 <>
-                  <div className="text-gray-400 mb-2">点击上传或拖拽文件到此处</div>
+                  <div className="text-gray-400 mb-2">{t('steps.step2.fields.idFront.uploadText')}</div>
                   <input
                     type="file"
                     accept="image/*"
@@ -366,25 +378,25 @@ export default function KycPage() {
                     className="w-full opacity-0 absolute inset-0 cursor-pointer"
                   />
                   <div className="bg-gray-800 text-gray-300 py-2 px-4 rounded inline-block">
-                    选择文件
+                    {t('steps.step2.fields.idFront.buttonText')}
                   </div>
                 </>
               )}
             </div>
             <p className="text-xs text-gray-500 mt-1">
-              支持JPG, PNG格式，文件大小不超过5MB
+              {t('steps.step2.fields.idFront.supportText')}
             </p>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-400 mb-2">
-              证件背面照片
+              {t('steps.step2.fields.idBack.label')}
             </label>
             <div className="border-2 border-dashed border-gray-700 rounded-lg p-4 text-center">
               {idBackPreview ? (
                 <div className="relative">
                   <img 
                     src={idBackPreview} 
-                    alt="证件背面预览" 
+                    alt={t('steps.step2.fields.idBack.previewAlt')} 
                     className="max-h-40 mx-auto rounded"
                   />
                   <button
@@ -399,7 +411,7 @@ export default function KycPage() {
                 </div>
               ) : (
                 <>
-                  <div className="text-gray-400 mb-2">点击上传或拖拽文件到此处</div>
+                  <div className="text-gray-400 mb-2">{t('steps.step2.fields.idBack.uploadText')}</div>
                   <input
                     type="file"
                     accept="image/*"
@@ -407,23 +419,22 @@ export default function KycPage() {
                     className="w-full opacity-0 absolute inset-0 cursor-pointer"
                   />
                   <div className="bg-gray-800 text-gray-300 py-2 px-4 rounded inline-block">
-                    选择文件
+                    {t('steps.step2.fields.idBack.buttonText')}
                   </div>
                 </>
               )}
             </div>
             <p className="text-xs text-gray-500 mt-1">
-              支持JPG, PNG格式，文件大小不超过5MB
+              {t('steps.step2.fields.idBack.supportText')}
             </p>
           </div>
         </div>
         <div className="mt-4 p-4 bg-blue-900/20 rounded-lg border border-blue-800/30">
-          <h4 className="font-medium text-blue-400 mb-2">证件照片要求:</h4>
+          <h4 className="font-medium text-blue-400 mb-2">{t('steps.step2.requirements.title')}</h4>
           <ul className="list-disc list-inside text-sm text-gray-300 space-y-1">
-            <li>证件必须是有效的，未过期</li>
-            <li>照片必须清晰可见，无反光或阴影</li>
-            <li>证件的所有四个角都必须在照片中可见</li>
-            <li>不要裁剪或编辑照片</li>
+            {requirements.map((item: string, index: number) => (
+              <li key={index}>{item}</li>
+            ))}
           </ul>
         </div>
       </motion.div>
@@ -431,21 +442,25 @@ export default function KycPage() {
   };
 
   // 渲染自拍照上传表单
-  const renderSelfieForm = () => {
+   // 渲染自拍照上传表单
+   const renderSelfieForm = () => {
+    const items = t('steps.step3.requirements.items');
+    const requirements = JSON.parse(items);
+    
     return (
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
-        <h3 className="text-xl font-bold mb-4">步骤 3: 上传自拍照</h3>
+        <h3 className="text-xl font-bold mb-4">{t('steps.step3.title')}</h3>
         <div className="max-w-md mx-auto">
           <div className="border-2 border-dashed border-gray-700 rounded-lg p-4 text-center">
             {selfiePreview ? (
               <div className="relative">
                 <img 
                   src={selfiePreview} 
-                  alt="自拍照预览" 
+                  alt={t('steps.step3.fields.selfie.previewAlt')} 
                   className="max-h-60 mx-auto rounded"
                 />
                 <button
@@ -460,7 +475,7 @@ export default function KycPage() {
               </div>
             ) : (
               <>
-                <div className="text-gray-400 mb-2">点击上传或拖拽文件到此处</div>
+                <div className="text-gray-400 mb-2">{t('steps.step3.fields.selfie.uploadText')}</div>
                 <input
                   type="file"
                   accept="image/*"
@@ -468,29 +483,28 @@ export default function KycPage() {
                   className="w-full opacity-0 absolute inset-0 cursor-pointer"
                 />
                 <div className="bg-gray-800 text-gray-300 py-2 px-4 rounded inline-block">
-                  选择文件
+                  {t('steps.step3.fields.selfie.buttonText')}
                 </div>
               </>
             )}
           </div>
           <p className="text-xs text-gray-500 mt-1 text-center">
-            支持JPG, PNG格式，文件大小不超过5MB
+            {t('steps.step3.fields.selfie.supportText')}
           </p>
         </div>
         <div className="mt-6 p-4 bg-blue-900/20 rounded-lg border border-blue-800/30">
-          <h4 className="font-medium text-blue-400 mb-2">自拍照要求:</h4>
+          <h4 className="font-medium text-blue-400 mb-2">{t('steps.step3.requirements.title')}</h4>
           <ul className="list-disc list-inside text-sm text-gray-300 space-y-1">
-            <li>面部必须清晰可见，无遮挡</li>
-            <li>照片必须是最近拍摄的</li>
-            <li>光线充足，背景简单</li>
-            <li>不要佩戴墨镜或面具</li>
+            {requirements.map((item: string, index: number) => (
+              <li key={index}>{item}</li>
+            ))}
           </ul>
         </div>
         <div className="mt-6 p-4 bg-yellow-900/20 rounded-lg border border-yellow-800/30">
           <div className="flex items-start">
             <span className="text-yellow-500 mr-2">⚠️</span>
             <p className="text-sm text-gray-300">
-              提交KYC申请即表示您同意我们根据隐私政策处理您的个人信息。我们将安全地存储您的数据，并且仅用于验证您的身份。
+              {t('steps.step3.disclaimer')}
             </p>
           </div>
         </div>
@@ -498,93 +512,95 @@ export default function KycPage() {
     );
   };
 
+  const instructions = t('instructions.items');
+  const instructionsList = JSON.parse(instructions);
+
   return (
     <div className="min-h-screen bg-[#0a0a10] text-white p-8 sm:p-16">
-      <div className="max-w-4xl mx-auto">
-        {/* 页面标题和连接钱包按钮 */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-          <div>
-            <h1 className="text-4xl font-bold mb-2">KYC认证</h1>
-            <p className="text-gray-400">完成身份验证，解锁平台全部功能</p>
-          </div>
-          <div className="mt-4 md:mt-0">
-            <SolanaConnectButton />
-          </div>
+    <div className="max-w-4xl mx-auto">
+      {/* 页面标题和连接钱包按钮 */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+        <div>
+          <h1 className="text-4xl font-bold mb-2">{t('pageTitle')}</h1>
+          <p className="text-gray-400">{t('pageDescription')}</p>
         </div>
-
-        {/* KYC状态卡片 */}
-        {kycStatus !== KycStatus.NOT_STARTED && renderStatusCard()}
-
-        {/* 未连接钱包提示 */}
-        {!connected && kycStatus === KycStatus.NOT_STARTED && <NotConnectWallet />}
-
-        {/* KYC表单 */}
-        {connected && kycStatus === KycStatus.NOT_STARTED && (
-          <motion.div 
-            className="bg-gray-900/50 p-6 rounded-xl border border-gray-800"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-          >
-            {/* 步骤指示器 */}
-            {renderStepIndicator()}
-
-            {/* 表单内容 */}
-            <div className="mb-8">
-              {activeStep === 1 && renderPersonalInfoForm()}
-              {activeStep === 2 && renderIdDocumentsForm()}
-              {activeStep === 3 && renderSelfieForm()}
-            </div>
-
-            {/* 导航按钮 */}
-            <div className="flex justify-between">
-              <button
-                onClick={prevStep}
-                disabled={activeStep === 1}
-                className={`px-4 py-2 rounded-lg font-medium ${
-                  activeStep === 1
-                    ? "bg-gray-700 text-gray-400 cursor-not-allowed"
-                    : "bg-gray-800 hover:bg-gray-700"
-                }`}
-              >
-                上一步
-              </button>
-              <button
-                onClick={nextStep}
-                disabled={!canProceed() || isSubmitting}
-                className={`px-6 py-2 rounded-lg font-medium ${
-                  canProceed() && !isSubmitting
-                    ? "bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
-                    : "bg-gray-700 text-gray-400 cursor-not-allowed"
-                }`}
-              >
-                {isSubmitting ? (
-                  <span className="flex items-center">
-                    <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    提交中...
-                  </span>
-                ) : (
-                  activeStep === 3 ? "提交" : "下一步"
-                )}
-              </button>
-            </div>
-          </motion.div>
-        )}
-
-        {/* KYC说明 */}
-        <div className="mt-10 bg-gray-900/30 p-6 rounded-xl border border-gray-800">
-          <h3 className="text-xl font-bold mb-3">KYC认证说明</h3>
-          <ul className="list-disc list-inside space-y-2 text-gray-400">
-            <li>KYC（了解您的客户）是一项法律要求，用于防止欺诈和洗钱活动</li>
-            <li>您的个人信息将被安全存储，并且仅用于身份验证目的</li>
-            <li>完成KYC认证后，您将能够使用平台的所有功能，包括高额交易和提款</li>
-            <li>认证过程通常需要1-3个工作日完成</li>
-          </ul>
+        <div className="mt-4 md:mt-0">
+          <SolanaConnectButton />
         </div>
       </div>
+
+      {/* KYC状态卡片 */}
+      {kycStatus !== KycStatus.NOT_STARTED && renderStatusCard()}
+
+      {/* 未连接钱包提示 */}
+      {!connected && kycStatus === KycStatus.NOT_STARTED && <NotConnectWallet />}
+
+      {/* KYC表单 */}
+      {connected && kycStatus === KycStatus.NOT_STARTED && (
+        <motion.div 
+          className="bg-gray-900/50 p-6 rounded-xl border border-gray-800"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          {/* 步骤指示器 */}
+          {renderStepIndicator()}
+
+          {/* 表单内容 */}
+          <div className="mb-8">
+            {activeStep === 1 && renderPersonalInfoForm()}
+            {activeStep === 2 && renderIdDocumentsForm()}
+            {activeStep === 3 && renderSelfieForm()}
+          </div>
+
+          {/* 导航按钮 */}
+          <div className="flex justify-between">
+            <button
+              onClick={prevStep}
+              disabled={activeStep === 1}
+              className={`px-4 py-2 rounded-lg font-medium ${
+                activeStep === 1
+                  ? "bg-gray-700 text-gray-400 cursor-not-allowed"
+                  : "bg-gray-800 hover:bg-gray-700"
+              }`}
+            >
+              {t('navigation.prev')}
+            </button>
+            <button
+              onClick={nextStep}
+              disabled={!canProceed() || isSubmitting}
+              className={`px-6 py-2 rounded-lg font-medium ${
+                canProceed() && !isSubmitting
+                  ? "bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                  : "bg-gray-700 text-gray-400 cursor-not-allowed"
+              }`}
+            >
+              {isSubmitting ? (
+                <span className="flex items-center">
+                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  {tCommon('submitting')}
+                </span>
+              ) : (
+                activeStep === 3 ? t('navigation.submit') : t('navigation.next')
+              )}
+            </button>
+          </div>
+        </motion.div>
+      )}
+
+      {/* KYC说明 */}
+      <div className="mt-10 bg-gray-900/30 p-6 rounded-xl border border-gray-800">
+        <h3 className="text-xl font-bold mb-3">{t('instructions.title')}</h3>
+        <ul className="list-disc list-inside space-y-2 text-gray-400">
+          {instructionsList.map((item: string, index: number) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      </div>
     </div>
+  </div>
   );
 }

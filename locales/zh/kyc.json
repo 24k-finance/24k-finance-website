@@ -1,26 +1,120 @@
 {
-    "step1Title": "步骤 1: 个人信息",
-    "fullName": "全名",
-    "enterFullName": "请输入您的全名",
-    "idType": "证件类型",
-    "idNumber": "证件号码",
-    "enterIdNumber": "请输入您的证件号码",
-    "country": "国家/地区",
-    "address": "居住地址",
-    "phone": "手机号码",
-    "email": "电子邮箱",
+  "kycStatus": {
+    "notStarted": "未开始",
+    "pending": "审核中",
+    "approved": "已通过",
+    "rejected": "已拒绝"
+  },
+  "formDefaults": {
+    "idType": "身份证",
+    "country": "中国"
+  },
+  "statusMessages": {
+    "pending": "您的KYC申请正在审核中，请耐心等待。审核通常需要1-3个工作日。",
+    "approved": "恭喜！您的KYC申请已通过审核。您现在可以使用平台的所有功能。",
+    "rejected": "很遗憾，您的KYC申请未通过审核。请检查您提供的信息是否准确，然后重新提交。"
+  },
+  "pageTitle": "KYC认证",
+  "pageDescription": "完成身份验证，解锁平台全部功能",
+  "steps": {
+    "step1": {
+      "title": "步骤 1: 个人信息",
+      "fields": {
+        "fullName": {
+          "label": "全名",
+          "placeholder": "请输入您的全名"
+        },
+        "idType": {
+          "label": "证件类型",
+          "options": {
+            "idCard": "身份证",
+            "passport": "护照",
+            "driverLicense": "驾照"
+          }
+        },
+        "idNumber": {
+          "label": "证件号码",
+          "placeholder": "请输入您的证件号码"
+        },
+        "country": {
+          "label": "国家/地区",
+          "options": {
+            "china": "中国",
+            "usa": "美国",
+            "japan": "日本",
+            "korea": "韩国",
+            "singapore": "新加坡",
+            "other": "其他"
+          }
+        },
+        "address": {
+          "label": "居住地址",
+          "placeholder": "请输入您的详细地址"
+        },
+        "phone": {
+          "label": "手机号码",
+          "placeholder": "请输入您的手机号码"
+        },
+        "email": {
+          "label": "电子邮箱",
+          "placeholder": "请输入您的电子邮箱"
+        }
+      }
+    },
+    "step2": {
+      "title": "步骤 2: 上传证件照片",
+      "fields": {
+        "idFront": {
+          "label": "证件正面照片",
+          "uploadText": "点击上传或拖拽文件到此处",
+          "buttonText": "选择文件",
+          "supportText": "支持JPG, PNG格式，文件大小不超过5MB",
+          "previewAlt": "证件正面预览"
+        },
+        "idBack": {
+          "label": "证件背面照片",
+          "uploadText": "点击上传或拖拽文件到此处",
+          "buttonText": "选择文件",
+          "supportText": "支持JPG, PNG格式，文件大小不超过5MB",
+          "previewAlt": "证件背面预览"
+        }
+      },
+      "requirements": {
+        "title": "证件照片要求:",
+        "items": "[\"证件必须是有效的，未过期\", \"照片必须清晰可见，无反光或阴影\", \"证件的所有四个角都必须在照片中可见\", \"不要裁剪或编辑照片\"]"
+      }
+    },
+    "step3": {
+      "title": "步骤 3: 上传自拍照",
+      "fields": {
+        "selfie": {
+          "uploadText": "点击上传或拖拽文件到此处",
+          "buttonText": "选择文件",
+          "supportText": "支持JPG, PNG格式，文件大小不超过5MB",
+          "previewAlt": "自拍照预览"
+        }
+      },
+      "requirements": {
+        "title": "自拍照要求:",
+        "items": "[\"面部必须清晰可见，无遮挡\", \"照片必须是最近拍摄的\", \"光线充足，背景简单\", \"不要佩戴墨镜或面具\"]"
+
+      },
+      "disclaimer": "提交KYC申请即表示您同意我们根据隐私政策处理您的个人信息。我们将安全地存储您的数据，并且仅用于验证您的身份。"
+    }
+  },
+  "navigation": {
+    "prev": "上一步",
     "next": "下一步",
-    "back": "上一步",
-    "submit": "提交",
-    "selfie": "自拍照片",
-    "upload": "上传",
-    "kycStatus": "KYC状态",
-    "statusPending": "审核中",
-    "statusApproved": "已通过",
-    "statusRejected": "已拒绝",
-    "messagePending": "您的KYC申请正在审核中，请耐心等待。审核通常需要1-3个工作日。",
-    "messageApproved": "恭喜！您的KYC申请已通过审核。",
-    "messageRejected": "很遗憾，您的KYC申请未通过审核。请检查您提供的信息是否准确，然后重新提交。",
+    "submit": "提交"
+  },
+  "alerts": {
     "connectWallet": "请先连接钱包"
-  }
-  
+  },
+  "statusLabels": {
+    "title": "KYC状态"
+  },
+  "instructions": {
+  "title": "KYC Verification Instructions",
+  "items": "[\"KYC (Know Your Customer) is a legal requirement to prevent fraud and money laundering activities\", \"Your personal information will be securely stored and used only for verification purposes\", \"After completing KYC verification, you will be able to use all platform features, including high-value transactions and withdrawals\", \"The verification process typically takes 1-3 business days\"]"
+}
+}

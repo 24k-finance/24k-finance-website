@@ -1,26 +1,120 @@
 {
-    "step1Title": "Step 1: Personal Information",
-    "fullName": "Full Name",
-    "enterFullName": "Enter your full name",
-    "idType": "ID Type",
-    "idNumber": "ID Number",
-    "enterIdNumber": "Enter your ID number",
-    "country": "Country/Region",
-    "address": "Residential Address",
-    "phone": "Phone Number",
-    "email": "Email",
+  "kycStatus": {
+    "notStarted": "Not Started",
+    "pending": "Under Review",
+    "approved": "Approved",
+    "rejected": "Rejected"
+  },
+  "formDefaults": {
+    "idType": "ID Card",
+    "country": "China"
+  },
+  "statusMessages": {
+    "pending": "Your KYC application is under review, please be patient. The review process typically takes 1-3 business days.",
+    "approved": "Congratulations! Your KYC application has been approved. You can now use all platform features.",
+    "rejected": "Unfortunately, your KYC application was not approved. Please check if the information you provided is accurate, then resubmit."
+  },
+  "pageTitle": "KYC Verification",
+  "pageDescription": "Complete identity verification to unlock all platform features",
+  "steps": {
+    "step1": {
+      "title": "Step 1: Personal Information",
+      "fields": {
+        "fullName": {
+          "label": "Full Name",
+          "placeholder": "Please enter your full name"
+        },
+        "idType": {
+          "label": "ID Type",
+          "options": {
+            "idCard": "ID Card",
+            "passport": "Passport",
+            "driverLicense": "Driver's License"
+          }
+        },
+        "idNumber": {
+          "label": "ID Number",
+          "placeholder": "Please enter your ID number"
+        },
+        "country": {
+          "label": "Country/Region",
+          "options": {
+            "china": "China",
+            "usa": "United States",
+            "japan": "Japan",
+            "korea": "South Korea",
+            "singapore": "Singapore",
+            "other": "Other"
+          }
+        },
+        "address": {
+          "label": "Residential Address",
+          "placeholder": "Please enter your detailed address"
+        },
+        "phone": {
+          "label": "Phone Number",
+          "placeholder": "Please enter your phone number"
+        },
+        "email": {
+          "label": "Email Address",
+          "placeholder": "Please enter your email address"
+        }
+      }
+    },
+    "step2": {
+      "title": "Step 2: Upload ID Documents",
+      "fields": {
+        "idFront": {
+          "label": "ID Front Photo",
+          "uploadText": "Click to upload or drag and drop files here",
+          "buttonText": "Choose File",
+          "supportText": "Supports JPG, PNG formats, file size not exceeding 5MB",
+          "previewAlt": "ID Front Preview"
+        },
+        "idBack": {
+          "label": "ID Back Photo",
+          "uploadText": "Click to upload or drag and drop files here",
+          "buttonText": "Choose File",
+          "supportText": "Supports JPG, PNG formats, file size not exceeding 5MB",
+          "previewAlt": "ID Back Preview"
+        }
+      },
+      "requirements": {
+        "title": "ID Photo Requirements:",
+        "items": "[\"ID must be valid and not expired\", \"Photos must be clearly visible, without glare or shadows\", \"All four corners of the ID must be visible in the photo\", \"Do not crop or edit the photos\"]"
+      }
+    },
+    "step3": {
+      "title": "Step 3: Upload Selfie",
+      "fields": {
+        "selfie": {
+          "uploadText": "Click to upload or drag and drop files here",
+          "buttonText": "Choose File",
+          "supportText": "Supports JPG, PNG formats, file size not exceeding 5MB",
+          "previewAlt": "Selfie Preview"
+        }
+      },
+      "requirements": {
+        "title": "Selfie Requirements:",
+        "items":"[\"Face must be clearly visible, without obstructions\", \"Photo must be recently taken\", \"Good lighting with simple background\", \"Do not wear sunglasses or masks\"]"
+      },
+      "disclaimer": "By submitting your KYC application, you agree to our processing of your personal information in accordance with our Privacy Policy. We will securely store your data and use it solely for verifying your identity."
+    }
+  },
+  "navigation": {
+    "prev": "Previous",
     "next": "Next",
-    "back": "Back",
-    "submit": "Submit",
-    "selfie": "Selfie Photo",
-    "upload": "Upload",
-    "kycStatus": "KYC Status",
-    "statusPending": "Pending",
-    "statusApproved": "Approved",
-    "statusRejected": "Rejected",
-    "messagePending": "Your KYC application is under review. Please wait 1–3 business days.",
-    "messageApproved": "Congratulations! Your KYC is approved.",
-    "messageRejected": "Sorry, your KYC was rejected. Please check your information and resubmit.",
+    "submit": "Submit"
+  },
+  "alerts": {
     "connectWallet": "Please connect your wallet first"
-  }
-  
+  },
+  "statusLabels": {
+    "title": "KYC Status"
+  },
+  "instructions": {
+  "title": "KYC Verification Instructions",
+  "items": "[\"KYC (Know Your Customer) is a legal requirement to prevent fraud and money laundering activities\", \"Your personal information will be securely stored and used only for verification purposes\", \"After completing KYC verification, you will be able to use all platform features, including high-value transactions and withdrawals\", \"The verification process typically takes 1-3 business days\"]"
+
+}
+}

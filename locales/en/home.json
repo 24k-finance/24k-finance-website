@@ -1,0 +1,38 @@
+{
+    "marketTitle": "Gold Mine Market",
+    "goToMarket": "Go to Market",
+    "goldMineItems": {
+      "item1": {
+        "tag": "Mine #1",
+        "title": "Active Mining Machines",
+        "description": "Currently Running: 5 / Total: 10"
+      },
+      "item2": {
+        "tag": "Earnings",
+        "title": "Today's Estimate",
+        "description": "0.005 BTC / 150 USDT"
+      }
+    },
+    "caseStudies": {
+      "item1": {
+        "tag": "Rock Gold Mine",
+        "title": "Mali Kuremalay #01",
+        "description": "Mali Kuremalay gold mine has about 40 tons of gold reserves with a grade of about 5g/ton"
+      },
+      "item2": {
+        "tag": "Alluvial Gold Mine",
+        "title": "Côte d'Ivoire Dimbokro #02",
+        "description": "Côte d'Ivoire Dimbokro gold mine has 50+ tons of reserves, annual production of 4-6 tons, grade of 1.2-2.5g/ton"
+      },
+      "item3": {
+        "tag": "Rock Gold Mine",
+        "title": "Kenya #03",
+        "description": "Kenya gold mine has 30+ tons of reserves, annual production of 1-2 tons, grade of 0.8-2g/ton"
+      },
+      "item4": {
+        "tag": "Alluvial Gold Mine",
+        "title": "Tajikistan #04",
+        "description": "Tajikistan gold mine has 500+ tons of reserves, annual production of 6-8 tons, grade of 1.5-4g/ton"
+      }
+    }
+  }
