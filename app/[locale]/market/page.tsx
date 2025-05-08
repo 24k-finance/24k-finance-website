@@ -143,8 +143,8 @@ export default function MarketIndex() {
         {/* 页面标题和连接钱包按钮 */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
           <div>
-            <h1 className="text-4xl font-bold mb-2">矿场市场</h1>
-            <p className="text-gray-400">选择高性能矿机，开启您的挖矿之旅</p>
+            <h1 className="text-4xl font-bold mb-2">金矿市场</h1>
+            <p className="text-gray-400">加入投资金矿的高收益机会</p>
           </div>
           <div className="mt-4 md:mt-0">
             <SolanaConnectButton />
@@ -159,7 +159,7 @@ export default function MarketIndex() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <h3 className="text-gray-400 mb-2">可用矿机</h3>
+            <h3 className="text-gray-400 mb-2">开采中</h3>
             <p className="text-3xl font-bold">98 台</p>
           </motion.div>
           
@@ -169,8 +169,8 @@ export default function MarketIndex() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.1 }}
           >
-            <h3 className="text-gray-400 mb-2">平均回本周期</h3>
-            <p className="text-3xl font-bold">12.5 个月</p>
+            <h3 className="text-gray-400 mb-2">平均年化</h3>
+            <p className="text-3xl font-bold">20%</p>
           </motion.div>
           
           <motion.div 
@@ -179,7 +179,7 @@ export default function MarketIndex() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.2 }}
           >
-            <h3 className="text-gray-400 mb-2">矿机类型</h3>
+            <h3 className="text-gray-400 mb-2">金矿类型</h3>
             <p className="text-3xl font-bold">6 种</p>
           </motion.div>
         </div>
@@ -286,7 +286,7 @@ export default function MarketIndex() {
                 {/* 库存和购买按钮 */}
                 <div className="flex justify-between items-center">
                   <div className="text-sm text-gray-400">
-                    库存: <span className="text-white">{machine.available}</span>/{machine.total}
+                    剩余额度: <span className="text-white">{machine.available}</span>/{machine.total}
                   </div>
                   <button
                     onClick={() => handlePurchase(machine.id)}
@@ -297,7 +297,7 @@ export default function MarketIndex() {
                         : "bg-gray-700 text-gray-400 cursor-not-allowed"
                     }`}
                   >
-                    {machine.available > 0 ? "购买" : "售罄"}
+                    {machine.available > 0 ? "质押" : "售罄"}
                   </button>
                 </div>
               </div>
@@ -385,7 +385,7 @@ export default function MarketIndex() {
 
         {/* 底部说明 */}
         <div className="mt-10 bg-gray-900/30 p-6 rounded-xl border border-gray-800">
-          <h3 className="text-xl font-bold mb-3">矿机购买说明</h3>
+          <h3 className="text-xl font-bold mb-3">金矿质押说明</h3>
           <ul className="list-disc list-inside space-y-2 text-gray-400">
             <li>所有矿机均由专业团队维护，确保7*24小时稳定运行</li>
             <li>购买后矿机将在24小时内完成部署并开始产生收益</li>

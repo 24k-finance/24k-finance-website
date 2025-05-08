@@ -43,9 +43,9 @@ function LaunchPageFooter() {
 const MINING_TYPE_KEYS = {
   BTC: "BTC",
   ETH: "ETH",
-  SOL: "SOL",
-  FIL: "FIL",
-  DOGE: "DOGE",
+  // SOL: "SOL",
+  // FIL: "FIL",
+  // DOGE: "DOGE",
   OTHER: "OTHER",
 } as const;
 
@@ -88,7 +88,7 @@ export default function LaunchPage() {
     price: "",
     roi: "",
     duration: "12",
-    totalUnits: 100,
+    totalUnits: 50000,
     minInvestment: "",
     contactEmail: "",
     contactPhone: "",

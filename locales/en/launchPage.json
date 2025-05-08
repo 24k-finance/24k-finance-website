@@ -41,11 +41,8 @@
       "contactPhone": "e.g., +86 123 4567 8901"
     },
     "miningTypes": {
-      "BTC": "Bitcoin",
-      "ETH": "Ethereum",
-      "SOL": "Solana",
-      "FIL": "Filecoin",
-      "DOGE": "Dogecoin",
+      "BTC": "Primary Gold Deposit",
+      "ETH": "Placer Gold Deposit",
       "OTHER": "Other"
     },
     "coverImage": {
