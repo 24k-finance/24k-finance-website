@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-07 14:30:27
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-08 08:57:13
+ * @LastEditTime: 2025-05-08 10:15:28
  * @FilePath: /24k-finance-website/app/components/IdlViewer.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -11,6 +11,7 @@
 import { useIdl } from '@/app/[locale]/hooks/useIdl';
 import { useState } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
+import { useCreateInstance } from '../hooks/useCreateInstance';
 
 // 8TpsAjmnaBoFZr7qzymizcQ25MYiNB2pSYtyEb5jg6Xi
 // 91N4aCumtu3x4E4SgqS8cKfKXk3LdHuHqN5xZ1qnunkV
@@ -26,6 +27,7 @@ export default function IdlViewer({ programId = 'HEvSKofvBgfaexv23kMabbYqxasxU3m
   const { idl, loading, error } = useIdl(programId);
   const [expanded, setExpanded] = useState<boolean>(false);
   const { connected } = useWallet();
+  const { createInstance, loading: _loading, error: _error, } = useCreateInstance();
 
   // 添加钱包未连接的提示
   if (!connected) {
@@ -60,10 +62,24 @@ export default function IdlViewer({ programId = 'HEvSKofvBgfaexv23kMabbYqxasxU3m
     );
   }
 
+
   return (
-    <div className="p-4 bg-slate-800 rounded-lg border border-slate-700 mt-12">
-      <div className="flex justify-between items-center mb-4">
+    <div className="p-4 bg-slate-800 rounded-lg border border-slate-700 mb-8">
+      <div className="flex items-center mb-4">
         {/* <h3 className="text-xl font-bold text-white">{idl.name} IDL</h3> */}
+        <button 
+          onClick={() => {
+            createInstance("my_farm_02".padEnd(32, "_"), programId).then((res) => {
+              console.log(res);
+            }).catch((err) => {
+              console.log(err);
+            });
+          }}
+          disabled={_loading}
+          className="px-3 py-1 bg-blue-600 hover:bg-blue-700 rounded text-sm mr-4"
+        >
+          创建实例
+        </button>
         <button 
           onClick={() => setExpanded(!expanded)}
           className="px-3 py-1 bg-blue-600 hover:bg-blue-700 rounded text-sm"
