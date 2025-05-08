@@ -14,68 +14,25 @@ const SolanaConnectButton = dynamic(
     }
 );
 
-// 模拟矿机数据
-const miningMachines = [
-  {
-    id: 1,
-    name: "库雷马莱",
-    image: "/assets_5.png", // 确保有此图片
-    price: "5,000,000 USD",
-    hashRate: "2 g/t",
-    powerConsumption: "40 Tonnes",
-    dailyReturn: "20%",
-    roi: "预计12个月",
-    available: 150000,
-    total: 5000000,
-    type: "btc",
-  },
-  {
-    id: 2,
-    name: "科特迪瓦",
-    image: "/assets_6.jpg", // 确保有此图片
-    price: "3,000,000 USD",
-    hashRate: "3 g/t",
-    ppowerConsumption: "40 Tonnes",
-    dailyReturn: "20%",
-    roi: "预计14个月",
-    available: 800,
-    total: 3000000,
-    type: "eth",
-  },
-  {
-    id: 3,
-    name: "肯尼亚",
-    image: "/assets_7.jpg", // 确保有此图片
-    price: "2,500,000 USD",
-    hashRate: "3 g/t",
-    ppowerConsumption: "50 Tonnes",
-    dailyReturn: "20%",
-    roi: "预计10个月",
-    available: 2000000,
-    total: 4000000,
-    type: "sol",
-  },
-  {
-    id: 4,
-    name: "塔吉克斯坦",
-    image: "/assets_8.jpg", // 确保有此图片
-    price: "2,800,000 USD",
-    hashRate: "3 g/t",
-    ppowerConsumption: "50 Tonnes",
-    dailyReturn: "30%",
-    roi: "预计13个月",
-    available: 2500000,
-    total: 5000000,
-    type: "other",
-  },
-];
-
 export default function MarketIndex() {
   const t = useTranslations('market'); // 添加这一行
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [selectedMachine, setSelectedMachine] = useState<number | null>(null);
   const [quantity, setQuantity] = useState<number>(1);
   const { connected } = useWallet();
+  const miningMachines = t.raw('machines').map((machine: any) => ({
+    id: machine.id,
+    name: machine.name,
+    image: `/assets_${machine.id + 4}.${machine.id === 1 ? 'png' : 'jpg'}`, // 根据ID生成图片路径
+    price: machine.price,
+    hashRate: machine.hashRate,
+    powerConsumption: machine.powerConsumption,
+    dailyReturn: machine.dailyReturn,
+    roi: machine.roi,
+    available: machine.id === 1 ? 150000 : machine.id === 2 ? 800 : machine.id === 3 ? 2000000 : 2500000,
+    total: machine.id === 1 ? 5000000 : machine.id === 2 ? 3000000 : machine.id === 3 ? 4000000 : 5000000,
+    type: machine.type,
+  }));
 
   // 处理购买操作
   const handlePurchase = (machineId: number) => {
@@ -95,7 +52,7 @@ export default function MarketIndex() {
     }
     
     // 这里可以添加购买逻辑
-    const machine = miningMachines.find(m => m.id === selectedMachine);
+    const machine = miningMachines.find((m: any) => m.id === selectedMachine);
     console.log(`购买 ${quantity} 台 ${machine?.name}`);
     
     // 购买成功后重置状态
@@ -109,7 +66,7 @@ export default function MarketIndex() {
   // 过滤矿机
   const filteredMachines = activeFilter === "all" 
     ? miningMachines 
-    : miningMachines.filter(machine => machine.type === activeFilter);
+    : miningMachines.filter((machine: any) => machine.type === activeFilter);
 
   return (
     <div className="min-h-screen bg-[#0a0a10] text-white p-8 sm:p-16">
@@ -214,7 +171,7 @@ export default function MarketIndex() {
 
         {/* 矿机列表 */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-          {filteredMachines.map((machine) => (
+          {filteredMachines.map((machine: any) => (
             <motion.div
               key={machine.id}
               className="bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800 hover:border-purple-800/50 transition-colors"
@@ -303,7 +260,7 @@ export default function MarketIndex() {
               onClick={(e) => e.stopPropagation()}
             >
               <h3 className="text-xl font-bold mb-4">
-                {t('purchaseModal.buyTitle')} {miningMachines.find(m => m.id === selectedMachine)?.name}
+                {t('purchaseModal.buyTitle')} {miningMachines.find((m: any) => m.id === selectedMachine)?.name}
               </h3>
               
               <div className="mb-4">
@@ -334,16 +291,16 @@ export default function MarketIndex() {
               <div className="mb-6">
                 <div className="flex justify-between mb-2">
                   <span className="text-gray-400">{t('purchaseModal.unitPriceLabel')}:</span>
-                  <span>{miningMachines.find(m => m.id === selectedMachine)?.price}</span>
+                  <span>{miningMachines.find((m: any) => m.id === selectedMachine)?.price}</span>
                 </div>
-                <div className="flex justify-between mb-2">
+                {/* <div className="flex justify-between mb-2">
                   <span className="text-gray-400">{t('purchaseModal.quantityCountLabel')}:</span>
                   <span>{quantity} 台</span>
-                </div>
+                </div> */}
                 <div className="flex justify-between font-bold">
                   <span>{t('purchaseModal.totalPriceLabel')}:</span>
                   <span className="text-purple-400">
-                    {parseInt(miningMachines.find(m => m.id === selectedMachine)?.price.replace(/,/g, '').split(' ')[0] || "0") * quantity} USDT
+                    {parseInt(miningMachines.find((m: any) => m.id === selectedMachine)?.price.replace(/,/g, '').split(' ')[0] || "0") * quantity} USDT
                   </span>
                 </div>
               </div>
