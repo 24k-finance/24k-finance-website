@@ -1,11 +1,9 @@
 "use client";
-
-import { useState } from "react";
 import Image from "next/image";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useWallet } from "@solana/wallet-adapter-react";
 import dynamic from "next/dynamic";
-// import SolanaConnectButton from "@/app/components/SolanaConnectButton";
 
 const SolanaConnectButton = dynamic(
     () => import('../components/SolanaConnectButton').then((mod) => mod.SolanaConnectButton),
@@ -19,80 +17,54 @@ const SolanaConnectButton = dynamic(
 const miningMachines = [
   {
     id: 1,
-    name: "比特币矿机 Pro",
-    image: "/btc-miner.jpg", // 确保有此图片
-    price: "5,000 USDT",
-    hashRate: "100 TH/s",
-    powerConsumption: "3,250 W",
-    dailyReturn: "~0.0005 BTC",
+    name: "库雷马莱",
+    image: "/assets_5.png", // 确保有此图片
+    price: "5,000,000 USD",
+    hashRate: "2 g/t",
+    powerConsumption: "40 Tonnes",
+    dailyReturn: "20%",
     roi: "预计12个月",
-    available: 15,
-    total: 50,
+    available: 150000,
+    total: 5000000,
     type: "btc",
   },
   {
     id: 2,
-    name: "以太坊矿机 Elite",
-    image: "/eth-miner.jpg", // 确保有此图片
-    price: "3,800 USDT",
-    hashRate: "750 MH/s",
-    powerConsumption: "1,200 W",
-    dailyReturn: "~0.005 ETH",
+    name: "科特迪瓦",
+    image: "/assets_6.jpg", // 确保有此图片
+    price: "3,000,000 USD",
+    hashRate: "3 g/t",
+    ppowerConsumption: "40 Tonnes",
+    dailyReturn: "20%",
     roi: "预计14个月",
-    available: 8,
-    total: 30,
+    available: 800,
+    total: 3000000,
     type: "eth",
   },
   {
     id: 3,
-    name: "Solana 验证节点",
-    image: "/sol-node.jpg", // 确保有此图片
-    price: "2,500 USDT",
-    hashRate: "N/A",
-    powerConsumption: "750 W",
-    dailyReturn: "~0.5 SOL",
+    name: "肯尼亚",
+    image: "/assets_7.jpg", // 确保有此图片
+    price: "2,500,000 USD",
+    hashRate: "3 g/t",
+    ppowerConsumption: "50 Tonnes",
+    dailyReturn: "20%",
     roi: "预计10个月",
-    available: 20,
-    total: 40,
+    available: 2000000,
+    total: 4000000,
     type: "sol",
   },
   {
     id: 4,
-    name: "比特币矿机 Lite",
-    image: "/btc-miner-lite.jpg", // 确保有此图片
-    price: "2,800 USDT",
-    hashRate: "60 TH/s",
-    powerConsumption: "2,100 W",
-    dailyReturn: "~0.0003 BTC",
+    name: "塔吉克斯坦",
+    image: "/assets_8.jpg", // 确保有此图片
+    price: "2,800,000 USD",
+    hashRate: "3 g/t",
+    ppowerConsumption: "50 Tonnes",
+    dailyReturn: "30%",
     roi: "预计13个月",
-    available: 25,
-    total: 50,
-    type: "btc",
-  },
-  {
-    id: 5,
-    name: "Filecoin 存储矿机",
-    image: "/fil-miner.jpg", // 确保有此图片
-    price: "4,200 USDT",
-    hashRate: "10 TB",
-    powerConsumption: "500 W",
-    dailyReturn: "~0.2 FIL",
-    roi: "预计15个月",
-    available: 12,
-    total: 25,
-    type: "other",
-  },
-  {
-    id: 6,
-    name: "Dogecoin 矿机",
-    image: "/doge-miner.jpg", // 确保有此图片
-    price: "1,800 USDT",
-    hashRate: "2.5 GH/s",
-    powerConsumption: "1,000 W",
-    dailyReturn: "~30 DOGE",
-    roi: "预计11个月",
-    available: 18,
-    total: 30,
+    available: 2500000,
+    total: 5000000,
     type: "other",
   },
 ];
@@ -160,7 +132,7 @@ export default function MarketIndex() {
             transition={{ duration: 0.3 }}
           >
             <h3 className="text-gray-400 mb-2">开采中</h3>
-            <p className="text-3xl font-bold">98 台</p>
+            <p className="text-3xl font-bold">6 座</p>
           </motion.div>
           
           <motion.div 
@@ -180,61 +152,62 @@ export default function MarketIndex() {
             transition={{ duration: 0.3, delay: 0.2 }}
           >
             <h3 className="text-gray-400 mb-2">金矿类型</h3>
-            <p className="text-3xl font-bold">6 种</p>
+            <p className="text-3xl font-bold">2 种</p>
           </motion.div>
         </div>
 
         {/* 过滤器 */}
         <div className="flex flex-wrap border-b border-gray-800 mb-6 gap-2">
           <button
-            className={`py-2 px-4 font-medium ${
+            className={`py-2 px-4 font-medium cursor-pointer ${
               activeFilter === "all"
                 ? "text-white border-b-2 border-purple-500"
                 : "text-gray-400 hover:text-white"
             }`}
             onClick={() => setActiveFilter("all")}
           >
-            全部矿机
+            全部金矿
           </button>
           <button
-            className={`py-2 px-4 font-medium ${
+            className={`py-2 px-4 font-medium cursor-pointer ${
               activeFilter === "btc"
                 ? "text-white border-b-2 border-purple-500"
                 : "text-gray-400 hover:text-white"
             }`}
             onClick={() => setActiveFilter("btc")}
           >
-            比特币矿机
+            
+            马里
           </button>
           <button
-            className={`py-2 px-4 font-medium ${
+            className={`py-2 px-4 font-medium cursor-pointer ${
               activeFilter === "eth"
                 ? "text-white border-b-2 border-purple-500"
                 : "text-gray-400 hover:text-white"
             }`}
             onClick={() => setActiveFilter("eth")}
           >
-            以太坊矿机
+            科特迪瓦 
           </button>
           <button
-            className={`py-2 px-4 font-medium ${
+            className={`py-2 px-4 font-medium cursor-pointer ${
               activeFilter === "sol"
                 ? "text-white border-b-2 border-purple-500"
                 : "text-gray-400 hover:text-white"
             }`}
             onClick={() => setActiveFilter("sol")}
           >
-            Solana节点
+            肯尼亚
           </button>
           <button
-            className={`py-2 px-4 font-medium ${
+            className={`py-2 px-4 font-medium cursor-pointer ${
               activeFilter === "other"
                 ? "text-white border-b-2 border-purple-500"
                 : "text-gray-400 hover:text-white"
             }`}
             onClick={() => setActiveFilter("other")}
           >
-            其他矿机
+            塔吉克斯坦
           </button>
         </div>
 
@@ -250,10 +223,19 @@ export default function MarketIndex() {
             >
               {/* 矿机图片 */}
               <div className="h-48 bg-gray-800 relative">
-                {/* 如果有图片，可以替换下面的div */}
-                <div className="absolute inset-0 flex items-center justify-center text-3xl font-bold text-gray-600">
-                  {machine.name.charAt(0)}
-                </div>
+                {machine.image ? (
+                  <Image
+                    src={machine.image}
+                    alt={machine.name}
+                    fill
+                    style={{ objectFit: "cover" }}
+                    className="transition-transform duration-500 group-hover:scale-105"
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center text-3xl font-bold text-gray-600">
+                    {machine.name.charAt(0)}
+                  </div>
+                )}
               </div>
               
               {/* 矿机信息 */}
@@ -266,19 +248,19 @@ export default function MarketIndex() {
                 {/* 矿机规格 */}
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <div>
-                    <p className="text-gray-400 text-sm">算力</p>
+                    <p className="text-gray-400 text-sm">品位</p>
                     <p className="font-medium">{machine.hashRate}</p>
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm">功耗</p>
+                    <p className="text-gray-400 text-sm">储量</p>
                     <p className="font-medium">{machine.powerConsumption}</p>
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm">日收益</p>
+                    <p className="text-gray-400 text-sm">年化</p>
                     <p className="font-medium text-green-400">{machine.dailyReturn}</p>
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm">回本周期</p>
+                    <p className="text-gray-400 text-sm">质押周期</p>
                     <p className="font-medium">{machine.roi}</p>
                   </div>
                 </div>
@@ -370,7 +352,7 @@ export default function MarketIndex() {
                   onClick={confirmPurchase}
                   className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 px-4 py-2 rounded-lg font-medium"
                 >
-                  确认购买
+                  确认质押
                 </button>
                 <button
                   onClick={() => setSelectedMachine(null)}
@@ -387,11 +369,11 @@ export default function MarketIndex() {
         <div className="mt-10 bg-gray-900/30 p-6 rounded-xl border border-gray-800">
           <h3 className="text-xl font-bold mb-3">金矿质押说明</h3>
           <ul className="list-disc list-inside space-y-2 text-gray-400">
-            <li>所有矿机均由专业团队维护，确保7*24小时稳定运行</li>
-            <li>购买后矿机将在24小时内完成部署并开始产生收益</li>
-            <li>矿机收益将根据网络难度和币价有所波动</li>
-            <li>矿机托管费用已包含在购买价格中，无需额外支付</li>
-            <li>矿机保修期为12个月，期间硬件故障免费维修</li>
+            <li>项目以实体金矿作为数字资产的质押资产，确保其真实价值与投资者权益。</li>
+            <li>金矿已获得合法采矿权及环境审批，具备合规性与可持续性。</li>
+            <li>矿山具备稳定的生产能力，黄金储量可验证。</li>
+            <li>所有质押资产将通过链下实物托管（off-chain custody）、链上证明机制（on-chain proof）实现黄金资源与数字资产之间的1:1锚定关系。</li>
+            <li>项目将定期披露金矿产量、黄金库存变化、第三方审计报告，确保运营透明合规。</li>
           </ul>
         </div>
       </div>

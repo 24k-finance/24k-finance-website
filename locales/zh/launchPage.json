@@ -17,7 +17,7 @@
       "description": "矿场描述",
       "coverImage": "矿场封面图片",
       "hashRate": "品位",
-      "powerConsumption": "产量",
+      "powerConsumption": "储量",
       "location": "矿场位置",
       "price": "价格",
       "roi": "预期回报率",

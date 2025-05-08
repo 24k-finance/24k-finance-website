@@ -20,35 +20,46 @@ const SolanaConnectButton = dynamic(
 const stakingPools = [
   {
     id: 1,
-    name: "BTC ",
-    icon: "/btc-icon.svg", // 确保有此图标
+    name: "马里 库雷马莱 ",
+    icon: "/assets_5.png", // 确保有此图标
     apr: "12.5%",
-    totalStaked: "1,250,000 USDT",
+    totalStaked: "5,000,000 USDT",
     yourStake: "5,000 USDT",
     rewards: "625 USDT",
-    duration: "30天",
+    duration: "预计12个月",
     status: "活跃",
   },
   {
     id: 2,
-    name: "ETH ",
-    icon: "/eth-icon.svg", // 确保有此图标
+    name: "科特迪瓦 丁博克罗 ",
+    icon: "/assets_6.jpg", // 确保有此图标
     apr: "10.2%",
     totalStaked: "980,000 USDT",
     yourStake: "2,500 USDT",
     rewards: "255 USDT",
-    duration: "60天",
+    duration: "预计14个月",
     status: "活跃",
   },
   {
     id: 3,
-    name: "SOL ",
-    icon: "/sol-icon.svg", // 确保有此图标
+    name: "肯尼亚 ",
+    icon: "/assets_7.jpg", // 确保有此图标
     apr: "15.8%",
     totalStaked: "750,000 USDT",
     yourStake: "0 USDT",
     rewards: "0 USDT",
-    duration: "90天",
+    duration: "预计10个月",
+    status: "即将开放",
+  },
+  {
+    id: 4,
+    name: "塔吉克斯坦 ",
+    icon: "/assets_8.jpg", // 确保有此图标
+    apr: "15.8%",
+    totalStaked: "750,000 USDT",
+    yourStake: "0 USDT",
+    rewards: "0 USDT",
+    duration: "预计13个月",
     status: "即将开放",
   },
 ];
@@ -177,10 +188,15 @@ export default function StakingIndex() {
                   <div className="flex flex-col md:flex-row justify-between">
                     {/* 池信息 */}
                     <div className="flex items-center mb-4 md:mb-0">
-                      <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center mr-4">
-                        {/* 替换为实际图标 */}
-                        <div className="text-2xl font-bold">{pool.name.charAt(0)}</div>
-                      </div>
+                    <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center mr-4 overflow-hidden">
+                      <Image
+                        src={pool.icon}
+                        alt={pool.name}
+                        width={48}
+                        height={48}
+                        className="object-cover w-full h-full"
+                      />
+                    </div>
                       <div>
                         <h3 className="text-xl font-bold">{pool.name}</h3>
                         <div className="flex items-center mt-1">
@@ -307,21 +323,21 @@ export default function StakingIndex() {
                   </thead>
                   <tbody>
                     <tr className="border-b border-gray-800">
-                      <td className="py-4">BTC </td>
+                      <td className="py-4">马里 库雷马莱</td>
                       <td className="py-4">{t('stakeAction')}</td>
                       <td className="py-4">2,500 USDT</td>
                       <td className="py-4">2025-04-15 14:30</td>
                       <td className="py-4 text-green-400">{t('success')}</td>
                     </tr>
                     <tr className="border-b border-gray-800">
-                      <td className="py-4">ETH </td>
+                      <td className="py-4">科特迪瓦 丁博克罗 </td>
                       <td className="py-4">{t('stakeAction')}</td>
                       <td className="py-4">1,500 USDT</td>
                       <td className="py-4">2025-04-10 09:15</td>
                       <td className="py-4 text-green-400">{t('success')}</td>
                     </tr>
                     <tr>
-                      <td className="py-4">BTC </td>
+                      <td className="py-4">肯尼亚 </td>
                       <td className="py-4">{t('harvestAction')}</td>
                       <td className="py-4">125 USDT</td>
                       <td className="py-4">2025-04-05 16:45</td>

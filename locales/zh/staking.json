@@ -20,7 +20,7 @@
     "confirm": "确认",
     "cancel": "取消",
     "estimatedAnnualReturn": "预计年化收益",
-    "poolName": "池名称",
+    "poolName": "金矿",
     "action": "操作",
     "amount": "金额",
     "time": "时间",
@@ -29,9 +29,9 @@
     "success": "成功",
     "connectWalletToViewHistory": "请连接钱包查看您的质押历史记录",
     "stakingNotes": "质押说明",
-    "stakingNote1": "质押期间，您的资金将用于购买和运营矿机，获取挖矿收益",
-    "stakingNote2": "质押收益根据矿机运行状况和市场行情可能有所波动",
-    "stakingNote3": "提前解除质押可能会产生一定的手续费",
-    "stakingNote4": "请确保您已了解质押风险，并在充分了解的情况下进行操作",
+    "stakingNote1": "所有质押资产均以实体金矿为锚定基础，但黄金价格存在市场波动风险，其价值可能随国际金价波动而发生变化。",
+    "stakingNote2": "在使用质押、兑换或赎回服务过程中，平台可能会根据链上交易成本、托管开支及运营需求收取一定的手续费用。",
+    "stakingNote3": "若出现重大市场波动或不可抗力事件，平台有权根据实际情况更新风险策略。",
+    "stakingNote4": "用户应在充分理解相关风险与规则的基础上，自主决策是否参与本服务。",
     "connectWalletAlert": "请先连接钱包"
   }
