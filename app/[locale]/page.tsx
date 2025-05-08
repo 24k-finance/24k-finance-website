@@ -3,7 +3,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-05 18:31:16
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-08 18:02:52
+ * @LastEditTime: 2025-05-08 18:22:10
  * @FilePath: /24k-finance-website/app/page.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -68,23 +68,23 @@ const caseStudies = [
   },
   {
     tag: "金矿",
-    title: "Boba Guys",
-    description: "ASICS 与 Solana Pay 合作建立忠诚度计划",
+    title: "科特迪瓦 丁博克罗 #02",
+    description: "科特迪瓦丁博克罗金矿储量50吨+，年产量4-6吨，品位1.2-2.5克/吨",
     imageUrl: "/assets_6.jpg", // 替换为实际图片路径
     large: false,
   },
   {
-    tag: "CASE STUDY",
-    title: "Homebase",
-    description: "GainForest 为气候保护工作带来透明度",
-    imageUrl: "/assets_3.webp", // 替换为实际图片路径
+    tag: "金矿",
+    title: "肯尼亚 #03",
+    description: "肯尼亚金矿储量30吨+，年产量1-2吨，品位0.8-2克/吨。",
+    imageUrl: "/assets_7.jpg", // 替换为实际图片路径
     large: false,
   },
   {
-    tag: "VIDEO",
-    title: "Hivemapper",
-    description: "Hivemapper 利用更好的实时数据和社区激励机制实现地图绘制的去中心化",
-    imageUrl: "/assets_4.webp", // 替换为实际图片路径
+    tag: "金矿",
+    title: "塔吉克斯坦 #04",
+    description: "塔吉克斯坦金矿储量500吨+，年产量6-8吨，品位1.5-4克/吨。",
+    imageUrl: "/assets_8.jpg", // 替换为实际图片路径
     large: false,
   },
 ];

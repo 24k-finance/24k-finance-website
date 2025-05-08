@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-05 19:29:08
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-07 21:20:22
+ * @LastEditTime: 2025-05-08 18:17:28
  * @FilePath: /24k-finance-website/app/[locale]/components/CallToAction.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -27,9 +27,9 @@ const CallToAction: React.FC = () => {
           <br className="hidden sm:block" />
           {t('title3')}
         </h2>
-        <button className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-2 rounded-full transition-colors duration-300">
+        {/* <button className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-2 rounded-full transition-colors duration-300">
           {t('button')}
-        </button>
+        </button> */}
       </div>
     </div>
   );
