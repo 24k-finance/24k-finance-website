@@ -51,7 +51,8 @@
         "powerConsumption": "40 Tonnes",
         "dailyReturn": "20%",
         "roi": "预计12个月",
-        "type": "btc"
+        "type": "btc",
+        "tag": "岩金矿"
       },
       {
         "id": 2,
@@ -61,7 +62,8 @@
         "powerConsumption": "40 Tonnes",
         "dailyReturn": "20%",
         "roi": "预计14个月",
-        "type": "eth"
+        "type": "eth",
+        "tag": "岩金矿"
       },
       {
         "id": 3,
@@ -71,7 +73,8 @@
         "powerConsumption": "50 Tonnes",
         "dailyReturn": "20%",
         "roi": "预计10个月",
-        "type": "sol"
+        "type": "sol",
+        "tag": "金沙矿"
       },
       {
         "id": 4,
@@ -81,7 +84,8 @@
         "powerConsumption": "50 Tonnes",
         "dailyReturn": "30%",
         "roi": "预计13个月",
-        "type": "other"
+        "type": "other",
+        "tag": "金沙矿"
       }
     ]    
   }

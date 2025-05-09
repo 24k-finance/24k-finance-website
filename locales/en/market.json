@@ -51,7 +51,8 @@
         "powerConsumption": "40 Tonnes",
         "dailyReturn": "20%",
         "roi": "Est. 12 months",
-        "type": "btc"
+        "type": "btc",
+        "tag": "Rock Gold Mine"
       },
       {
         "id": 2,
@@ -61,7 +62,8 @@
         "powerConsumption": "40 Tonnes",
         "dailyReturn": "20%",
         "roi": "Est. 14 months",
-        "type": "eth"
+        "type": "eth",
+        "tag": "Alluvial Gold Mine"
       },
       {
         "id": 3,
@@ -71,7 +73,8 @@
         "powerConsumption": "50 Tonnes",
         "dailyReturn": "20%",
         "roi": "Est. 10 months",
-        "type": "sol"
+        "type": "sol",
+        "tag": "Alluvial Gold Mine"
       },
       {
         "id": 4,
@@ -81,7 +84,8 @@
         "powerConsumption": "50 Tonnes",
         "dailyReturn": "30%",
         "roi": "Est. 13 months",
-        "type": "other"
+        "type": "other",
+        "tag": "Rock Gold Mine"
       }
     ]    
   }

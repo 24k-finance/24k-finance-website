@@ -32,6 +32,7 @@ export default function MarketIndex() {
     available: machine.id === 1 ? 150000 : machine.id === 2 ? 800 : machine.id === 3 ? 2000000 : 2500000,
     total: machine.id === 1 ? 5000000 : machine.id === 2 ? 3000000 : machine.id === 3 ? 4000000 : 5000000,
     type: machine.type,
+    tag: machine.tag,
   }));
 
   // 处理购买操作
@@ -181,6 +182,9 @@ export default function MarketIndex() {
             >
               {/* 矿机图片 */}
               <div className="h-48 bg-gray-800 relative">
+                <div className="absolute top-2 left-2 z-10 bg-purple-600/80 px-3 py-1 rounded-xs text-xs font-medium">
+                  {machine.tag}
+                </div>
                 {machine.image ? (
                   <Image
                     src={machine.image}
