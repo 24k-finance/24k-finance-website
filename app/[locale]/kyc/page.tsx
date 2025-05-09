@@ -350,7 +350,7 @@ export default function KycPage() {
             <label className="block text-sm font-medium text-gray-400 mb-2">
               {t('steps.step2.fields.idFront.label')}
             </label>
-            <div className="border-2 border-dashed border-gray-700 rounded-lg p-4 text-center">
+            <div className="border-2 border-dashed border-gray-700 rounded-lg p-4 text-center relative">
               {idFrontPreview ? (
                 <div className="relative">
                   <img 
@@ -371,15 +371,17 @@ export default function KycPage() {
               ) : (
                 <>
                   <div className="text-gray-400 mb-2">{t('steps.step2.fields.idFront.uploadText')}</div>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => handleFileChange(e, 'front')}
-                    className="w-full opacity-0 absolute inset-0 cursor-pointer"
-                  />
-                  <div className="bg-gray-800 text-gray-300 py-2 px-4 rounded inline-block">
-                    {t('steps.step2.fields.idFront.buttonText')}
-                  </div>
+                  <label className="block cursor-pointer">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleFileChange(e, 'front')}
+                      className="hidden"
+                    />
+                    <div className="bg-gray-800 text-gray-300 py-2 px-4 rounded inline-block">
+                      {t('steps.step2.fields.idFront.buttonText')}
+                    </div>
+                  </label>
                 </>
               )}
             </div>
@@ -391,7 +393,7 @@ export default function KycPage() {
             <label className="block text-sm font-medium text-gray-400 mb-2">
               {t('steps.step2.fields.idBack.label')}
             </label>
-            <div className="border-2 border-dashed border-gray-700 rounded-lg p-4 text-center">
+            <div className="border-2 border-dashed border-gray-700 rounded-lg p-4 text-center relative">
               {idBackPreview ? (
                 <div className="relative">
                   <img 
@@ -412,15 +414,17 @@ export default function KycPage() {
               ) : (
                 <>
                   <div className="text-gray-400 mb-2">{t('steps.step2.fields.idBack.uploadText')}</div>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => handleFileChange(e, 'back')}
-                    className="w-full opacity-0 absolute inset-0 cursor-pointer"
-                  />
-                  <div className="bg-gray-800 text-gray-300 py-2 px-4 rounded inline-block">
-                    {t('steps.step2.fields.idBack.buttonText')}
-                  </div>
+                  <label className="block cursor-pointer">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleFileChange(e, 'back')}
+                      className="hidden"
+                    />
+                    <div className="bg-gray-800 text-gray-300 py-2 px-4 rounded inline-block">
+                      {t('steps.step2.fields.idBack.buttonText')}
+                    </div>
+                  </label>
                 </>
               )}
             </div>
@@ -455,7 +459,7 @@ export default function KycPage() {
       >
         <h3 className="text-xl font-bold mb-4">{t('steps.step3.title')}</h3>
         <div className="max-w-md mx-auto">
-          <div className="border-2 border-dashed border-gray-700 rounded-lg p-4 text-center">
+          <div className="border-2 border-dashed border-gray-700 rounded-lg p-4 text-center relative">
             {selfiePreview ? (
               <div className="relative">
                 <img 
