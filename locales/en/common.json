@@ -1,9 +1,68 @@
 {
     "currentLanguage": "EN",
     "connecting": "Connecting...",
-  "connectedAddress": "Connected: {address}",
-  "connectWalletName": "Connect ({walletName})",
-  "connectWallet": "Connect Wallet",
-   "connectWalletPrompt": "Please connect your wallet to start the KYC process",
-    "submitting": "Submitting..."
+    "connectedAddress": "Connected: {address}",
+    "connectWalletName": "Connect ({walletName})",
+    "connectWallet": "Connect Wallet",
+    "connectWalletPrompt": "Please connect your wallet to start the KYC process",
+    "submitting": "Submitting...",
+    "name": "Name",
+    "description": "Description",
+    "hashRate": "Gold Grade",
+    "powerConsumption": "Reserves",
+    "location": "Location",
+    "price": "Price",
+    "roi": "Return on Investment",
+    "duration": "Duration",
+    "totalUnits": "Total Units",
+    "minInvestment": "Minimum Investment",
+    "contactEmail": "Contact Email",
+    "contactPhone": "Contact Phone",
+    "alert": {
+        "fillRequiredField": "Please fill in the required field:",
+        "uploadCoverImage": "Please upload a cover image",
+        "connectWalletFirst": "Please connect your wallet first"
+      },
+      "button": {
+        "submit": "Submit",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "back": "Back",
+        "next": "Next",
+        "save": "Save"
+      },
+      "form": {
+        "required": "Required",
+        "optional": "Optional",
+        "invalid": "Invalid"
+      },
+      "status": {
+        "loading": "Loading...",
+        "success": "Success",
+        "failed": "Failed",
+        "pending": "Pending"
+      },
+      "wallet": {
+        "connect": "Connect Wallet",
+        "disconnect": "Disconnect",
+        "connected": "Connected",
+        "notConnected": "Not Connected",
+        "insufficientBalance": "Insufficient Balance"
+      },
+      "error": {
+        "general": "An error occurred, please try again later",
+        "network": "Network error, please check your connection",
+        "transaction": "Transaction failed",
+        "validation": "Validation failed"
+      },
+      "time": {
+        "day": "day",
+        "hour": "hour",
+        "minute": "minute",
+        "second": "second",
+        "days": "days",
+        "hours": "hours",
+        "minutes": "minutes",
+        "seconds": "seconds"
+      }
   }

@@ -1,0 +1,23 @@
+{
+    "title": "My Mine Applications",
+    "subtitle": "View all your submitted mine applications and their statuses",
+    "refresh": "Refresh",
+    "newApplication": "New Application",
+    "connectWalletDescription": "Please connect your wallet to view your mine applications",
+    "errorLoading": "Failed to load",
+    "tryAgain": "Try Again",
+    "noApplications": "No Applications Yet",
+    "noApplicationsDescription": "You haven't submitted any mine applications yet. Create your first one now!",
+    "createFirstApplication": "Create First Application",
+    "location": "Location",
+    "operator": "Operator",
+    "scale": "Scale",
+    "financeScale": "Financing Amount",
+    "rate": "Annual Rate",
+    "period": "Lock-up Period",
+    "months": "months",
+    "applicationDate": "Application Date",
+    "viewDetails": "View Details",
+    "sign": "Sign"
+  }
+  

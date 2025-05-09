@@ -1,0 +1,22 @@
+{
+    "title": "我的矿池申请",
+    "subtitle": "查看您提交的所有矿池申请及其状态",
+    "refresh": "刷新",
+    "newApplication": "新建申请",
+    "connectWalletDescription": "请连接您的钱包以查看您的矿池申请",
+    "errorLoading": "加载失败",
+    "tryAgain": "重试",
+    "noApplications": "暂无申请记录",
+    "noApplicationsDescription": "您还没有提交过矿池申请，立即创建您的第一个申请吧！",
+    "createFirstApplication": "创建第一个申请",
+    "location": "位置",
+    "operator": "运营方",
+    "scale": "规模",
+    "financeScale": "融资规模",
+    "rate": "年化率",
+    "period": "锁仓期限",
+    "months": "个月",
+    "applicationDate": "申请日期",
+    "viewDetails": "查看详情",
+    "sign": "签约"
+}

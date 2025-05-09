@@ -1,10 +1,13 @@
 "use client";
-
+import BN from 'bn.js';
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useWallet } from "@solana/wallet-adapter-react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
+import { useApplyMine } from "../hooks/useApplyMine";
+import { Link } from '@/i18n/navigation';
+// import { BN } from "@project-serum/anchor";
 
 const SolanaConnectButton = dynamic(
     () => import('../components/SolanaConnectButton').then((mod) => mod.SolanaConnectButton),
@@ -37,7 +40,6 @@ function LaunchPageFooter() {
         </div>
   )
 }
-
 
 // Define keys for mining types
 const MINING_TYPE_KEYS = {
@@ -73,6 +75,7 @@ export default function LaunchPage() {
   const t = useTranslations('launchPage'); // 初始化翻译函数 (launchPage 命名空间)
   const tCommon = useTranslations('common'); // 初始化翻译函数 (common 命名空间)
 
+  const { applyMine, loading, error } = useApplyMine();
   const { connected } = useWallet();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -140,14 +143,14 @@ export default function LaunchPage() {
     
     for (const field of requiredFields) {
       if (!formData[field as keyof MiningFarmForm]) {
-        alert(tCommon('alert.fillRequiredField', { fieldName: getFieldLabel(field) }));
+        console.log(tCommon('alert.fillRequiredField') + ` ${getFieldLabel(field)}`);
         return false;
       }
     }
     
     // 验证封面图片
     if (!coverImage) {
-      alert(tCommon('alert.uploadCoverImage'));
+      console.log(tCommon('alert.uploadCoverImage'));
       return false;
     }
     
@@ -167,11 +170,11 @@ export default function LaunchPage() {
       duration: 'duration',
       totalUnits: 'totalUnits',
       minInvestment: 'minInvestment',
-      contactEmail: 'email', // Maps form field 'contactEmail' to translation key 'email'
-      contactPhone: 'phone'  // Maps form field 'contactPhone' to translation key 'phone'
+      contactEmail: 'email',
+      contactPhone: 'phone'
     };
     const translationKey = fieldToTranslationKey[field] || field;
-    return t(translationKey as any); // Use 'any' or ensure keys are strictly typed for t()
+    return tCommon(translationKey as any); // Use 'any' or ensure keys are strictly typed for t()
   };
 
 
@@ -180,46 +183,102 @@ export default function LaunchPage() {
     e.preventDefault();
     
     if (!connected) {
-      alert(tCommon('alert.connectWalletFirst'));
+      console.log(tCommon('alert.connectWalletFirst'));
       return;
     }
+    const currentTimestamp = Math.floor(Date.now() / 1000);
+    // 计算明天的时间戳（加上 86400 秒，即 1 天）
+    const tomorrowTimestamp = currentTimestamp + 86400;  // 明天的时间戳
+    // 计算一年后的时间戳（加上 365 天的秒数）
+    const oneYearLaterTimestamp = tomorrowTimestamp + (365 * 86400);  // 一年后的时间戳
+    const result = await applyMine({
+      mineCode: 'mine001' + Date.now(),
+      name: '测试矿场',
+      operator: '测试公司',
+      relationship: '直接拥有',
+      scale: '中型',
+      location: '中国云南',
+      approval1: '批文编号1',
+      approval2: '批文编号2',
+      approval3: '批文编号3',
+      financeScale: new BN('100000000'), // u128
+      currency: 'USDT',
+      startDate: new BN(tomorrowTimestamp),     // i64
+      endDate: new BN(oneYearLaterTimestamp),       // i64
+      rate: 500,                          // u32
+      frozenMonth: 6,                     // u8
+    });
+
+    console.log(result);
+
+    return
     
     if (!validateForm()) {
       return;
     }
+
+     // 生成唯一的 mineCode（如果未提供）
+     const mineCode = formData.name + `code_${Date.now().toString()}` || `MINE_${Date.now().toString()}`;
     
     setIsSubmitting(true);
     
-    // 模拟API请求
-    setTimeout(() => {
-      console.log('提交的矿场数据:', formData);
-      console.log('封面图片:', coverImage);
+    try {
+      // 在这里添加你的API请求逻辑
+      // 例如，使用fetch或axios发送POST请求到你的后端API
+      const params = {
+        name: formData.name.substring(0, 20), // 限制长度而不是填充
+        operator: "company".substring(0, 10),
+        relationship: formData.description.substring(0, 20), // 限制描述长度
+        scale: "100",
+        location: formData.location.substring(0, 20),
+        approval2: formData.contactPhone.substring(0, 15),
+        approval3: formData.contactPhone.substring(0, 15),
+        approval1: formData.contactEmail.substring(0, 20),
+        financeScale: formData.price,
+        rate: formData.roi,
+        frozenMonth: formData.duration,
+        startDate: Math.floor(new Date().getTime() / 1000), // 转换为秒级时间戳
+        endDate: Math.floor(new Date().getTime() / 1000) + 2592000, // 当前时间 + 30天
+        mineCode: mineCode
+      };
+      console.log(params);
+     
+    } catch (error) {
       
+    } finally {
       setIsSubmitting(false);
-      setIsSuccess(true);
+    }
+
+    // // 模拟API请求
+    // setTimeout(() => {
+    //   console.log('提交的矿场数据:', formData);
+    //   console.log('封面图片:', coverImage);
       
-      // 5秒后重置表单
-      setTimeout(() => {
-        setIsSuccess(false);
-        setFormData({
-          name: "",
-          type: MINING_TYPE_KEYS.BTC,
-          description: "",
-          hashRate: "",
-          powerConsumption: "",
-          location: "",
-          price: "",
-          roi: "",
-          duration: "12",
-          totalUnits: 100,
-          minInvestment: "",
-          contactEmail: "",
-          contactPhone: "",
-        });
-        setCoverImage(null);
-        setCoverPreview(null);
-      }, 5000);
-    }, 2000);
+    //   setIsSubmitting(false);
+    //   setIsSuccess(true);
+      
+    //   // 5秒后重置表单
+    //   setTimeout(() => {
+    //     setIsSuccess(false);
+    //     setFormData({
+    //       name: "",
+    //       type: MINING_TYPE_KEYS.BTC,
+    //       description: "",
+    //       hashRate: "",
+    //       powerConsumption: "",
+    //       location: "",
+    //       price: "",
+    //       roi: "",
+    //       duration: "12",
+    //       totalUnits: 100,
+    //       minInvestment: "",
+    //       contactEmail: "",
+    //       contactPhone: "",
+    //     });
+    //     setCoverImage(null);
+    //     setCoverPreview(null);
+    //   }, 5000);
+    // }, 2000);
   };
 
   return (
@@ -228,8 +287,15 @@ export default function LaunchPage() {
         {/* 页面标题和连接钱包按钮 */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
           <div>
-          <h1 className="text-4xl font-bold mb-2">{t('title')}</h1>
-          <p className="text-gray-400">{t('subtitle')}</p>
+            <h1 className="text-4xl font-bold mb-2">{t('title')}</h1>
+            <p className="text-gray-400">
+              <span className="">{t('subtitle')}</span>
+              {/* <Link href="/launching">
+                <span className='bg-purple-600 hover:bg-purple-700 text-white font-medium ml-3 py-1 px-2 rounded-xs'>
+                  查看申请中列表
+                </span>
+              </Link> */}
+            </p>
           </div>
           <div className="mt-4 md:mt-0">
             <SolanaConnectButton />
@@ -248,9 +314,9 @@ export default function LaunchPage() {
               <span className="text-2xl mr-3">✅</span>
               <div>
               <h3 className="text-xl font-bold text-green-400 mb-2">
-                  {t('success')}
+                  {t('successMessage.title')}
                 </h3>
-                <p className="text-gray-300">{t('successMessage')}</p>
+                <p className="text-gray-300">{t('successMessage.description')}</p>
               </div>
             </div>
           </motion.div>
@@ -261,7 +327,7 @@ export default function LaunchPage() {
 
         {/* 矿场发布表单 */}
         {connected && !isSuccess && (
-                  <motion.form
+              <motion.form
                   onSubmit={handleSubmit}
                   className="bg-gray-900/50 p-6 rounded-xl border border-gray-800"
                   initial={{ opacity: 0, y: 20 }}
@@ -328,7 +394,6 @@ export default function LaunchPage() {
                             alt={t('altTexts.coverPreview')}
                             className="max-h-60 mx-auto rounded"
                           />
-      // ... existing code ...
                         </div>
                       ) : (
                         <>

@@ -1,9 +1,68 @@
 {
-    "currentLanguage": "ZH",
-    "connecting": "连接中...",
-    "connectedAddress": "已连接: {address}",
-    "connectWalletName": "连接 ({walletName})",
-    "connectWallet": "连接钱包",
-    "connectWalletPrompt": "请先连接您的钱包以开始KYC认证流程",
-    "submitting": "提交中..."
+  "currentLanguage": "中文",
+  "connecting": "连接中...",
+  "connectedAddress": "已连接: {address}",
+  "connectWalletName": "连接 ({walletName})",
+  "connectWallet": "连接钱包",
+  "connectWalletPrompt": "请连接您的钱包以开始KYC流程",
+  "submitting": "提交中...",
+  "name": "名称",
+    "description": "描述",
+    "hashRate": "品位",
+    "powerConsumption": "储量",
+    "location": "位置",
+    "price": "价格",
+    "roi": "投资回报率",
+    "duration": "周期",
+    "totalUnits": "总单位数",
+    "minInvestment": "最低投资额",
+    "contactEmail": "联系邮箱",
+    "contactPhone": "联系电话",
+  "alert": {
+    "fillRequiredField": "请填写必填字段: {{fieldName}}",
+    "uploadCoverImage": "请上传封面图片",
+    "connectWalletFirst": "请先连接钱包"
+  },
+  "button": {
+    "submit": "提交",
+    "cancel": "取消",
+    "confirm": "确认",
+    "back": "返回",
+    "next": "下一步",
+    "save": "保存"
+  },
+  "form": {
+    "required": "必填",
+    "optional": "选填",
+    "invalid": "无效"
+  },
+  "status": {
+    "loading": "加载中...",
+    "success": "成功",
+    "failed": "失败",
+    "pending": "处理中"
+  },
+  "wallet": {
+    "connect": "连接钱包",
+    "disconnect": "断开连接",
+    "connected": "已连接",
+    "notConnected": "未连接",
+    "insufficientBalance": "余额不足"
+  },
+  "error": {
+    "general": "发生错误，请稍后再试",
+    "network": "网络错误，请检查您的连接",
+    "transaction": "交易失败",
+    "validation": "验证失败"
+  },
+  "time": {
+    "day": "天",
+    "hour": "小时",
+    "minute": "分钟",
+    "second": "秒",
+    "days": "天",
+    "hours": "小时",
+    "minutes": "分钟",
+    "seconds": "秒"
   }
+}

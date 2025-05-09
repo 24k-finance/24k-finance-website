@@ -2,28 +2,38 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-09 09:47:50
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-09 09:47:56
+ * @LastEditTime: 2025-05-09 11:40:20
  * @FilePath: /24k-finance-website/app/[locale]/hooks/useApplyMine.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import { useCallback } from 'react';
-import { SystemProgram } from '@solana/web3.js';
+import { ComputeBudgetProgram, SystemProgram } from '@solana/web3.js';
+import { BN } from '@project-serum/anchor';
 import { useLaunchpadProgram, getProgramPDAs } from './useLaunchpadProgram';
 
 // 申请金矿参数类型
 export interface ApplyMineParams {
-  mineName: string;
-  description: string;
-  startDate: number; // Unix 时间戳
-  endDate: number;   // Unix 时间戳
-  mineCode: string;  // 唯一标识符
-  // 其他必要参数...
-}
+    mine_code: string;    // 平台生成的编号，长度限制：MAX_MINE_CODE_LEN
+  name: string;         // 矿产官方名称，长度限制：MAX_NAME_LEN
+  operator: string;     // 运营方名称，长度限制：MAX_OPERATOR_LEN
+  relationship: string; // 关系证明文件 URI，长度限制：MAX_RELATIONSHIP_LEN
+  scale: string;        // 矿产规模，长度限制：MAX_SCALE_LEN
+  location: string;     // 矿产位置，长度限制：MAX_LOCATION_LEN
+  approval1: string;    // 政府确权文件 URI，长度限制：MAX_APPROVAL_LEN
+  approval2: string;    // 施工许可文件 URI，长度限制：MAX_APPROVAL_LEN
+  approval3: string;    // 其他政策文件 URI，长度限制：MAX_APPROVAL_LEN
+  finance_scale: BN;    // 融资规模（元），类型：u128 (使用 BN 表示)
+  currency: string;     // 法币单位，长度限制：MAX_CURRENCY_LEN
+  start_date: BN;       // 融资开始时间，类型：i64 (使用 BN 表示)
+  end_date: BN;         // 融资结束时间，类型：i64 (使用 BN 表示)
+  rate: BN;             // 年化率（实际除以10000），类型：u32 (使用 BN 表示)
+  frozen_month: BN;     //
+  }
 
 export const useApplyMine = () => {
   const { program, loading, setLoading, error, setError, wallet } = useLaunchpadProgram();
   
-  const applyMine = useCallback(async (params: ApplyMineParams) => {
+  const applyMine = useCallback(async (params: any) => {
     if (!program || !wallet) {
       setError(new Error('请先连接钱包'));
       return null;
@@ -34,15 +44,17 @@ export const useApplyMine = () => {
     
     try {
       const { mineAppPDA } = getProgramPDAs(params.mineCode);
-      
       // 调用合约方法
       const txSignature = await program.methods
-        .applyMine(params)
+        .applyMine(
+           params
+        )
         .accounts({
           application: mineAppPDA,
           owner: wallet.publicKey,
           systemProgram: SystemProgram.programId
         })
+        // .preInstructions([modifyComputeUnits]) // 添加修改计算单元限制指令到事务的开头
         .rpc();
       
       return {

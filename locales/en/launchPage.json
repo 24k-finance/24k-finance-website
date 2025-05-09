@@ -59,17 +59,17 @@
       "24months": "24 Months",
       "36months": "36 Months"
     },
-    "submitButton": "Publish Farm",
+    "submitButton": "Apply Farm",
     "validation": {
       "fillField": "Please fill in {field}",
       "uploadCoverImage": "Please upload a cover image",
       "connectWalletFirst": "Please connect your wallet first"
     },
     "instructions": {
-      "title": "Farm Publishing Instructions",
+      "title": "Farm Apply Instructions",
       "item1": "All farm projects are subject to platform review, which usually takes 1–2 business days.",
       "item2": "Please ensure the provided farm information is truthful and accurate. False information will result in rejection.",
-      "item3": "Publishing a farm requires a 0.1 SOL on-chain fee to ensure project authenticity.",
+      "item3": "Apply a farm requires a 0.1 SOL on-chain fee to ensure project authenticity.",
       "item4": "After the farm goes live, the platform will charge a 5% management fee.",
       "item5": "If you have any questions, please contact our support team: {email}"
     }
