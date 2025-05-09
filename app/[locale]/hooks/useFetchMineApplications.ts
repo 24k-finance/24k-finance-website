@@ -2,13 +2,14 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-09 09:49:16
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-09 12:32:10
+ * @LastEditTime: 2025-05-09 14:13:48
  * @FilePath: /24k-finance-website/app/[locale]/hooks/useFetchMineApplications.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import { useCallback, useState, useEffect } from 'react';
 import { PublicKey } from '@solana/web3.js';
 import { useLaunchpadProgram } from './useLaunchpadProgram';
+import { formatBNDecimal, toDate } from '../utils';
 
 // 金矿申请信息类型
 export interface MineApplication {
@@ -49,18 +50,29 @@ export const useFetchMineApplications = () => {
         return {
           publicKey: item.publicKey,
           account: {
-            owner: account.owner || '无',
-            mineName: account.mineName || '未知矿池',
-            description: account.description || '暂无描述',
-            startDate: account.startDate ? account.startDate.toNumber() : 0,
-            endDate: account.endDate ? account.endDate.toNumber() : 0,
-            mineCode: account.mineCode || '无代码',
-            approved: account.approved || false,
-            signed: account.signed || false,
+            mineCode: account.mineCode,
+            name: account.name,
+            operator: account.operator,
+            relationship: account.relationship,
+            approval1: account.approval1,
+            approval2: account.approval2,
+            approval3: account.approval3,
+            scale: account.scale,
+            location: account.location,
+            currency: account.currency,
+            financeScale: formatBNDecimal(account.financeScale, 6),
+            startDate: toDate(account.startDate),
+            endDate: toDate(account.endDate),
+            signDate: toDate(account.signDate),
+            rate: account.rate,
+            frozenMonth: account.frozenMonth,
+            auditResult: account.auditResult,
+            isSigned: account.isSigned,
+            owner: account.owner.toBase58(),
           }
         };
       });
-      
+      console.log('fixedApplications', fixedApplications);
       setApplications(fixedApplications);
     } catch (err) {
       console.error('获取金矿申请列表失败:', err);

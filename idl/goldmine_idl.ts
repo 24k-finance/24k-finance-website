@@ -232,81 +232,29 @@ export const goldmineFactoryIdl = {
         type: {
           kind: "struct",
           fields: [
-            {
-              name: "mineCode",
-              type: "string",
-            },
-            {
-              name: "name",
-              type: "string",
-            },
-            {
-              name: "operator",
-              type: "string",
-            },
-            {
-              name: "relationship",
-              type: "string",
-            },
-            {
-              name: "scale",
-              type: "string",
-            },
-            {
-              name: "location",
-              type: "string",
-            },
-            {
-              name: "approval1",
-              type: "string",
-            },
-            {
-              name: "approval2",
-              type: "string",
-            },
-            {
-              name: "approval3",
-              type: "string",
-            },
-            {
-              name: "financeScale",
-              type: "u128",
-            },
-            {
-              name: "currency",
-              type: "string",
-            },
-            {
-              name: "startDate",
-              type: "i64",
-            },
-            {
-              name: "endDate",
-              type: "i64",
-            },
-            {
-              name: "rate",
-              type: "u32",
-            },
-            {
-              name: "frozenMonth",
-              type: "u8",
-            },
-            {
-              name: "owner",
-              type: "publicKey",
-            },
-            {
-              name: "approved",
-              type: "bool",
-            },
-            {
-              name: "signed",
-              type: "bool",
-            },
+            { name: "owner", type: "publicKey" },
+            { name: "mineCode", type: "string" },
+            { name: "name", type: "string" },
+            { name: "operator", type: "string" },
+            { name: "relationship", type: "string" },
+            { name: "approval1", type: "string" },
+            { name: "approval2", type: "string" },
+            { name: "approval3", type: "string" },
+            { name: "scale", type: "string" },
+            { name: "location", type: "string" },
+            { name: "financeScale", type: "u128" },
+            { name: "currency", type: "string" },
+            { name: "startDate", type: "i64" },
+            { name: "endDate", type: "i64" },
+            { name: "rate", type: "u32" },
+            { name: "frozenMonth", type: "u8" },
+            { name: "auditResult", type: "bool" },
+            { name: "isSigned", type: "bool" },
+            { name: "signDate", type: "i64" },
+            { name: "bump", type: "u8" }
           ],
         },
-      },
+      },      
       {
         name: "StakeRecord",
         type: {

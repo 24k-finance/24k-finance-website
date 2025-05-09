@@ -290,11 +290,11 @@ export default function LaunchPage() {
             <h1 className="text-4xl font-bold mb-2">{t('title')}</h1>
             <p className="text-gray-400">
               <span className="">{t('subtitle')}</span>
-              {/* <Link href="/launching">
+              <Link href="/launching">
                 <span className='bg-purple-600 hover:bg-purple-700 text-white font-medium ml-3 py-1 px-2 rounded-xs'>
                   查看申请中列表
                 </span>
-              </Link> */}
+              </Link>
             </p>
           </div>
           <div className="mt-4 md:mt-0">

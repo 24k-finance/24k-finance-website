@@ -190,7 +190,7 @@ export default function LaunchingPage() {
                       <h3 className="text-xl font-bold mr-3">{app.account.name}</h3>
                       <StatusBadge status={getApplicationStatus(app)} />
                     </div>
-                    <p className="text-gray-400 mb-4">{app.account.mine_code}</p>
+                    <p className="text-gray-400 mb-4">{app.account.mineCode}</p>
                     
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                       <div>
@@ -210,7 +210,7 @@ export default function LaunchingPage() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <div>
                         <p className="text-sm text-gray-500">{t('financeScale')}</p>
-                        <p>{app.account.finance_scale.toString()} {app.account.currency}</p>
+                        <p>{app.account.financeScale.toString()} {app.account.currency}</p>
                       </div>
                       <div>
                         <p className="text-sm text-gray-500">{t('rate')}</p>
@@ -218,7 +218,7 @@ export default function LaunchingPage() {
                       </div>
                       <div>
                         <p className="text-sm text-gray-500">{t('period')}</p>
-                        <p>{app.account.frozen_month} {t('months')}</p>
+                        <p>{app.account.frozenMonth} {t('months')}</p>
                       </div>
                     </div>
                   </div>
@@ -226,11 +226,16 @@ export default function LaunchingPage() {
                   <div className="mt-4 md:mt-0 md:ml-6 flex flex-col items-end">
                     <div className="text-right mb-4">
                       <p className="text-sm text-gray-500">{t('applicationDate')}</p>
-                      <p>{formatDate(app.account.start_date)}</p>
+                      <p>{app.account.startDate}</p>
+                    </div>
+
+                    <div className="text-right mb-4">
+                      <p className="text-sm text-gray-500">{t('endDate')}</p>
+                      <p>{app.account.endDate}</p>
                     </div>
                     
                     <div className="flex space-x-2">
-                      <button className="bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded transition-colors duration-200">
+                      <button className="bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded transition-colors duration-200 cursor-pointer">
                         {t('viewDetails')}
                       </button>
                       
