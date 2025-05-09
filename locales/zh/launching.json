@@ -20,5 +20,6 @@
     "endDate": "结束日期",
     "viewDetails": "查看详情",
     "sign": "签约",
-    "approve": "审核通过"
+    "approve": "审核通过",
+    "processing": "处理中"
 }

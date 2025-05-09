@@ -1,14 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { useWallet } from '@solana/wallet-adapter-react';
-// import { SolanaConnectButton } from '../../components/SolanaConnectButton';
 import Link from 'next/link';
-// import { useFetchMineApplications } from '@/hooks/useFetchMineApplications';
 import dynamic from 'next/dynamic';
 import { useFetchMineApplications } from '../hooks/useFetchMineApplications';
+import { useApproveMine } from '../hooks/useApproveMine';
+import { useState } from 'react';
 
 const SolanaConnectButton = dynamic(
     () => import('../components/SolanaConnectButton').then((mod) => mod.SolanaConnectButton),
@@ -64,6 +63,9 @@ export default function LaunchingPage() {
   const tCommon = useTranslations('common');
   const { connected, publicKey } = useWallet();
   const { applications, loading, error, fetchApplications } = useFetchMineApplications();
+  const { approveMine, loading: approveLoading, error: approveError } = useApproveMine();
+
+  const [processingApp, setProcessingApp] = useState<string | null>(null);
   
   // 筛选当前用户的申请
   const myApplications = applications.filter(app => 
@@ -78,14 +80,30 @@ export default function LaunchingPage() {
     return 'pending';
   };
 
-  // 格式化日期
-  const formatDate = (timestamp: number) => {
-    return new Date(timestamp * 1000).toLocaleDateString('zh-CN', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
+  const handleApprove = async (app: any) => {
+    if (!connected) {
+      console.log(tCommon('alert.connectWalletFirst'));
+      return;
+    }
+    
+    setProcessingApp(app.publicKey.toString());
+
+    console.log(app.account.mineCode); // 打印 mineCode 以进行检查
+    
+    try {
+      const result = await approveMine(app.account.mineCode);
+      if (result) {
+        console.log('审批成功:', result);
+        // 刷新列表
+        fetchApplications();
+      }
+    } catch (err) {
+      console.error('审批失败:', err);
+    } finally {
+      setProcessingApp(null);
+    }
   };
+
 
   // 刷新列表
   const handleRefresh = () => {
@@ -238,8 +256,25 @@ export default function LaunchingPage() {
                       <button className="bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded transition-colors duration-200 cursor-pointer">
                         {t('viewDetails')}
                       </button>
-                      <button className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded transition-colors duration-200 cursor-pointer">
-                        {t('approve')}
+                      <button 
+                        onClick={() => handleApprove(app)}
+                        disabled={processingApp === app.publicKey.toString() || getApplicationStatus(app) === 'approved' || approveLoading}
+                        className={`${
+                          processingApp === app.publicKey.toString() 
+                            ? 'bg-gray-600' 
+                            : getApplicationStatus(app) === 'approved'
+                              ? 'bg-gray-600 cursor-not-allowed'
+                              : 'bg-green-600 hover:bg-green-700'
+                        } text-white font-medium py-2 px-4 rounded transition-colors duration-200 cursor-pointer flex items-center`}
+                      >
+                        {processingApp === app.publicKey.toString() ? (
+                          <>
+                            <div className="animate-spin h-4 w-4 border-t-2 border-b-2 border-white rounded-full mr-2"></div>
+                            {t('processing')}
+                          </>
+                        ) : (
+                          getApplicationStatus(app) === 'approved' ? t('approved') : t('approve')
+                        )}
                       </button>
                       {/* {getApplicationStatus(app) === 'approved' && (
                         <button className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded transition-colors duration-200">
