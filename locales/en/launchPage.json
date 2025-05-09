@@ -1,6 +1,7 @@
 {
     "title": "LAUNCH Farm",
     "subtitle": "Launch your mining project and attract investors",
+    "applyButton": "View the list of applications",
     "successMessage": {
       "title": "Farm Published Successfully!",
       "description": "Your mining project has been submitted successfully. We will review it within 24 hours. Once approved, your farm will be displayed on the market."

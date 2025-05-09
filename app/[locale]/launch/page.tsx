@@ -292,7 +292,7 @@ export default function LaunchPage() {
               <span className="">{t('subtitle')}</span>
               <Link href="/launching">
                 <span className='bg-purple-600 hover:bg-purple-700 text-white font-medium ml-3 py-1 px-2 rounded-xs'>
-                  查看申请中列表
+                  {t('applyButton')}
                 </span>
               </Link>
             </p>

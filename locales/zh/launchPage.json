@@ -1,6 +1,7 @@
 {
     "title": "LAUNCH矿场",
     "subtitle": "发布您的矿场项目，吸引投资者参与",
+    "applyButton": "查看申请中列表",
     "successMessage": {
       "title": "矿场发布成功！",
       "description": "您的矿场项目已成功提交，我们将在24小时内审核。审核通过后，您的矿场将在市场中展示。"
