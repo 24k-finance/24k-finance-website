@@ -2,13 +2,13 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-07 20:11:36
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-08 10:13:10
+ * @LastEditTime: 2025-05-09 09:25:37
  * @FilePath: /24k-finance-website/app/[locale]/hooks/useCreateInstance.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import { useCallback, useState } from 'react'
 import { useAnchorWallet, useConnection } from '@solana/wallet-adapter-react'
-import { AnchorProvider, Program, web3 } from '@project-serum/anchor'
+import { AnchorProvider, Idl, Program, web3 } from '@project-serum/anchor'
 // import idl from '@/idl/goldmine_factory.json' // 替换为你的 IDL 路径
 import { PublicKey } from '@solana/web3.js'
 
@@ -98,7 +98,7 @@ export const useCreateInstance = () => {
           })
   
           const programId = new PublicKey(programIdStr)
-          const program = new Program(goldmineFactoryIdl as any, programId, provider)
+          const program = new Program(goldmineFactoryIdl as Idl, programId, provider)
   
           const nameSeed = Buffer.from(name)
           if (nameSeed.length > 32) {
