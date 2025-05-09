@@ -4,8 +4,9 @@
       "kyc": "KYC Verification",
       "launch": "LAUNCH Mining",
       "market": "Mining Market",
-      "staking": "My Staking",
+      "staking": "Portfolio",
       "contactUs": "Contact Us",
-      "whitePaper": "White Paper"
+      "whitePaper": "DOC",
+      "leaderboard": "Leaderboard"
     }
   }

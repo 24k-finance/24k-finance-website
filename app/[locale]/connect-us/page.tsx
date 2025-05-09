@@ -10,24 +10,66 @@ import dynamic from "next/dynamic";
 const teamMembers = [
   {
     id: 1,
-    name: "Ben Huang",
+    name: "Dr. Caigen",
     titleKey: "team.members.0.title",
+    role: "Director",
     photo: "/avatar_0.jpg", // 请确保图片路径正确
-    bioKey: "team.members.0.bio"
+    bioKey: "team.members.0.bio",
+    descriptionKeys: [
+      "team.members.0.description.0",
+      "team.members.0.description.1",
+      "team.members.0.description.2"
+    ]
   },
   {
     id: 2,
-    name: "David Chen",
+    name: "Dr. Max",
     titleKey: "team.members.1.title",
-    photo: "/avatar_1.png", // 请确保图片路径正确
-    bioKey: "team.members.1.bio"
+    role: "CEO",
+    photo: "/avatar_1.jpg", // 请确保图片路径正确
+    bioKey: "team.members.1.bio",
+    descriptionKeys: [
+      "team.members.1.description.0",
+      "team.members.1.description.1",
+      "team.members.1.description.2"
+    ]
   },
   {
     id: 3,
-    name: "Sarah Li",
+    name: "Hugh",
     titleKey: "team.members.2.title",
+    role: "COO",
+    photo: "/avatar_1.jpg", // 请确保图片路径正确
+    bioKey: "team.members.2.bio",
+    descriptionKeys: [
+      "team.members.2.description.0",
+      "team.members.2.description.1"
+    ]
+  },
+  {
+    id: 4,
+    name: "Alfred",
+    titleKey: "team.members.3.title",
+    role: "CTO",
     photo: "/avatar_2.jpg", // 请确保图片路径正确
-    bioKey: "team.members.2.bio"
+    bioKey: "team.members.3.bio",
+    descriptionKeys: [
+      "team.members.3.description.0",
+      "team.members.3.description.1"
+    ]
+  },
+  {
+    id: 5,
+    name: "Young",
+    titleKey: "team.members.4.title",
+    role: "CMO",
+    photo: "/avatar_2.jpg", // 请确保图片路径正确
+    bioKey: "team.members.4.bio",
+    descriptionKeys: [
+      "team.members.4.description.0",
+      "team.members.4.description.1",
+      "team.members.4.description.2"
+    ]
   }
 ];
 
@@ -71,8 +113,8 @@ export default function CompanyPage() {
           </motion.div>
         </section>
 
-        {/* 团队介绍部分 */}
-        <section>
+       {/* 团队介绍部分 */}
+       <section>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -84,17 +126,27 @@ export default function CompanyPage() {
             {/* 团队成员展示 - 大图 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
               <div className="md:col-span-1 flex flex-col justify-center space-y-6">
-                <h3 className="text-2xl font-bold">{t(`team.members.${activeTeamMember - 1}.name`)}</h3>
-                <p className="text-gray-400">{t(`team.members.${activeTeamMember - 1}.title`)}</p>
-                <p className="text-gray-300 leading-relaxed">
-                  {t(`team.members.${activeTeamMember - 1}.bio`)}
-                </p>
+                <h3 className="text-2xl font-bold">{teamMembers[activeTeamMember - 1].name}</h3>
+                <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-500/20 border border-yellow-500/50 text-yellow-400 mb-2">
+                  {t(teamMembers[activeTeamMember - 1].titleKey)}
+                </div>
+                <div className="space-y-2">
+                  {teamMembers[activeTeamMember - 1].descriptionKeys.map((key, index) => (
+                    <p key={index} className="text-gray-300 leading-relaxed flex items-start">
+                      <span className="text-purple-400 mr-2 mt-1">•</span>
+                      {t(key)}
+                    </p>
+                  ))}
+                </div>
+                {/* <p className="text-gray-300 leading-relaxed">
+                  {t(teamMembers[activeTeamMember - 1].bioKey)}
+                </p> */}
               </div>
               <div className="md:col-span-1 flex justify-center">
                 <div className="relative w-full max-w-md aspect-[3/4] bg-gray-800 rounded-lg overflow-hidden">
                   <Image
                     src={teamMembers[activeTeamMember - 1].photo}
-                    alt={t(`team.members.${activeTeamMember - 1}.name`)}
+                    alt={teamMembers[activeTeamMember - 1].name}
                     fill
                     style={{ objectFit: "cover" }}
                     className="rounded-lg"
@@ -104,25 +156,39 @@ export default function CompanyPage() {
             </div>
 
             {/* 团队成员缩略图 */}
-            <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-2 gap-8">
               {teamMembers.map((member) => (
                 <div 
                   key={member.id}
                   className={`cursor-pointer transition-all duration-300 ${
                     activeTeamMember === member.id 
-                      ? "opacity-100 scale-105" 
-                      : "opacity-70 hover:opacity-100"
+                      ? "opacity-100 scale-105 border-2 border-yellow-500/50" 
+                      : "opacity-80 hover:opacity-100 border border-gray-700"
                   }`}
                   onClick={() => setActiveTeamMember(member.id)}
                 >
-                  <div className="relative aspect-square bg-gray-800 rounded-lg overflow-hidden">
-                    <Image
-                      src={member.photo}
-                      alt={t(`team.members.${member.id - 1}.name`)}
-                      fill
-                      style={{ objectFit: "cover" }}
-                      className="rounded-lg"
-                    />
+                  <div className="flex flex-col md:flex-row gap-4 p-4 rounded-lg bg-gray-800/50">
+                    <div className="relative w-full md:w-1/3 aspect-square bg-gray-800 rounded-lg overflow-hidden">
+                      <Image
+                        src={member.photo}
+                        alt={member.name}
+                        fill
+                        style={{ objectFit: "cover" }}
+                        className="rounded-lg"
+                      />
+                    </div>
+                    <div className="w-full md:w-2/3">
+                      <p className="text-lg font-medium">{member.name}</p>
+                      <p className="text-sm text-yellow-400 mb-2">{t(member.titleKey)}</p>
+                      <div className="space-y-1">
+                        {member.descriptionKeys.map((key, index) => (
+                          <p key={index} className="text-sm text-gray-300 leading-relaxed flex items-start">
+                            <span className="text-purple-400 mr-2 mt-1 text-xs">•</span>
+                            {t(key)}
+                          </p>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -144,8 +210,8 @@ export default function CompanyPage() {
                 <p className="text-gray-300 mb-4">{t('contact.description')}</p>
                 <ul className="space-y-3 text-gray-400">
                   <li>{t('contact.info.email')}</li>
-                  <li>{t('contact.info.phone')}</li>
-                  <li>{t('contact.info.address')}</li>
+                  {/* <li>{t('contact.info.phone')}</li> */}
+                  {/* <li>{t('contact.info.address')}</li> */}
                 </ul>
               </div>
               <div>

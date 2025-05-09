@@ -21,5 +21,7 @@
     "viewDetails": "查看详情",
     "sign": "签约",
     "approve": "审核通过",
-    "processing": "处理中"
+    "processing": "处理中",
+    "approved": "审核通过",
+    "approving": "审核中"
 }

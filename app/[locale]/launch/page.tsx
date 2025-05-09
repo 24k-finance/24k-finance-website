@@ -81,6 +81,7 @@ export default function LaunchPage() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [coverImage, setCoverImage] = useState<File | null>(null);
   const [coverPreview, setCoverPreview] = useState<string | null>(null);
+  const [txSignature, setTxSignature] = useState<string | null>(null);
   const [formData, setFormData] = useState<MiningFarmForm>({
     name: "",
     type: MINING_TYPE_KEYS.BTC,
@@ -186,99 +187,78 @@ export default function LaunchPage() {
       console.log(tCommon('alert.connectWalletFirst'));
       return;
     }
-    const currentTimestamp = Math.floor(Date.now() / 1000);
-    // 计算明天的时间戳（加上 86400 秒，即 1 天）
-    const tomorrowTimestamp = currentTimestamp + 86400;  // 明天的时间戳
-    // 计算一年后的时间戳（加上 365 天的秒数）
-    const oneYearLaterTimestamp = tomorrowTimestamp + (365 * 86400);  // 一年后的时间戳
-    const result = await applyMine({
-      mineCode: 'mine004' + Date.now(),
-      name: `Côte d'Ivoire Dimbokro`,
-      operator: 'Lee',
-      relationship: 'owner',
-      scale: 'medium',
-      location: `Côte d'Ivoire Dimbokro`,
-      approval1: '',
-      approval2: '',
-      approval3: '',
-      financeScale: new BN('700000'), // u128
-      currency: 'USD',
-      startDate: new BN(tomorrowTimestamp),     // i64
-      endDate: new BN(oneYearLaterTimestamp),       // i64
-      rate: 28,                          // u32
-      frozenMonth: 13.5,                     // u8
-    });
-
-    console.log(result);
-
-    return
     
     if (!validateForm()) {
       return;
     }
 
-     // 生成唯一的 mineCode（如果未提供）
-     const mineCode = formData.name + `code_${Date.now().toString()}` || `MINE_${Date.now().toString()}`;
-    
-    setIsSubmitting(true);
+    const currentTimestamp = Math.floor(Date.now() / 1000);
+    // 计算明天的时间戳（加上 86400 秒，即 1 天）
+    const tomorrowTimestamp = currentTimestamp + 86400;  // 明天的时间戳
+    // 计算一年后的时间戳（加上 365 天的秒数）
+    const oneYearLaterTimestamp = tomorrowTimestamp + (365 * 86400);  // 一年后的时间戳
+    const processedFormData = {
+      mineCode: 'mine' + Date.now(),
+      name: formData.name,
+      operator: 'Lee',
+      relationship: 'owner',
+      scale: 'medium',
+      location: formData.location,
+      approval1: '',
+      approval2: '',
+      approval3: '',
+      financeScale: new BN(formData.price), // u128
+      currency: 'USD',
+      startDate: new BN(tomorrowTimestamp),     // i64
+      endDate: new BN(oneYearLaterTimestamp),       // i64
+      rate: +formData.roi,                          // u32
+      frozenMonth: 13.5,                     // u8
+    }
     
     try {
+      setIsSubmitting(true);
       // 在这里添加你的API请求逻辑
       // 例如，使用fetch或axios发送POST请求到你的后端API
-      const params = {
-        name: formData.name.substring(0, 20), // 限制长度而不是填充
-        operator: "company".substring(0, 10),
-        relationship: formData.description.substring(0, 20), // 限制描述长度
-        scale: "100",
-        location: formData.location.substring(0, 20),
-        approval2: formData.contactPhone.substring(0, 15),
-        approval3: formData.contactPhone.substring(0, 15),
-        approval1: formData.contactEmail.substring(0, 20),
-        financeScale: formData.price,
-        rate: formData.roi,
-        frozenMonth: formData.duration,
-        startDate: Math.floor(new Date().getTime() / 1000), // 转换为秒级时间戳
-        endDate: Math.floor(new Date().getTime() / 1000) + 2592000, // 当前时间 + 30天
-        mineCode: mineCode
-      };
-      console.log(params);
+      const result = await applyMine(processedFormData);
+
+      if (result && result.txSignature) {
+        setTxSignature(result.txSignature);
+      }
+
+      setIsSuccess(true);
+      setFormData({
+        name: "",
+        type: MINING_TYPE_KEYS.BTC,
+        description: "",
+        hashRate: "",
+        powerConsumption: "",
+        location: "",
+        price: "",
+        roi: "",
+        duration: "12",
+        totalUnits: 100,
+        minInvestment: "",
+        contactEmail: "",
+        contactPhone: "",
+      });
+      setCoverImage(null);
+      setCoverPreview(null);
      
     } catch (error) {
-      
+      console.log('Error submitting form:', error);
     } finally {
       setIsSubmitting(false);
     }
+  };
 
-    // // 模拟API请求
-    // setTimeout(() => {
-    //   console.log('提交的矿场数据:', formData);
-    //   console.log('封面图片:', coverImage);
-      
-    //   setIsSubmitting(false);
-    //   setIsSuccess(true);
-      
-    //   // 5秒后重置表单
-    //   setTimeout(() => {
-    //     setIsSuccess(false);
-    //     setFormData({
-    //       name: "",
-    //       type: MINING_TYPE_KEYS.BTC,
-    //       description: "",
-    //       hashRate: "",
-    //       powerConsumption: "",
-    //       location: "",
-    //       price: "",
-    //       roi: "",
-    //       duration: "12",
-    //       totalUnits: 100,
-    //       minInvestment: "",
-    //       contactEmail: "",
-    //       contactPhone: "",
-    //     });
-    //     setCoverImage(null);
-    //     setCoverPreview(null);
-    //   }, 5000);
-    // }, 2000);
+   // 获取Solana浏览器链接
+   const getSolanaExplorerLink = (signature: string) => {
+    // 根据环境选择正确的浏览器URL
+    const baseUrl = process.env.NEXT_PUBLIC_SOLANA_NETWORK === 'mainnet' 
+      ? 'https://explorer.solana.com/tx/' 
+      : 'https://explorer.solana.com/tx/?cluster=devnet';
+    
+    return `${baseUrl}${signature}`;
   };
 
   return (
@@ -317,6 +297,19 @@ export default function LaunchPage() {
                   {t('successMessage.title')}
                 </h3>
                 <p className="text-gray-300">{t('successMessage.description')}</p>
+                {txSignature && txSignature !== 'Transaction already processed' && (
+                  <div className="mt-3">
+                    <p className="text-sm text-gray-400 mb-1">{t('successMessage.viewTransaction')}:</p>
+                    <a 
+                      href={getSolanaExplorerLink(txSignature)} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-block bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200 text-sm"
+                    >
+                      {t('successMessage.viewOnExplorer')} 🔗
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>

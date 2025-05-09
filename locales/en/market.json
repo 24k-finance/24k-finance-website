@@ -50,7 +50,7 @@
         "hashRate": "2 g/t",
         "powerConsumption": "40 Tonnes",
         "dailyReturn": "20%",
-        "roi": "Est. 12 months",
+        "roi": "Esp. 12 months",
         "type": "btc",
         "tag": "Rock Gold Mine"
       },
@@ -61,7 +61,7 @@
         "hashRate": "3 g/t",
         "powerConsumption": "40 Tonnes",
         "dailyReturn": "20%",
-        "roi": "Est. 14 months",
+        "roi": "Esp. 14 months",
         "type": "eth",
         "tag": "Alluvial Gold Mine"
       },
@@ -72,7 +72,7 @@
         "hashRate": "3 g/t",
         "powerConsumption": "50 Tonnes",
         "dailyReturn": "20%",
-        "roi": "Est. 10 months",
+        "roi": "Esp. 10 months",
         "type": "sol",
         "tag": "Alluvial Gold Mine"
       },
@@ -83,7 +83,7 @@
         "hashRate": "3 g/t",
         "powerConsumption": "50 Tonnes",
         "dailyReturn": "30%",
-        "roi": "Est. 13 months",
+        "roi": "Esp. 13 months",
         "type": "other",
         "tag": "Rock Gold Mine"
       }

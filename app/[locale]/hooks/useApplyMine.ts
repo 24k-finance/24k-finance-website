@@ -2,13 +2,14 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-09 09:47:50
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-09 11:40:20
+ * @LastEditTime: 2025-05-09 21:14:22
  * @FilePath: /24k-finance-website/app/[locale]/hooks/useApplyMine.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import { useCallback } from 'react';
-import { ComputeBudgetProgram, SystemProgram } from '@solana/web3.js';
+import { SystemProgram } from '@solana/web3.js';
 import { BN } from '@project-serum/anchor';
+import { useConnection } from '@solana/wallet-adapter-react';
 import { useLaunchpadProgram, getProgramPDAs } from './useLaunchpadProgram';
 
 // 申请金矿参数类型
@@ -32,6 +33,7 @@ export interface ApplyMineParams {
 
 export const useApplyMine = () => {
   const { program, loading, setLoading, error, setError, wallet } = useLaunchpadProgram();
+  const { connection } = useConnection();
   
   const applyMine = useCallback(async (params: any) => {
     if (!program || !wallet) {
@@ -41,27 +43,32 @@ export const useApplyMine = () => {
     
     setLoading(true);
     setError(null);
+
+    const { mineAppPDA } = getProgramPDAs(params.mineCode);
     
     try {
-      const { mineAppPDA } = getProgramPDAs(params.mineCode);
-      // 调用合约方法
-      const txSignature = await program.methods
-        .applyMine(
-           params
-        )
-        .accounts({
-          application: mineAppPDA,
-          owner: wallet.publicKey,
-          systemProgram: SystemProgram.programId
-        })
-        // .preInstructions([modifyComputeUnits]) // 添加修改计算单元限制指令到事务的开头
-        .rpc();
+      const tx = await program.methods
+      .applyMine(params)
+      .accounts({
+        application: mineAppPDA,
+        owner: wallet.publicKey,
+        systemProgram: SystemProgram.programId
+      })
+      .transaction(); // 注意这里不是 rpc()，是 transaction()
+
+    tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
+    tx.feePayer = wallet.publicKey;
+
+    const signed = await wallet.signTransaction(tx);
+    const txSig = await connection.sendRawTransaction(signed.serialize());
+
+    await connection.confirmTransaction(txSig);
       
       return {
-        txSignature,
+        txSignature: txSig,
         mineAppPDA
       };
-    } catch (err) {
+    } catch (err: any) {
       console.error('申请金矿失败:', err);
       setError(err as Error);
       return null;

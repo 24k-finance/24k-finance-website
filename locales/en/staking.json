@@ -1,5 +1,5 @@
 {
-  "title": "Staking Mining",
+  "title": "Portfolio",
   "subtitle": "Stake your assets to earn stable returns",
   "totalStaked": "Total Staked",
   "totalRewards": "Total Rewards",
@@ -38,25 +38,25 @@
     {
       "id": 1,
       "name": "Mali Kouremale",
-      "duration": "Est. 12 months",
+      "duration": "Esp. 12 months",
       "status": "Active"
     },
     {
       "id": 2,
       "name": "Côte d'Ivoire Dimbokro",
-      "duration": "Est. 14 months",
+      "duration": "Esp. 14 months",
       "status": "Active"
     },
     {
       "id": 3,
       "name": "Kenya",
-      "duration": "Est. 10 months",
+      "duration": "Esp. 10 months",
       "status": "Coming Soon"
     },
     {
       "id": 4,
       "name": "Tajikistan",
-      "duration": "Est. 13 months",
+      "duration": "Esp. 13 months",
       "status": "Coming Soon"
     }
   ],

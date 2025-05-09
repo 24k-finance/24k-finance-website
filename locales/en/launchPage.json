@@ -4,7 +4,9 @@
     "applyButton": "View the list of applications",
     "successMessage": {
       "title": "Farm Published Successfully!",
-      "description": "Your mining project has been submitted successfully. We will review it within 24 hours. Once approved, your farm will be displayed on the market."
+      "description": "Your mining project has been submitted successfully. We will review it within 24 hours. Once approved, your farm will be displayed on the market.",
+      "viewTransaction": "View transaction details",
+      "viewOnExplorer": "View on Solana Explorer"
     },
     "formSectionTitles": {
       "farmInfo": "Farm Information",

@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-07 17:36:24
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-09 16:28:03
+ * @LastEditTime: 2025-05-09 22:01:07
  * @FilePath: /24k-finance-website/app/utils/index.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -32,6 +32,7 @@ export async function getMessages(locale: string) {
     market: (await import(`@/locales/${locale}/market.json`)).default,
     "connect-us": (await import(`@/locales/${locale}/connect-us.json`)).default,
     launching: (await import(`@/locales/${locale}/launching.json`)).default,
+    points: (await import(`@/locales/${locale}/points.json`)).default,
   };
   
   return messages;

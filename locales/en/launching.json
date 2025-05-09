@@ -21,6 +21,8 @@
     "viewDetails": "View Details",
     "sign": "Sign",
     "approve": "Approve",
-    "processing": "Processing"
+    "processing": "Processing",
+    "approved": "Approved",
+    "approving": "Approving"
   }
   

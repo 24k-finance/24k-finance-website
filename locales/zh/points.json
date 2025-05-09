@@ -1,0 +1,54 @@
+{
+    "title": "积分与奖励",
+    "subtitle": "通过各种活动赚取积分，攀登排行榜",
+    "yourPoints": "您的积分",
+    "yourRank": "您的排名",
+    "nextReward": "下一个奖励",
+    "pointsToNextLevel": "积分至下一等级",
+    "dailyTasks": "每日任务",
+    "pointsHistory": "积分历史",
+    "pointsRules": "积分规则",
+    "completed": "已完成",
+    "completeTask": "完成",
+    "connectWalletMessage": "请连接您的钱包以查看您的积分和奖励",
+    "viewLeaderboard": "查看排行榜",
+    "backToPoints": "返回积分页面",
+    "noPointsHistory": "暂无积分历史。完成任务以赚取积分！",
+    
+    "history": {
+      "stakeAction": "在矿池中质押",
+      "referralAction": "推荐朋友",
+      "dailyLoginAction": "每日登录",
+      "transactionAction": "完成交易"
+    },
+    
+    "tasks": {
+      "dailyLogin": "每日登录",
+      "dailyLoginDesc": "每天登录平台",
+      "stake": "在矿池中质押",
+      "stakeDesc": "在矿池中质押任意金额",
+      "referFriend": "推荐朋友",
+      "referFriendDesc": "邀请朋友加入平台",
+      "socialShare": "社交媒体分享",
+      "socialShareDesc": "在社交媒体上分享平台内容"
+    },
+    
+    "rules": {
+      "dailyLogin": "每日登录：每天 +10 积分",
+      "staking": "质押：每次质押行为 +50 积分",
+      "referral": "推荐：每次成功推荐 +100 积分",
+      "transaction": "交易：每次完成交易 +25 积分",
+      "socialMedia": "社交媒体：分享平台内容 +20 积分"
+    },
+    
+    "leaderboard": {
+      "title": "排行榜",
+      "subtitle": "按获得积分排名的顶级用户",
+      "daily": "每日",
+      "weekly": "每周",
+      "allTime": "全部时间",
+      "rank": "排名",
+      "user": "用户",
+      "points": "积分"
+    }
+  }

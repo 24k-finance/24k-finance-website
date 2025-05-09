@@ -2,39 +2,62 @@
     "company": {
       "title": "公司",
       "description": {
-        "paragraph1": "24K金融是一家创新型区块链金融科技公司，致力于将传统金融与区块链技术相结合，为用户提供安全、透明、高效的数字资产管理服务。我们的使命是通过区块链技术重塑金融基础设施，让金融服务更加普惠、便捷和高效。",
-        "paragraph2": "作为区块链领域的先行者，我们拥有一支由金融专家和技术精英组成的专业团队。团队成员来自全球顶尖金融机构和科技公司，拥有丰富的行业经验和深厚的技术积累。我们相信，只有将金融专业知识与前沿技术相结合，才能真正实现金融创新。",
-        "paragraph3": "我们的核心业务包括数字资产挖矿、质押和交易服务。通过自主研发的智能合约和风险控制系统，我们为用户提供全方位的数字资产增值解决方案。我们特别关注用户体验和安全性，所有产品都经过严格的安全审计和测试，确保用户资产的安全。",
-        "paragraph4": "24K金融秉持开放、透明、创新的价值观，积极拥抱监管，合规经营。我们相信，只有在合规的框架下，区块链金融才能健康可持续发展。我们致力于与监管机构、行业伙伴和用户共同构建一个更加开放、包容的金融生态系统。",
-        "paragraph5": "展望未来，我们将继续探索区块链技术在金融领域的创新应用，不断优化产品和服务，为用户创造更大的价值。我们坚信，区块链技术将重塑金融的未来，而24K金融将成为这一变革的重要推动者。"
-      }
+      "paragraph1": "24k Finance 是一个专注于金矿资产通证化的实体资产 (RWA) 项目。我们的主要产品包括：",
+      "paragraph2": "• 通证化金矿库：以非洲金矿为代表，通过金矿收益权提供超过 30% 的潜在回报。",
+      "paragraph3": "• 通证化黄金代币：实物黄金的数字化代表。",
+      "paragraph4": "• 专注于矿业的 Launchpad 平台：一个孵化和启动矿业相关项目的平台。",
+      "paragraph5": "• 我们的核心团队在海外矿业领域拥有超过十年的经验，在金矿开发、地质勘探和项目管理方面拥有丰富的专业知识。通过 RWA 通证化，我们旨在增强金矿的流动性，提高开发效率，降低投资门槛。我们与专业机构合作，托管用户资金，提高黄金供应链的透明度和信任度，从而将黄金的传统价值与区块链技术的创新相结合。"
+    }
     },
     "team": {
-      "title": "团队",
-      "subtitle": "我们由来自全球的精英组成专业团队。",
-      "members": [
-        {
-          "name": "Ben Huang",
-          "title": "总裁 (创始合伙人)",
-          "bio": "一个充满激情的企业家，拥有10年的创业经验。专注于区块链和金融科技领域，致力于将创新技术应用于实际业务。曾在多家知名科技公司担任高管职位，带领团队成功开发了多个具有影响力的产品。相信技术的力量可以改变金融世界。"
+      "title": "Team",
+      "subtitle": "We are a professional team composed of elites from around the world.",
+      "members": {
+        "0": {
+          "title": "Director",
+          "description": {
+            "0": "Founder of Tietto Minerals ($1Bn AUD in Valuation)",
+            "1": "Member of AusIMM",
+            "2": "30+ Years in Mining"
+          }
         },
-        {
-          "name": "David Chen",
-          "title": "技术总监",
-          "bio": "资深技术专家，拥有丰富的区块链开发经验。曾参与多个大型区块链项目的架构设计和实现。精通Solana、Ethereum等主流区块链技术，对智能合约和去中心化应用有深入研究。"
+        "1": {
+          "title": "CEO",
+          "description": {
+            "0": "Partner@SaiChi Mining Company",
+            "1": "Produced 2,300 kg of gold over the past decade",
+            "2": "Ph.D at UNSW"
+          }
         },
-        {
-          "name": "Sarah Li",
-          "title": "市场总监",
-          "bio": "市场营销专家，拥有超过8年的数字营销和品牌建设经验。曾在多家知名科技公司负责市场策略制定和执行，擅长社区建设和用户增长。对加密货币市场有独到见解。"
+        "2": {
+          "title": "COO",
+          "description": {
+            "0": "Partner@SaiChi Mining Company",
+            "1": "Chairman@TaZhong Mine"
+          }
+        },
+        "3": {
+          "title": "CTO",
+          "description": {
+            "0": "Manager@Alibaba & Bytedance",
+            "1": "Author of 3 Node.js textbooks"
+          }
+        },
+        "4": {
+          "title": "CMO",
+          "description": {
+            "0": "DeFi Trader & Crypto KOL",
+            "1": "Project Manager for multiple DeFi & TradFi Projects",
+            "2": "Grew a DeFi project from 0 to 1Mil+ Users"
+          }
         }
-      ]
+      }
     },
     "contact": {
       "title": "联系我们",
       "description": "如果您有任何问题或建议，欢迎随时联系我们。我们的团队将竭诚为您服务。",
       "info": {
-        "email": "邮箱: contact@24k-finance.com",
+        "email": "邮箱: young@24k.network",
         "phone": "电话: +86 123 4567 8910",
         "address": "地址: 中国上海市浦东新区张江高科技园区"
       },

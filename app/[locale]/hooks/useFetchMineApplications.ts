@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-09 09:49:16
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-09 16:53:52
+ * @LastEditTime: 2025-05-09 22:18:05
  * @FilePath: /24k-finance-website/app/[locale]/hooks/useFetchMineApplications.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -23,6 +23,7 @@ export interface MineApplication {
     mineCode: string;
     approved: boolean;
     signed: boolean;
+    auditResult: boolean; // 添加 auditResult 字段
   }
 }
 
@@ -60,11 +61,11 @@ export const useFetchMineApplications = () => {
             scale: account.scale,
             location: account.location,
             currency: account.currency,
-            financeScale: formatBNDecimal(account.financeScale, 6),
+            financeScale: formatBNDecimal(account.financeScale, 1),
             startDate: toDate(account.startDate),
             endDate: toDate(account.endDate),
             signDate: toDate(account.signDate),
-            rate: account.rate * 100,
+            rate: account.rate * 10000,
             frozenMonth: account.frozenMonth,
             auditResult: account.auditResult,
             isSigned: account.isSigned,

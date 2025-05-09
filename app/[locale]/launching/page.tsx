@@ -24,6 +24,8 @@ type ApplicationStatus = 'pending' | 'approved' | 'rejected' | 'signed';
 
 // 申请状态标签组件
 const StatusBadge = ({ status }: { status: ApplicationStatus }) => {
+  const t = useTranslations('launching');
+
   const statusConfig = {
     pending: {
       bg: 'bg-yellow-500/20',
@@ -47,7 +49,7 @@ const StatusBadge = ({ status }: { status: ApplicationStatus }) => {
       bg: 'bg-blue-500/20',
       border: 'border-blue-500/50',
       text: 'text-blue-400',
-      label: 'signed'
+      label: 'sign'
     }
   };
 
@@ -55,7 +57,7 @@ const StatusBadge = ({ status }: { status: ApplicationStatus }) => {
 
   return (
     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${config.bg} ${config.border} ${config.text}`}>
-      {config.label}
+      {t(config.label).toLowerCase()}
     </span>
   );
 };
@@ -78,8 +80,8 @@ export default function LaunchingPage() {
 
   // 获取申请状态
   const getApplicationStatus = (app: any): ApplicationStatus => {
-    if (app.account.is_signed) return 'signed';
-    if (app.account.audit_result) return 'approved';
+    if (app.account.isSigned) return 'signed';
+    if (app.account.auditResult) return 'approved';
     // 这里可以添加拒绝的逻辑，如果有相关字段
     return 'pending';
   };
@@ -91,8 +93,6 @@ export default function LaunchingPage() {
     }
     
     setProcessingApp(app.publicKey.toString());
-
-    console.log(app.account.mineCode); // 打印 mineCode 以进行检查
     
     try {
       const result = await approveMine(app.account.mineCode);
@@ -239,6 +239,7 @@ export default function LaunchingPage() {
                     </div>
                     <p className="text-gray-400 mb-4">{app.account.mineCode}</p>
                     
+                    
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                       <div>
                         <p className="text-sm text-gray-500">{t('location')}</p>
@@ -287,11 +288,11 @@ export default function LaunchingPage() {
                       </button>
                       <button 
                         onClick={() => handleApprove(app)}
-                        disabled={processingApp === app.publicKey.toString() || getApplicationStatus(app) === 'approved' || approveLoading}
+                        disabled={processingApp === app.publicKey.toString() || app.account.auditResult || approveLoading}
                         className={`${
                           processingApp === app.publicKey.toString() 
                             ? 'bg-gray-600' 
-                            : getApplicationStatus(app) === 'approved'
+                            : app.account.auditResult
                               ? 'bg-gray-600 cursor-not-allowed'
                               : 'bg-green-600 hover:bg-green-700'
                         } text-white font-medium py-2 px-4 rounded transition-colors duration-200 cursor-pointer flex items-center`}
@@ -302,29 +303,29 @@ export default function LaunchingPage() {
                             {t('processing')}
                           </>
                         ) : (
-                          getApplicationStatus(app) === 'approved' ? t('approved') : t('approve')
+                          app.account.auditResult ? t('approved') : t('approve')
                         )}
                       </button>
-                      <button 
-                      onClick={() => handleSign(app)}
-                      disabled={getApplicationStatus(app) !== 'approved' || signingApp === app.publicKey.toString() || getApplicationStatus(app) === 'signed'}
-                      className={`${
-                        signingApp === app.publicKey.toString() 
-                          ? 'bg-gray-600' 
-                          : getApplicationStatus(app) !== 'approved' || getApplicationStatus(app) === 'signed'
-                            ? 'bg-gray-600 cursor-not-allowed'
-                            : 'bg-blue-600 hover:bg-blue-700'
-                      } text-white font-medium py-2 px-4 rounded transition-colors duration-200 cursor-pointer flex items-center`}
-                    >
-                      {signingApp === app.publicKey.toString() ? (
-                        <>
-                          <div className="animate-spin h-4 w-4 border-t-2 border-b-2 border-white rounded-full mr-2"></div>
-                          {t('processing')}
-                        </>
-                      ) : (
-                        getApplicationStatus(app) === 'signed' ? t('signed') : t('sign')
-                      )}
-                    </button>
+                      {/* <button 
+                        onClick={() => handleSign(app)}
+                        disabled={!app.account.auditResult || signingApp === app.publicKey.toString() || app.account.isSigned}
+                        className={`${
+                          signingApp === app.publicKey.toString() 
+                            ? 'bg-gray-600' 
+                            : !app.account.auditResult || app.account.isSigned
+                              ? 'bg-gray-600 cursor-not-allowed'
+                              : 'bg-blue-600 hover:bg-blue-700'
+                        } text-white font-medium py-2 px-4 rounded transition-colors duration-200 cursor-pointer flex items-center`}
+                      >
+                        {signingApp === app.publicKey.toString() ? (
+                          <>
+                            <div className="animate-spin h-4 w-4 border-t-2 border-b-2 border-white rounded-full mr-2"></div>
+                            {t('processing')}
+                          </>
+                        ) : (
+                          app.account.isSigned ? t('signed') : t('sign')
+                        )}
+                      </button> */}
                     </div>
                   </div>
                 </div>

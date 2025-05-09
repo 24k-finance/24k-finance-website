@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-05 19:25:10
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-08 16:05:21
+ * @LastEditTime: 2025-05-09 21:58:25
  * @FilePath: /24k-finance-website/app/components/Footer.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -12,6 +12,7 @@ import Image from 'next/image';
 import { useTranslations, useLocale } from 'next-intl';
 import { Link, useRouter, usePathname } from '@/i18n/navigation';
 import { Youtube, Twitter, Github, Send, Globe } from 'lucide-react';
+import { DOC_URI } from '../constant';
 
 const Footer: React.FC = () => {
   const t = useTranslations('footers');
@@ -54,6 +55,7 @@ const Footer: React.FC = () => {
 
   const footerLinks = {
     [t('company')]: [
+      { name: t('doc'), href: DOC_URI, target: '_blank'  },
       { name: t('about'), href: '#' },
       { name: t('roadmap'), href: '#' },
       { name: t('media'), href: '#' },
@@ -103,7 +105,7 @@ const Footer: React.FC = () => {
               <ul className="space-y-3">
                 {links.map((link) => (
                   <li key={link.name}>
-                    <Link href={link.href} className="text-sm hover:text-white transition-colors">
+                    <Link href={link.href} target={link.target} className="text-sm hover:text-white transition-colors">
                       {link.name}
                     </Link>
                   </li>

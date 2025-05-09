@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-09 09:48:20
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-09 09:48:24
+ * @LastEditTime: 2025-05-09 21:47:12
  * @FilePath: /24k-finance-website/app/[locale]/hooks/useSignMine.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -37,13 +37,13 @@ export const useSignMine = () => {
         .signMine(mineCode)
         .accounts({
           application: mineAppPDA,
-          owner: wallet.publicKey,
-          launchPool: launchPoolPDA,
-          paymentVault: vaultKeypair.publicKey,
-          paymentMint: usdcMint,
-          tokenProgram: TOKEN_PROGRAM_ID,
-          systemProgram: SystemProgram.programId,
-          rent: PublicKey.default // 租金豁免账户
+          // owner: wallet.publicKey,
+          // launchPool: launchPoolPDA,
+          // paymentVault: vaultKeypair.publicKey,
+          // paymentMint: usdcMint,
+          // tokenProgram: TOKEN_PROGRAM_ID,
+          // systemProgram: SystemProgram.programId,
+          // rent: PublicKey.default // 租金豁免账户
         })
         .signers([vaultKeypair])
         .rpc();

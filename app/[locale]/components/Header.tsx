@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-05 19:07:58
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-08 16:09:46
+ * @LastEditTime: 2025-05-09 22:03:10
  * @FilePath: /24k-finance-website/app/components/Header.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -12,6 +12,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import LanguageSwitcher from './LanguageSwitcher';
+import { DOC_URI } from '../constant';
 
 const Header: React.FC = () => {
   const t = useTranslations('header.header');
@@ -22,8 +23,9 @@ const Header: React.FC = () => {
     { name: t('launch'), href: '/launch' },
     { name: t('market'), href: '/market' },
     { name: t('staking'), href: '/staking' },
+    { name: t('leaderboard'), href: '/leaderboard' },
     { name: t('contactUs'), href: '/connect-us' },
-    { name: t('whitePaper'), href: 'https://j7vjbcs7d1nu3sfb.public.blob.vercel-storage.com/24k%20Finance%20%E7%99%BD%E7%9A%AE%E4%B9%A6-FlKFFYJzTQ09tmTc9ID5xYDB0XAG53.pdf', target: '_blank'  },
+    { name: t('whitePaper'), href: DOC_URI, target: '_blank'  },
   ];
 
   return (

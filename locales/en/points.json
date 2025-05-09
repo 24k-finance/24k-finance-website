@@ -1,0 +1,54 @@
+{
+    "title": "Points & Rewards",
+    "subtitle": "Earn points through various activities and climb the leaderboard",
+    "yourPoints": "Your Points",
+    "yourRank": "Your Rank",
+    "nextReward": "Next Reward",
+    "pointsToNextLevel": "points to next level",
+    "dailyTasks": "Daily Tasks",
+    "pointsHistory": "Points History",
+    "pointsRules": "Points Rules",
+    "completed": "Completed",
+    "completeTask": "Complete",
+    "connectWalletMessage": "Please connect your wallet to view your points and rewards",
+    "viewLeaderboard": "View Leaderboard",
+    "backToPoints": "Back to Points",
+    "noPointsHistory": "No points history yet. Complete tasks to earn points!",
+    
+    "history": {
+      "stakeAction": "Staked in Mining Pool",
+      "referralAction": "Referred a Friend",
+      "dailyLoginAction": "Daily Login",
+      "transactionAction": "Completed Transaction"
+    },
+    
+    "tasks": {
+      "dailyLogin": "Daily Login",
+      "dailyLoginDesc": "Log in to the platform daily",
+      "stake": "Stake in Mining Pool",
+      "stakeDesc": "Stake any amount in a mining pool",
+      "referFriend": "Refer a Friend",
+      "referFriendDesc": "Invite a friend to join the platform",
+      "socialShare": "Social Media Share",
+      "socialShareDesc": "Share platform content on social media"
+    },
+    
+    "rules": {
+      "dailyLogin": "Daily Login: +10 points per day",
+      "staking": "Staking: +50 points for each staking action",
+      "referral": "Referrals: +100 points for each successful referral",
+      "transaction": "Transactions: +25 points for each completed transaction",
+      "socialMedia": "Social Media: +20 points for sharing platform content"
+    },
+    
+    "leaderboard": {
+      "title": "Leaderboard",
+      "subtitle": "Top users ranked by points earned",
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "allTime": "All Time",
+      "rank": "Rank",
+      "user": "User",
+      "points": "Points"
+    }
+  }

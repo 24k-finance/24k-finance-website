@@ -1,40 +1,63 @@
 {
     "company": {
       "title": "Company",
-      "description": {
-        "paragraph1": "24K Finance is an innovative blockchain financial technology company dedicated to combining traditional finance with blockchain technology to provide users with secure, transparent, and efficient digital asset management services. Our mission is to reshape the financial infrastructure through blockchain technology, making financial services more inclusive, convenient, and efficient.",
-        "paragraph2": "As a pioneer in the blockchain field, we have a professional team composed of financial experts and technical elites. Team members come from top global financial institutions and technology companies, with rich industry experience and deep technical accumulation. We believe that only by combining financial expertise with cutting-edge technology can we truly achieve financial innovation.",
-        "paragraph3": "Our core business includes digital asset mining, staking, and trading services. Through self-developed smart contracts and risk control systems, we provide users with comprehensive digital asset value-added solutions. We pay special attention to user experience and security, and all products undergo strict security audits and testing to ensure the safety of user assets.",
-        "paragraph4": "24K Finance upholds the values of 'openness, transparency, and innovation', actively embraces regulation, and operates in compliance. We believe that only within a compliant framework can blockchain finance develop healthily and sustainably. We are committed to working with regulatory authorities, industry partners, and users to build a more open and inclusive financial ecosystem.",
-        "paragraph5": "Looking to the future, we will continue to explore innovative applications of blockchain technology in the financial field, continuously optimize products and services, and create greater value for users. We firmly believe that blockchain technology will reshape the future of finance, and 24K Finance will be an important driver of this transformation."
-      }
+     "description": {
+      "paragraph1": "24k Finance is a Real-World Asset (RWA) project focused on the tokenization of gold mining assets. Our primary offerings include:",
+      "paragraph2": "• Tokenized Gold Mining Vault: Represented by African gold mines, offering over 30% potential returns through gold mining revenue rights.",
+      "paragraph3": "• Tokenized Gold Tokens: Digital representations of physical gold.",
+      "paragraph4": "• Mining-Focused Launchpad Platform: A platform to incubate and launch mining-related projects.",
+      "paragraph5": "• Gold Spot and Futures Exchange: A trading platform for gold derivatives. Our core team brings over a decade of experience in the overseas mining industry, with expertise in gold mine development, geological exploration, and project management. By leveraging RWA tokenization, we aim to enhance the liquidity of gold mines, improve development efficiency, and lower investment barriers. We partner with professional institutions to custody user funds, increasing transparency and trust in the gold supply chain, thereby combining the traditional value of gold with the innovation of blockchain technology."
+    }
     },
     "team": {
       "title": "Team",
       "subtitle": "We are a professional team composed of elites from around the world.",
-      "members": [
-        {
-          "name": "Ben Huang",
-          "title": "CEO (Founding Partner)",
-          "bio": "A passionate entrepreneur with 10 years of entrepreneurial experience. Focused on blockchain and fintech, dedicated to applying innovative technology to practical business. Has held executive positions in several well-known technology companies, leading teams to successfully develop multiple influential products. Believes in the power of technology to change the financial world."
+      "members": {
+        "0": {
+          "title": "Director",
+          "description": {
+            "0": "Founder of Tietto Minerals ($1Bn AUD in Valuation)",
+            "1": "Member of AusIMM",
+            "2": "30+ Years in Mining"
+          }
         },
-        {
-          "name": "David Chen",
+        "1": {
+          "title": "CEO",
+          "description": {
+            "0": "Partner@SaiChi Mining Company",
+            "1": "Produced 2,300 kg of gold over the past decade",
+            "2": "Ph.D at UNSW"
+          }
+        },
+        "2": {
+          "title": "COO",
+          "description": {
+            "0": "Partner@SaiChi Mining Company",
+            "1": "Chairman@TaZhong Mine"
+          }
+        },
+        "3": {
           "title": "CTO",
-          "bio": "Senior technical expert with rich blockchain development experience. Has participated in the architectural design and implementation of multiple large blockchain projects. Proficient in mainstream blockchain technologies such as Solana and Ethereum, with in-depth research on smart contracts and decentralized applications."
+          "description": {
+            "0": "Manager@Alibaba & Bytedance",
+            "1": "Author of 3 Node.js textbooks"
+          }
         },
-        {
-          "name": "Sarah Li",
+        "4": {
           "title": "CMO",
-          "bio": "Marketing expert with over 8 years of experience in digital marketing and brand building. Has been responsible for market strategy formulation and execution in many well-known technology companies, skilled in community building and user growth. Has unique insights into the cryptocurrency market."
+          "description": {
+            "0": "DeFi Trader & Crypto KOL",
+            "1": "Project Manager for multiple DeFi & TradFi Projects",
+            "2": "Grew a DeFi project from 0 to 1Mil+ Users"
+          }
         }
-      ]
+      }
     },
     "contact": {
       "title": "Contact Us",
       "description": "If you have any questions or suggestions, please feel free to contact us. Our team will be at your service.",
       "info": {
-        "email": "Email: contact@24k-finance.com",
+        "email": "Email:young@24k.network",
         "phone": "Phone: +86 123 4567 8910",
         "address": "Address: Zhangjiang Hi-Tech Park, Pudong New Area, Shanghai, China"
       },
