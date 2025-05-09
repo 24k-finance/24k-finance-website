@@ -8,6 +8,8 @@ import dynamic from 'next/dynamic';
 import { useFetchMineApplications } from '../hooks/useFetchMineApplications';
 import { useApproveMine } from '../hooks/useApproveMine';
 import { useState } from 'react';
+import { useSignMine } from '../hooks/useSignMine';
+import { PublicKey } from '@solana/web3.js';
 
 const SolanaConnectButton = dynamic(
     () => import('../components/SolanaConnectButton').then((mod) => mod.SolanaConnectButton),
@@ -27,25 +29,25 @@ const StatusBadge = ({ status }: { status: ApplicationStatus }) => {
       bg: 'bg-yellow-500/20',
       border: 'border-yellow-500/50',
       text: 'text-yellow-400',
-      label: '审核中'
+      label: 'approving'
     },
     approved: {
       bg: 'bg-green-500/20',
       border: 'border-green-500/50',
       text: 'text-green-400',
-      label: '已批准'
+      label: 'approved'
     },
     rejected: {
       bg: 'bg-red-500/20',
       border: 'border-red-500/50',
       text: 'text-red-400',
-      label: '已拒绝'
+      label: 'rejected'
     },
     signed: {
       bg: 'bg-blue-500/20',
       border: 'border-blue-500/50',
       text: 'text-blue-400',
-      label: '已签约'
+      label: 'signed'
     }
   };
 
@@ -64,9 +66,11 @@ export default function LaunchingPage() {
   const { connected, publicKey } = useWallet();
   const { applications, loading, error, fetchApplications } = useFetchMineApplications();
   const { approveMine, loading: approveLoading, error: approveError } = useApproveMine();
+  const { signMine, loading: signLoading, error: signError } = useSignMine();
 
   const [processingApp, setProcessingApp] = useState<string | null>(null);
-  
+  const [signingApp, setSigningApp] = useState<string | null>(null);
+
   // 筛选当前用户的申请
   const myApplications = applications.filter(app => 
     connected && publicKey && app.account.owner.toString() === publicKey.toString()
@@ -103,6 +107,31 @@ export default function LaunchingPage() {
       setProcessingApp(null);
     }
   };
+
+   // 处理签约操作
+   const handleSign = async (app: any) => {
+    if (!connected) {
+      console.log(tCommon('alert.connectWalletFirst'));
+      return;
+    }
+    setSigningApp(app.publicKey.toString());
+    try {
+      // 这里使用一个固定的 USDC 代币地址，实际应用中可能需要从配置或其他地方获取
+      const usdcMint = new PublicKey('EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'); // Solana USDC 代币地址
+      
+      const result = await signMine(app.account.mineCode, usdcMint);
+      if (result) {
+        console.log('签约成功:', result);
+        // 刷新列表
+        fetchApplications();
+      }
+    } catch (err) {
+      console.error('签约失败:', err);
+    } finally {
+      setSigningApp(null);
+    }
+  };
+
 
 
   // 刷新列表
@@ -276,11 +305,26 @@ export default function LaunchingPage() {
                           getApplicationStatus(app) === 'approved' ? t('approved') : t('approve')
                         )}
                       </button>
-                      {/* {getApplicationStatus(app) === 'approved' && (
-                        <button className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded transition-colors duration-200">
-                          {t('sign')}
-                        </button>
-                      )} */}
+                      <button 
+                      onClick={() => handleSign(app)}
+                      disabled={getApplicationStatus(app) !== 'approved' || signingApp === app.publicKey.toString() || getApplicationStatus(app) === 'signed'}
+                      className={`${
+                        signingApp === app.publicKey.toString() 
+                          ? 'bg-gray-600' 
+                          : getApplicationStatus(app) !== 'approved' || getApplicationStatus(app) === 'signed'
+                            ? 'bg-gray-600 cursor-not-allowed'
+                            : 'bg-blue-600 hover:bg-blue-700'
+                      } text-white font-medium py-2 px-4 rounded transition-colors duration-200 cursor-pointer flex items-center`}
+                    >
+                      {signingApp === app.publicKey.toString() ? (
+                        <>
+                          <div className="animate-spin h-4 w-4 border-t-2 border-b-2 border-white rounded-full mr-2"></div>
+                          {t('processing')}
+                        </>
+                      ) : (
+                        getApplicationStatus(app) === 'signed' ? t('signed') : t('sign')
+                      )}
+                    </button>
                     </div>
                   </div>
                 </div>

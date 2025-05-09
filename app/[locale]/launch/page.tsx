@@ -192,21 +192,21 @@ export default function LaunchPage() {
     // 计算一年后的时间戳（加上 365 天的秒数）
     const oneYearLaterTimestamp = tomorrowTimestamp + (365 * 86400);  // 一年后的时间戳
     const result = await applyMine({
-      mineCode: 'mine001' + Date.now(),
-      name: '测试矿场',
-      operator: '测试公司',
-      relationship: '直接拥有',
-      scale: '中型',
-      location: '中国云南',
-      approval1: '批文编号1',
-      approval2: '批文编号2',
-      approval3: '批文编号3',
-      financeScale: new BN('100000000'), // u128
-      currency: 'USDT',
+      mineCode: 'mine004' + Date.now(),
+      name: `Côte d'Ivoire Dimbokro`,
+      operator: 'Lee',
+      relationship: 'owner',
+      scale: 'medium',
+      location: `Côte d'Ivoire Dimbokro`,
+      approval1: '',
+      approval2: '',
+      approval3: '',
+      financeScale: new BN('700000'), // u128
+      currency: 'USD',
       startDate: new BN(tomorrowTimestamp),     // i64
       endDate: new BN(oneYearLaterTimestamp),       // i64
-      rate: 500,                          // u32
-      frozenMonth: 6,                     // u8
+      rate: 28,                          // u32
+      frozenMonth: 13.5,                     // u8
     });
 
     console.log(result);

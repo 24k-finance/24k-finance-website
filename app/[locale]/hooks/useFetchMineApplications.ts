@@ -2,14 +2,14 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-09 09:49:16
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-09 14:13:48
+ * @LastEditTime: 2025-05-09 16:28:31
  * @FilePath: /24k-finance-website/app/[locale]/hooks/useFetchMineApplications.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import { useCallback, useState, useEffect } from 'react';
 import { PublicKey } from '@solana/web3.js';
 import { useLaunchpadProgram } from './useLaunchpadProgram';
-import { formatBNDecimal, toDate } from '../utils';
+import { containsChinese, formatBNDecimal, toDate } from '../utils';
 
 // 金矿申请信息类型
 export interface MineApplication {
@@ -73,7 +73,7 @@ export const useFetchMineApplications = () => {
         };
       });
       console.log('fixedApplications', fixedApplications);
-      setApplications(fixedApplications);
+      setApplications(fixedApplications.filter((item: any) => !containsChinese(item.account.name)));
     } catch (err) {
       console.error('获取金矿申请列表失败:', err);
       setError(err as Error);
