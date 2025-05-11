@@ -7,6 +7,10 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { useFetchMineApplications } from "../hooks/useFetchMineApplications";
+import { useStake } from "../hooks/useStake";
+import { COIN_PROGRAM_ID } from "../constant";
+import BN from "bn.js";
+import { toast } from "react-hot-toast";
 
 const SolanaConnectButton = dynamic(
   () => import('../components/SolanaConnectButton').then((mod) => mod.SolanaConnectButton),
@@ -24,6 +28,7 @@ export default function StakingIndex() {
   const { connected, publicKey } = useWallet();
   const { applications, loading: appsLoading } = useFetchMineApplications();
   const [stakingPools, setStakingPools] = useState<any[]>([]);
+  const { stake, loading: stakeLoading, error: stakeError } = useStake();
 
   // 模拟历史记录数据
   const [stakingHistory, setStakingHistory] = useState([
@@ -66,6 +71,7 @@ export default function StakingIndex() {
         const rewards = connected ? ((index === 0 || index === 1) ? (625 - index * 370).toLocaleString() : "0") + " " + account.currency : "-- " + account.currency;
         
         return {
+          publicKey: app.publicKey,
           id: index + 1,
           mineCode: account.mineCode,
           name: account.name,
@@ -137,16 +143,59 @@ export default function StakingIndex() {
     console.log(t('consoleMessages.harvestFromPool', { poolId }));
   };
 
-  // 处理质押表单提交
-  const handleStakeSubmit = () => {
-    if (!stakeAmount || parseFloat(stakeAmount) <= 0) {
-      return;
-    }
+    // 处理质押表单提交
+    const handleStakeSubmit = async () => {
+      if (!stakeAmount || parseFloat(stakeAmount) <= 0) {
+        return;
+      }
   
-    // 重置表单
-    setStakeAmount("");
-    setSelectedPool(null);
-  };
+      const pool = stakingPools.find((p) => p.id === selectedPool);
+      if (!pool) {
+        toast.error(t('poolNotFound'));
+        return;
+      }
+      
+      try {
+        // 将输入的金额转换为最小单位 (假设 USDC/USDT 有 6 位小数)
+        const amountInSmallestUnit = new BN(parseFloat(stakeAmount) * 1000000);
+        
+        // 创建质押参数
+        const stakeParams = {
+          amount: amountInSmallestUnit,
+          stableCoin: pool.currency,
+          txnHash: ""  // 可以留空，或者在交易后更新
+        };
+        
+        // 这里需要用户的代币账户和池子的金库地址
+        // 在实际应用中，您需要获取这些地址
+        // 以下是示例代码，您需要根据实际情况修改
+        const userTokenAccount = COIN_PROGRAM_ID
+        const poolVault = pool.publicKey
+        
+        // 调用质押函数
+        const result = await stake(
+          pool.mineCode,
+          stakeParams,
+          userTokenAccount,
+          poolVault
+        );
+        
+        if (result) {
+          toast.success(t('success'));
+          console.log("质押交易签名:", result.txSignature);
+          
+          // 重置表单
+          setStakeAmount("");
+          setSelectedPool(null);
+          
+          // 可以在这里刷新用户的质押数据
+          // 例如重新获取矿池数据或用户质押记录
+        }
+      } catch (error) {
+        console.error("质押失败:", error);
+        toast.error(error instanceof Error ? error.message : String(error));
+      }
+    };
 
   // 处理取消质押
   const handleStakeCancel = () => {

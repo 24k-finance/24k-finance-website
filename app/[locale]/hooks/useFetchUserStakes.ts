@@ -12,7 +12,6 @@ export interface StakeRecord {
     amount: BN;
     stableCoin: string;
     timestamp: BN;
-    // 其他字段...
   }
 }
 
