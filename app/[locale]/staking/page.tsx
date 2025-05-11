@@ -162,7 +162,7 @@ export default function StakingIndex() {
         // 创建质押参数
         const stakeParams = {
           amount: amountInSmallestUnit,
-          stableCoin: pool.currency,
+          stableCoin: 'USDT',
           txnHash: ""  // 可以留空，或者在交易后更新
         };
         
