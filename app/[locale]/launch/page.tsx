@@ -1,5 +1,6 @@
 "use client";
 import BN from 'bn.js';
+import { put } from "@vercel/blob";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useWallet } from "@solana/wallet-adapter-react";
@@ -192,6 +193,18 @@ export default function LaunchPage() {
       return;
     }
 
+     // 上传图片到 Vercel Blob
+     let imageUrl = '';
+     if (coverImage) {
+       const filename = `mining-farms/${Date.now()}-${coverImage.name}`;
+       const { url } = await put(filename, coverImage, { 
+         access: 'public',
+         token: process.env.NEXT_PUBLIC_BLOB_READ_WRITE_TOKEN || 'vercel_blob_rw_J7VJbCS7d1Nu3Sfb_k6XyfKleM5Fxnzv0tbp7dlGO6bv3NE'
+       });
+       imageUrl = url;
+    }
+    
+
     const currentTimestamp = Math.floor(Date.now() / 1000);
     // 计算明天的时间戳（加上 86400 秒，即 1 天）
     const tomorrowTimestamp = currentTimestamp + 86400;  // 明天的时间戳
@@ -204,7 +217,7 @@ export default function LaunchPage() {
       relationship: 'owner',
       scale: 'medium',
       location: formData.location,
-      approval1: '',
+      approval1: imageUrl,
       approval2: '',
       approval3: '',
       financeScale: new BN(formData.price), // u128
@@ -290,6 +303,11 @@ export default function LaunchPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
           >
+              {/* <Link href="/launching">
+                <span className='bg-purple-600 hover:bg-purple-700 text-white font-medium ml-3 py-1 px-2 rounded-xs'>
+                  {t('applyButton')}
+                </span>
+              </Link> */}
             <div className="flex items-start">
               <span className="text-2xl mr-3">✅</span>
               <div>

@@ -66,7 +66,7 @@ export default function LaunchingPage() {
   const t = useTranslations('launching');
   const tCommon = useTranslations('common');
   const { connected, publicKey } = useWallet();
-  const { applications, loading, error, fetchApplications } = useFetchMineApplications();
+  const { applications, loading, error, fetchApplications } = useFetchMineApplications(false);
   const { approveMine, loading: approveLoading, error: approveError } = useApproveMine();
   const { signMine, loading: signLoading, error: signError } = useSignMine();
 
@@ -96,14 +96,10 @@ export default function LaunchingPage() {
     
     try {
       const result = await approveMine(app.account.mineCode);
-      if (result) {
-        console.log('审批成功:', result);
-        // 刷新列表
-        fetchApplications();
-      }
     } catch (err) {
       console.error('审批失败:', err);
     } finally {
+      fetchApplications();
       setProcessingApp(null);
     }
   };
@@ -232,7 +228,22 @@ export default function LaunchingPage() {
                 transition={{ duration: 0.3, delay: index * 0.1 }}
               >
                 <div className="flex flex-col md:flex-row justify-between">
-                  <div>
+                  <div className="w-full md:w-32 h-32 mr-6 mb-4 md:mb-0 flex-shrink-0">
+                    {app.account.approval1 ? (
+                      <img 
+                        src={app.account.approval1} 
+                        alt={app.account.name} 
+                        className="w-full h-full object-cover rounded-lg"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-700/50 rounded-lg flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex-grow">
                     <div className="flex items-center mb-2">
                       <h3 className="text-xl font-bold mr-3">{app.account.name}</h3>
                       <StatusBadge status={getApplicationStatus(app)} />

@@ -23,58 +23,7 @@ export default function StakingIndex() {
   const [selectedPool, setSelectedPool] = useState<number | null>(null);
   const { connected, publicKey } = useWallet();
   const { applications, loading: appsLoading } = useFetchMineApplications();
-
-  // 模拟质押数据
-  const [stakingPools, setStakingPools] = useState([
-    {
-      id: 1,
-      name: t('pools.0.name'),
-      icon: "/assets_5.png", // 确保有此图标
-      apr: "12.5%",
-      totalStaked: "5,000,000 USDT",
-      yourStake: "5,000 USDT",
-      rewards: "625 USDT",
-      duration: t('pools.0.duration'),
-      status: t('pools.0.status'),
-      auditResult: true, // 默认值，将根据应用程序数据更新
-    },
-    {
-      id: 2,
-      name: t('pools.1.name'),
-      icon: "/assets_6.jpg", // 确保有此图标
-      apr: "10.2%",
-      totalStaked: "980,000 USDT",
-      yourStake: "2,500 USDT",
-      rewards: "255 USDT",
-      duration: t('pools.1.duration'),
-      status: t('pools.1.status'),
-      auditResult: true, // 默认值，将根据应用程序数据更新
-    },
-    {
-      id: 3,
-      name: t('pools.2.name'),
-      icon: "/assets_7.jpg", // 确保有此图标
-      apr: "15.8%",
-      totalStaked: "750,000 USDT",
-      yourStake: "0 USDT",
-      rewards: "0 USDT",
-      duration: t('pools.2.duration'),
-      status: t('pools.2.status'),
-      auditResult: false, // 默认值，将根据应用程序数据更新
-    },
-    {
-      id: 4,
-      name: t('pools.3.name'),
-      icon: "/assets_8.jpg", // 确保有此图标
-      apr: "15.8%",
-      totalStaked: "750,000 USDT",
-      yourStake: "0 USDT",
-      rewards: "0 USDT",
-      duration: t('pools.3.duration'),
-      status: t('pools.3.status'),
-      auditResult: false, // 默认值，将根据应用程序数据更新
-    },
-  ]);
+  const [stakingPools, setStakingPools] = useState<any[]>([]);
 
   // 模拟历史记录数据
   const [stakingHistory, setStakingHistory] = useState([
@@ -101,25 +50,54 @@ export default function StakingIndex() {
     },
   ]);
 
-  // 根据应用程序数据更新质押池的 auditResult
+  // 根据应用程序数据更新质押池
   useEffect(() => {
     if (applications && applications.length > 0) {
       console.log("应用程序数据：", applications);
-      const updatedPools = stakingPools.map((pool, index) => {
-        // 假设应用程序数据和池按顺序对应，或者使用其他匹配逻辑
-        if (index < applications.length) {
-          return {
-            ...pool,
-            auditResult: applications[index].account.auditResult,
-            status: applications[index].account.auditResult ? t('statusActive') : t('statusComing')
-          };
-        }
-        return pool;
+      
+      // 将应用程序数据转换为质押池数据
+      const pools = applications.map((app, index) => {
+        const account = app.account;
+        // 计算每个池的质押总额（示例值）
+        const totalStaked = (1000000 + index * 500000).toLocaleString() + " " + account.currency;
+        // 计算用户质押额（示例值）
+        const yourStake = connected ? ((index === 0 || index === 1) ? (5000 - index * 2500).toLocaleString() : "0") + " " + account.currency : "-- " + account.currency;
+        // 计算奖励（示例值）
+        const rewards = connected ? ((index === 0 || index === 1) ? (625 - index * 370).toLocaleString() : "0") + " " + account.currency : "-- " + account.currency;
+        
+        return {
+          id: index + 1,
+          mineCode: account.mineCode,
+          name: account.name,
+          operator: account.operator,
+          relationship: account.relationship,
+          approval1: account.approval1,
+          approval2: account.approval2,
+          approval3: account.approval3,
+          scale: account.scale,
+          location: account.location,
+          currency: account.currency,
+          financeScale: account.financeScale,
+          startDate: account.startDate,
+          endDate: account.endDate,
+          signDate: account.signDate,
+          rate: account.rate,
+          frozenMonth: account.frozenMonth,
+          auditResult: account.auditResult,
+          isSigned: account.isSigned,
+          owner: account.owner,
+          // 质押池特定属性
+          apr: (account.rate / 10000).toFixed(1) + "%",
+          totalStaked: totalStaked,
+          yourStake: yourStake,
+          rewards: rewards,
+          duration: account.frozenMonth + " " + t('months'),
+          status: account.auditResult ? t('statusActive') : t('statusComing'),
+        };
       });
-      console.log("更新后的质押池：", updatedPools);
-      setStakingPools(updatedPools);
+      setStakingPools(pools);
     }
-  }, [applications, t]);
+  }, [applications, connected, t]);
 
   // 处理质押操作
   const handleStake = (poolId: number) => {
@@ -165,7 +143,6 @@ export default function StakingIndex() {
       return;
     }
   
-    
     // 重置表单
     setStakeAmount("");
     setSelectedPool(null);
@@ -176,6 +153,26 @@ export default function StakingIndex() {
     setStakeAmount("");
     setSelectedPool(null);
   };
+
+  // 计算活跃池数量
+  const activePools = stakingPools.filter(pool => pool.auditResult).length;
+  
+  // 计算用户活跃质押数量
+  const activeStakings = connected ? stakingPools.filter(pool => 
+    pool.auditResult && pool.yourStake && !pool.yourStake.startsWith("0") && !pool.yourStake.startsWith("--")
+  ).length : 0;
+  
+  // 计算总质押金额（示例）
+  const totalStaked = stakingPools.reduce((sum, pool) => {
+    const amount = pool.totalStaked ? parseFloat(pool.totalStaked.replace(/[^0-9.]/g, '')) : 0;
+    return sum + amount;
+  }, 0).toLocaleString();
+  
+  // 计算总奖励（示例）
+  const totalRewards = connected ? stakingPools.reduce((sum, pool) => {
+    const amount = pool.rewards && !pool.rewards.startsWith("--") ? parseFloat(pool.rewards.replace(/[^0-9.]/g, '')) : 0;
+    return sum + amount;
+  }, 0).toLocaleString() : "0";
 
   return (
     <div className="min-h-screen bg-[#0a0a10] text-white p-8 sm:p-16">
@@ -200,7 +197,7 @@ export default function StakingIndex() {
             transition={{ duration: 0.3 }}
           >
             <h3 className="text-gray-400 mb-2">{t('totalStaked')}</h3>
-            <p className="text-2xl font-bold">6,750,000 USDT</p>
+            <p className="text-2xl font-bold">{totalStaked} {stakingPools[0]?.currency || 'USDT'}</p>
           </motion.div>
           
           <motion.div
@@ -210,7 +207,7 @@ export default function StakingIndex() {
             transition={{ duration: 0.3, delay: 0.1 }}
           >
             <h3 className="text-gray-400 mb-2">{t('totalRewards')}</h3>
-            <p className="text-2xl font-bold">880 USDT</p>
+            <p className="text-2xl font-bold">{totalRewards} {stakingPools[0]?.currency || 'USDT'}</p>
           </motion.div>
           
           <motion.div
@@ -220,7 +217,7 @@ export default function StakingIndex() {
             transition={{ duration: 0.3, delay: 0.2 }}
           >
             <h3 className="text-gray-400 mb-2">{t('activePools')}</h3>
-            <p className="text-2xl font-bold">2</p>
+            <p className="text-2xl font-bold">{activePools}</p>
           </motion.div>
           
           <motion.div
@@ -230,7 +227,7 @@ export default function StakingIndex() {
             transition={{ duration: 0.3, delay: 0.3 }}
           >
             <h3 className="text-gray-400 mb-2">{t('activeStaking')}</h3>
-            <p className="text-2xl font-bold">{connected ? "2" : "0"}</p>
+            <p className="text-2xl font-bold">{activeStakings}</p>
           </motion.div>
         </div>
 
@@ -258,141 +255,164 @@ export default function StakingIndex() {
           </button>
         </div>
 
+        {/* 加载中状态 */}
+        {appsLoading && (
+          <div className="flex justify-center items-center py-20">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
+          </div>
+        )}
+
         {/* 质押池列表 */}
-        {activeTab === "active" && (
+        {activeTab === "active" && !appsLoading && (
           <div className="space-y-6">
-            {stakingPools.map((pool) => (
-              <motion.div
-                key={pool.id}
-                className="bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800 hover:border-purple-800/50 transition-colors"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-              >
-                <div className="p-6">
-                  <div className="flex flex-col md:flex-row justify-between">
-                    {/* 池信息 */}
-                    <div className="flex items-center mb-4 md:mb-0">
-                      <div className="w-16 h-16 rounded-lg overflow-hidden mr-4 flex-shrink-0">
-                        <Image
-                          src={pool.icon}
-                          alt={pool.name}
-                          width={64}
-                          height={64}
-                          className="w-full h-full object-cover"
-                        />
+            {stakingPools.length === 0 ? (
+              <div className="bg-gray-800/50 rounded-xl p-8 text-center">
+                <div className="text-6xl mb-4">📊</div>
+                <h2 className="text-2xl font-bold mb-2">{t('noPoolsAvailable')}</h2>
+                {/* <p className="text-gray-400 mb-6">{t('checkBackLater')}</p> */}
+              </div>
+            ) : (
+              stakingPools.map((pool) => (
+                <motion.div
+                  key={pool.id}
+                  className="bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800 hover:border-purple-800/50 transition-colors"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <div className="p-6">
+                    <div className="flex flex-col md:flex-row justify-between">
+                      {/* 池信息 */}
+                      <div className="flex items-center mb-4 md:mb-0">
+                        <div className="w-16 h-16 rounded-lg overflow-hidden mr-4 flex-shrink-0">
+                          {pool.approval1 ? (
+                            <Image
+                              src={pool.approval1}
+                              alt={pool.name}
+                              width={64}
+                              height={64}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-gray-700/50 rounded-lg flex items-center justify-center">
+                              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                              </svg>
+                            </div>
+                          )}
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-bold">{pool.name}</h3>
+                          <div className="flex items-center mt-1">
+                            <span className="text-green-400 font-medium mr-4">APR: {pool.apr}</span>
+                            <span className="text-gray-400 text-sm">{pool.duration}</span>
+                          </div>
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="text-xl font-bold">{pool.name}</h3>
-                        <div className="flex items-center mt-1">
-                          <span className="text-green-400 font-medium mr-4">APR: {pool.apr}</span>
-                          <span className="text-gray-400 text-sm">{pool.duration}</span>
+
+                      {/* 质押状态 */}
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div>
+                          <p className="text-gray-400 text-sm">{t('totalPoolStaked')}</p>
+                          <p className="font-medium">{pool.totalStaked}</p>
+                        </div>
+                        <div>
+                          <p className="text-gray-400 text-sm">{t('yourStake')}</p>
+                          <p className="font-medium">{connected ? pool.yourStake : `-- ${pool.currency}`}</p>
+                        </div>
+                        <div>
+                          <p className="text-gray-400 text-sm">{t('pendingRewards')}</p>
+                          <p className="font-medium text-green-400">{connected ? pool.rewards : `-- ${pool.currency}`}</p>
+                        </div>
+                        <div>
+                          <p className="text-gray-400 text-sm">{t('status')}</p>
+                          <p className={`font-medium ${pool.auditResult ? "text-green-400" : "text-yellow-400"}`}>
+                            {pool.status}
+                          </p>
                         </div>
                       </div>
                     </div>
 
-                    {/* 质押状态 */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                      <div>
-                        <p className="text-gray-400 text-sm">{t('totalPoolStaked')}</p>
-                        <p className="font-medium">{pool.totalStaked}</p>
-                      </div>
-                      <div>
-                        <p className="text-gray-400 text-sm">{t('yourStake')}</p>
-                        <p className="font-medium">{connected ? pool.yourStake : "-- USDT"}</p>
-                      </div>
-                      <div>
-                        <p className="text-gray-400 text-sm">{t('pendingRewards')}</p>
-                        <p className="font-medium text-green-400">{connected ? pool.rewards : "-- USDT"}</p>
-                      </div>
-                      <div>
-                        <p className="text-gray-400 text-sm">{t('status')}</p>
-                        <p className={`font-medium ${pool.auditResult ? "text-green-400" : "text-yellow-400"}`}>
-                          {pool.auditResult ? t('statusActive') : t('statusComing')}
-                        </p>
-                      </div>
+                    {/* 操作按钮 */}
+                    <div className="mt-6 flex flex-wrap gap-3">
+                      <button
+                        onClick={() => handleStake(pool.id)}
+                        disabled={!pool.auditResult || !connected}
+                        className={`px-4 py-2 rounded-lg font-medium ${
+                          pool.auditResult && connected
+                            ? "bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                            : "bg-gray-700 text-gray-400 cursor-not-allowed"
+                        }`}
+                      >
+                        {pool.auditResult ? t('stake') : t('statusComing')}
+                      </button>
+                      <button
+                        onClick={() => handleWithdraw(pool.id)}
+                        disabled={!pool.yourStake || pool.yourStake.startsWith("0") || pool.yourStake.startsWith("--") || !connected || !pool.auditResult}
+                        className={`px-4 py-2 rounded-lg font-medium ${
+                          pool.yourStake && !pool.yourStake.startsWith("0") && !pool.yourStake.startsWith("--") && connected && pool.auditResult
+                            ? "bg-gray-800 hover:bg-gray-700 border border-gray-700"
+                            : "bg-gray-800 text-gray-400 cursor-not-allowed"
+                        }`}
+                      >
+                        {t('withdraw')}
+                      </button>
+                      <button
+                        onClick={() => handleHarvest(pool.id)}
+                        disabled={!pool.rewards || pool.rewards.startsWith("0") || pool.rewards.startsWith("--") || !connected || !pool.auditResult}
+                        className={`px-4 py-2 rounded-lg font-medium ${
+                          pool.rewards && !pool.rewards.startsWith("0") && !pool.rewards.startsWith("--") && connected && pool.auditResult
+                            ? "bg-green-900/50 hover:bg-green-800 text-green-400 border border-green-800/50"
+                            : "bg-gray-800 text-gray-400 cursor-not-allowed"
+                        }`}
+                      >
+                        {t('harvest')}
+                      </button>
                     </div>
                   </div>
 
-                  {/* 操作按钮 */}
-                  <div className="mt-6 flex flex-wrap gap-3">
-                    <button
-                      onClick={() => handleStake(pool.id)}
-                      disabled={!pool.auditResult || !connected}
-                      className={`px-4 py-2 rounded-lg font-medium ${
-                        pool.auditResult && connected
-                          ? "bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
-                          : "bg-gray-700 text-gray-400 cursor-not-allowed"
-                      }`}
-                    >
-                      {pool.auditResult ? t('stake') : t('statusComing')}
-                    </button>
-                    <button
-                      onClick={() => handleWithdraw(pool.id)}
-                      disabled={pool.yourStake === "0 USDT" || !connected || !pool.auditResult}
-                      className={`px-4 py-2 rounded-lg font-medium ${
-                        pool.yourStake !== "0 USDT" && connected && pool.auditResult
-                          ? "bg-gray-800 hover:bg-gray-700 border border-gray-700"
-                          : "bg-gray-800 text-gray-400 cursor-not-allowed"
-                      }`}
-                    >
-                      {t('withdraw')}
-                    </button>
-                    <button
-                      onClick={() => handleHarvest(pool.id)}
-                      disabled={pool.rewards === "0 USDT" || !connected || !pool.auditResult}
-                      className={`px-4 py-2 rounded-lg font-medium ${
-                        pool.rewards !== "0 USDT" && connected && pool.auditResult
-                          ? "bg-green-900/50 hover:bg-green-800 text-green-400 border border-green-800/50"
-                          : "bg-gray-800 text-gray-400 cursor-not-allowed"
-                      }`}
-                    >
-                      {t('harvest')}
-                    </button>
-                  </div>
-                </div>
-
-                {/* 质押表单 - 仅在选中时显示 */}
-                {selectedPool === pool.id && (
-                  <div className="bg-gray-800/50 p-6 border-t border-gray-700">
-                    <h4 className="font-medium mb-4">{t('stakeTo')} {pool.name}</h4>
-                    <div className="flex flex-col md:flex-row gap-4">
-                      <div className="flex-grow">
-                        <input
-                          type="number"
-                          placeholder={t('enterStakeAmount')}
-                          value={stakeAmount}
-                          onChange={(e) => setStakeAmount(e.target.value)}
-                          className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                        />
+                  {/* 质押表单 - 仅在选中时显示 */}
+                  {selectedPool === pool.id && (
+                    <div className="bg-gray-800/50 p-6 border-t border-gray-700">
+                      <h4 className="font-medium mb-4">{t('stakeTo')} {pool.name}</h4>
+                      <div className="flex flex-col md:flex-row gap-4">
+                        <div className="flex-grow">
+                          <input
+                            type="number"
+                            placeholder={t('enterStakeAmount')}
+                            value={stakeAmount}
+                            onChange={(e) => setStakeAmount(e.target.value)}
+                            className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                          />
+                        </div>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={handleStakeSubmit}
+                            disabled={!stakeAmount || parseFloat(stakeAmount) <= 0}
+                            className={`px-4 py-2 rounded-lg font-medium ${
+                              stakeAmount && parseFloat(stakeAmount) > 0
+                                ? "bg-purple-600 hover:bg-purple-700"
+                                : "bg-gray-700 text-gray-400 cursor-not-allowed"
+                            }`}
+                          >
+                            {t('confirm')}
+                          </button>
+                          <button
+                            onClick={handleStakeCancel}
+                            className="px-4 py-2 rounded-lg font-medium bg-gray-700 hover:bg-gray-600"
+                          >
+                            {t('cancel')}
+                          </button>
+                        </div>
                       </div>
-                      <div className="flex gap-2">
-                        <button
-                          onClick={handleStakeSubmit}
-                          disabled={!stakeAmount || parseFloat(stakeAmount) <= 0}
-                          className={`px-4 py-2 rounded-lg font-medium ${
-                            stakeAmount && parseFloat(stakeAmount) > 0
-                              ? "bg-purple-600 hover:bg-purple-700"
-                              : "bg-gray-700 text-gray-400 cursor-not-allowed"
-                          }`}
-                        >
-                          {t('confirm')}
-                        </button>
-                        <button
-                          onClick={handleStakeCancel}
-                          className="px-4 py-2 rounded-lg font-medium bg-gray-700 hover:bg-gray-600"
-                        >
-                          {t('cancel')}
-                        </button>
-                      </div>
+                      <p className="text-gray-400 text-sm mt-4">
+                        {t('estimatedAnnualReturn')}: {stakeAmount ? (parseFloat(stakeAmount) * parseFloat(pool.apr.replace('%', '')) / 100).toFixed(2) : '0'} {pool.currency}
+                      </p>
                     </div>
-                    <p className="text-gray-400 text-sm mt-4">
-                      {t('estimatedAnnualReturn')}: {stakeAmount ? (parseFloat(stakeAmount) * parseFloat(pool.apr.replace('%', '')) / 100).toFixed(2) : '0'} USDT
-                    </p>
-                  </div>
-                )}
-              </motion.div>
-            ))}
+                  )}
+                </motion.div>
+              ))
+            )}
           </div>
         )}
 

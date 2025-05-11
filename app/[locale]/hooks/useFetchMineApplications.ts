@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-09 09:49:16
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-09 22:18:05
+ * @LastEditTime: 2025-05-11 13:44:05
  * @FilePath: /24k-finance-website/app/[locale]/hooks/useFetchMineApplications.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -27,7 +27,7 @@ export interface MineApplication {
   }
 }
 
-export const useFetchMineApplications = () => {
+export const useFetchMineApplications = (auditResult: boolean = true) => {
   const { program, loading, setLoading, error, setError } = useLaunchpadProgram();
   const [applications, setApplications] = useState<any[]>([]);
   
@@ -73,10 +73,9 @@ export const useFetchMineApplications = () => {
           }
         };
       });
-      console.log('fixedApplications', fixedApplications);
-      setApplications(fixedApplications.filter((item: any) => !containsChinese(item.account.name)));
+      setApplications(fixedApplications.filter((item: any) => !containsChinese(item.account.name)).filter((item: any) => item.account.auditResult === auditResult));
     } catch (err) {
-      console.error('获取金矿申请列表失败:', err);
+      // console.error('获取金矿申请列表失败:', err);
       setError(err as Error);
     } finally {
       setLoading(false);
