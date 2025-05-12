@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-12 19:22:08
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-12 21:10:58
+ * @LastEditTime: 2025-05-12 21:59:03
  * @FilePath: /24k-finance-website/app/[locale]/hooks/useCreateLaunchPool.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -17,6 +17,7 @@ import {
   Transaction,
 } from "@solana/web3.js";
 import {
+  ASSOCIATED_TOKEN_PROGRAM_ID,
   createAssociatedTokenAccountInstruction,
   getAssociatedTokenAddress,
   TOKEN_PROGRAM_ID,
@@ -48,7 +49,8 @@ export const useCreateLaunchPool = () => {
     const paymentVault = await getAssociatedTokenAddress(
       usdtMint,  // 使用传入的 usdtMint
       launchPoolPDA,  // 重要：所有者应该是 launchPoolPDA
-      true  // 表示这是一个 PDA 拥有的代币账户
+      true,  // 表示这是一个 PDA 拥有的代币账户
+      TOKEN_PROGRAM_ID
     );
 
     console.log("wallet object:", wallet);
@@ -59,15 +61,16 @@ export const useCreateLaunchPool = () => {
     console.log("usdtMint:", usdtMint.toBase58());
     console.log("mineAppPDA:", mineAppPDA.toBase58());
 
-    // const createATAInstruction = createAssociatedTokenAccountInstruction(
-    //   wallet.publicKey,  // 付款人
-    //   paymentVault,      // 关联代币账户地址
-    //   launchPoolPDA,     // 代币账户所有者
-    //   usdtMint           // 代币铸币厂
-    // );
+    const createATAInstruction = createAssociatedTokenAccountInstruction(
+      wallet.publicKey,  // 付款人
+      paymentVault,      // 关联代币账户地址
+      launchPoolPDA,     // 代币账户所有者
+      usdtMint,           // 代币铸币厂
+      TOKEN_PROGRAM_ID,
+      ASSOCIATED_TOKEN_PROGRAM_ID
+    );
 
-
-    const signMineInstruction =  await program.methods
+    const signature =  await program.methods
       .signMine(mineCode)
       .accounts({
         application: mineAppPDA,
@@ -76,6 +79,7 @@ export const useCreateLaunchPool = () => {
         paymentVault: paymentVault,  // 使用正确的 paymentVault
         paymentMint: usdtMint,  // 使用传入的 usdtMint
         tokenProgram: TOKEN_PROGRAM_ID,
+        associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
         systemProgram: SystemProgram.programId,
         rent: SYSVAR_RENT_PUBKEY
       })
@@ -87,17 +91,17 @@ export const useCreateLaunchPool = () => {
       //     usdtMint           // 代币铸币厂
       //   )
       // ])
-      // .instruction();
+      .preInstructions([createATAInstruction])
       .rpc({ skipPreflight: true });
 
        // 3. 创建交易并添加指令
       //  const transaction = new Transaction()
-      // //  .add(createATAInstruction)
+      //  .add(createATAInstruction)
       //  .add(signMineInstruction);
 
       //  const signature = await program.provider.sendAndConfirm!(transaction, []);
-       console.log("交易成功，签名:", signMineInstruction);
-       return signMineInstruction;
+       console.log("交易成功，签名:", signature);
+       return signature;
   };
 
   return { createLaunchPool };
