@@ -9,7 +9,10 @@ import { useFetchMineApplications } from '../hooks/useFetchMineApplications';
 import { useApproveMine } from '../hooks/useApproveMine';
 import { useState } from 'react';
 import { useSignMine } from '../hooks/useSignMine';
+import { useSignMineAndInitVault } from '../hooks/useSignMineAndInitVault';
+import { useCreateLaunchPool } from '../hooks/useCreateLaunchPool';
 import { PublicKey } from '@solana/web3.js';
+import { USDT_MINT } from '../constant';
 
 const SolanaConnectButton = dynamic(
     () => import('../components/SolanaConnectButton').then((mod) => mod.SolanaConnectButton),
@@ -69,6 +72,8 @@ export default function LaunchingPage() {
   const { applications, loading, error, fetchApplications } = useFetchMineApplications(false);
   const { approveMine, loading: approveLoading, error: approveError } = useApproveMine();
   const { signMine, loading: signLoading, error: signError } = useSignMine();
+  const { signMineAndInitVault } = useSignMineAndInitVault();
+  const { createLaunchPool } = useCreateLaunchPool();
 
   const [processingApp, setProcessingApp] = useState<string | null>(null);
   const [signingApp, setSigningApp] = useState<string | null>(null);
@@ -113,9 +118,11 @@ export default function LaunchingPage() {
     setSigningApp(app.publicKey.toString());
     try {
       // 这里使用一个固定的 USDC 代币地址，实际应用中可能需要从配置或其他地方获取
-      const usdcMint = new PublicKey('EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'); // Solana USDC 代币地址
       
-      const result = await signMine(app.account.mineCode, usdcMint);
+      const result = await createLaunchPool({
+        mineCode: app.account.mineCode,
+        usdtMint: USDT_MINT,
+      });
       if (result) {
         console.log('签约成功:', result);
         // 刷新列表
@@ -317,7 +324,7 @@ export default function LaunchingPage() {
                           app.account.auditResult ? t('approved') : t('approve')
                         )}
                       </button>
-                      {/* <button 
+                      <button 
                         onClick={() => handleSign(app)}
                         disabled={!app.account.auditResult || signingApp === app.publicKey.toString() || app.account.isSigned}
                         className={`${
@@ -336,7 +343,7 @@ export default function LaunchingPage() {
                         ) : (
                           app.account.isSigned ? t('signed') : t('sign')
                         )}
-                      </button> */}
+                      </button>
                     </div>
                   </div>
                 </div>

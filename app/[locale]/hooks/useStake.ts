@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-09 09:48:49
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-09 09:48:55
+ * @LastEditTime: 2025-05-12 18:34:00
  * @FilePath: /24k-finance-website/app/[locale]/hooks/useStake.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -26,7 +26,7 @@ export const useStake = () => {
     mineCode: string,
     params: StakeParams,
     userTokenAccount: PublicKey,
-    poolVault: PublicKey
+    tokenMint: PublicKey,
   ) => {
     if (!program || !wallet) {
       setError(new Error('请先连接钱包'));
@@ -42,15 +42,21 @@ export const useStake = () => {
       if (!stakeRecordPDA) {
         throw new Error('无法生成质押记录 PDA');
       }
+
+      // 查找与启动池关联的代币账户
+      const paymentVaultPDA = new PublicKey("DhYptRnW42noPrzy4o6M6AVEavT6CeEjT6aYqVW5sMt5")
+      
+      console.log('使用的支付金库:', paymentVaultPDA.toBase58());
+      console.log('用户代币账户:', userTokenAccount.toBase58());
       
       // 调用合约方法
       const txSignature = await program.methods
         .stake(params)
         .accounts({
           pool: launchPoolPDA,
-          vault: poolVault,
+          vault: paymentVaultPDA,
           from: userTokenAccount,
-          record: stakeRecordPDA,
+          record: new PublicKey("AVicqSRPGckS7S6SocxP6Krzcab3W52Mfbc8cRka1iT1"),
           investor: wallet.publicKey,
           tokenProgram: TOKEN_PROGRAM_ID,
           systemProgram: SystemProgram.programId

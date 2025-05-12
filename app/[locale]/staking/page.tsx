@@ -3,12 +3,13 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { getAssociatedTokenAddress } from "@solana/spl-token";
 import { useWallet } from "@solana/wallet-adapter-react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { useFetchMineApplications } from "../hooks/useFetchMineApplications";
 import { useStake } from "../hooks/useStake";
-import { COIN_PROGRAM_ID } from "../constant";
+import { USDT_MINT } from "../constant";
 import BN from "bn.js";
 import { toast } from "react-hot-toast";
 
@@ -154,6 +155,8 @@ export default function StakingIndex() {
         toast.error(t('poolNotFound'));
         return;
       }
+
+      console.log("质押结果:", pool);
       
       try {
         // 将输入的金额转换为最小单位 (假设 USDC/USDT 有 6 位小数)
@@ -169,16 +172,22 @@ export default function StakingIndex() {
         // 这里需要用户的代币账户和池子的金库地址
         // 在实际应用中，您需要获取这些地址
         // 以下是示例代码，您需要根据实际情况修改
-        const userTokenAccount = COIN_PROGRAM_ID
-        const poolVault = pool.publicKey
+         // 获取用户的代币账户
+         const userTokenAccount = await getAssociatedTokenAddress(
+          USDT_MINT, // 代币的铸币地址
+          publicKey! // 用户的钱包地址
+        );
+        
         
         // 调用质押函数
         const result = await stake(
           pool.mineCode,
           stakeParams,
           userTokenAccount,
-          poolVault
+          USDT_MINT
         );
+
+        
         
         if (result) {
           toast.success(t('success'));

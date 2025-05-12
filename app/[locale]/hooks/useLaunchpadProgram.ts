@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-09 09:46:29
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-09 09:46:44
+ * @LastEditTime: 2025-05-12 17:02:26
  * @FilePath: /24k-finance-website/app/[locale]/hooks/useLaunchpadProgram.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -75,6 +75,7 @@ export const useLaunchpadProgram = () => {
     error,
     setError,
     wallet,
-    connection
+    connection,
+    provider: program?.provider
   };
 };
