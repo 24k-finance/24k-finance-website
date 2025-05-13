@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-09 09:48:20
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-12 18:43:25
+ * @LastEditTime: 2025-05-13 12:36:35
  * @FilePath: /24k-finance-website/app/[locale]/hooks/useSignMine.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -37,29 +37,6 @@ export const useSignMine = () => {
       console.log('使用的关联代币账户:', poolATA.toBase58(), mineCode);
       // 创建一个新的 Keypair 作为临时签名者
       // const vaultKeypair = Keypair.generate();
-      
-      // 2. 创建一个包含所有指令的单一交易
-      const tx = new Transaction();
-
-      try {
-        await program.provider.connection.getAccountInfo(poolATA);
-        console.log('关联代币账户已存在');
-      } catch (e) {
-        console.log('创建关联代币账户');
-        // 创建关联代币账户的指令
-        const createATAIx = createAssociatedTokenAccountInstruction(
-          wallet.publicKey, // 付款人
-          poolATA, // 关联代币账户地址
-          launchPoolPDA, // 所有者
-          usdcMint // 代币铸币厂
-        );
-        tx.add(createATAIx);
-      }    
-      
-      // 添加创建 vault 账户的指令
-      // tx.add(createVaultIx);
-      
-      // 添加 signMine 指令
       const signMineIx = await program.methods
         .signMine(mineCode)
         .accounts({
@@ -72,40 +49,13 @@ export const useSignMine = () => {
           systemProgram: SystemProgram.programId,
           rent: SYSVAR_RENT_PUBKEY
         })
-        .instruction();
-      
-      tx.add(signMineIx);
-      
-      // 设置最近的区块哈希和付款人
-      const { blockhash } = await program.provider.connection.getLatestBlockhash();
-      tx.recentBlockhash = blockhash;
-      tx.feePayer = wallet.publicKey;
-      
-      // 使用钱包签名交易
-      if (wallet.signTransaction) {
-        const signedTx = await wallet.signTransaction(tx);
-        // 添加 vaultKeypair 的签名
-        // signedTx.partialSign(vaultKeypair);
-        
-        // 发送已签名的交易
-        const txid = await program.provider.connection.sendRawTransaction(
-          signedTx.serialize(),
-          { skipPreflight: false, preflightCommitment: 'confirmed' }
-        );
-        
-        // 等待交易确认
-        await program.provider.connection.confirmTransaction(txid, 'confirmed');
-        
-        console.log('交易已确认，签名：', txid, poolATA.toBase58());
+        .rpc();
         
         return {
-          txSignature: txid,
+          txSignature: signMineIx,
           launchPoolPDA,
           vaultPDA: poolATA // 返回 PDA 而不是临时 keypair
         };
-      } else {
-        throw new Error('钱包不支持签名交易');
-      }
     } catch (err) {
       console.error('签署金矿失败:', err);
       setError(err as Error);

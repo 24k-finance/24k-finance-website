@@ -118,11 +118,11 @@ export default function LaunchingPage() {
     setSigningApp(app.publicKey.toString());
     try {
       // 这里使用一个固定的 USDC 代币地址，实际应用中可能需要从配置或其他地方获取
-      
-      const result = await createLaunchPool({
-        mineCode: app.account.mineCode,
-        usdtMint: USDT_MINT,
-      });
+      const result = await signMine(app.account.mineCode, USDT_MINT);
+      // const result = await createLaunchPool({
+      //   mineCode: app.account.mineCode,
+      //   usdtMint: USDT_MINT,
+      // });
       if (result) {
         console.log('签约成功:', result);
         // 刷新列表
