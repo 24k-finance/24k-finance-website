@@ -131,6 +131,10 @@ export const goldmineFactoryIdl = {
             name: "mineCode",
             type: "string",
           },
+          {
+            name: "bumpLaunchPool",
+            type: "u8",
+          },
         ],
       },
       {

@@ -196,7 +196,7 @@ export default function LaunchPage() {
      // 上传图片到 Vercel Blob
      let imageUrl = '';
      if (coverImage) {
-       const filename = `mining-farms/${Date.now()}-${coverImage.name}`;
+       const filename = `farms/${Date.now()}-${coverImage.name}`;
        const { url } = await put(filename, coverImage, { 
          access: 'public',
          token: process.env.NEXT_PUBLIC_BLOB_READ_WRITE_TOKEN || 'vercel_blob_rw_J7VJbCS7d1Nu3Sfb_k6XyfKleM5Fxnzv0tbp7dlGO6bv3NE'
