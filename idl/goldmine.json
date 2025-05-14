@@ -1,1021 +1,1073 @@
 {
-    "address": "CqcCvZmiLwhgKJvhVzttVct2aHRW4n1dJFNiSpoJQHuq",
-    "metadata": {
-      "name": "launchpad",
-      "version": "0.1.0",
-      "spec": "0.1.0",
-      "description": "Created with Anchor"
-    },
-    "instructions": [
-      {
-        "name": "apply_mine",
-        "discriminator": [
-          53,
-          206,
-          174,
-          77,
-          238,
-          89,
-          128,
-          241
-        ],
-        "accounts": [
-          {
-            "name": "application",
-            "writable": true,
-            "pda": {
-              "seeds": [
-                {
-                  "kind": "const",
-                  "value": [
-                    109,
-                    105,
-                    110,
-                    101,
-                    95,
-                    97,
-                    112,
-                    112
-                  ]
-                },
-                {
-                  "kind": "arg",
-                  "path": "mine_code"
-                }
-              ]
-            }
-          },
-          {
-            "name": "owner",
-            "writable": true,
-            "signer": true
-          },
-          {
-            "name": "system_program",
-            "address": "11111111111111111111111111111111"
-          }
-        ],
-        "args": [
-          {
-            "name": "params",
-            "type": {
-              "defined": {
-                "name": "ApplyMineParams"
+  "address": "twzXVjyX5rLv2aFAGw8tBTtvps4cvYaC9UFn95MHEJZ",
+  "metadata": {
+    "name": "launchpad",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "apply_mine",
+      "discriminator": [
+        53,
+        206,
+        174,
+        77,
+        238,
+        89,
+        128,
+        241
+      ],
+      "accounts": [
+        {
+          "name": "application",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  105,
+                  110,
+                  101,
+                  95,
+                  97,
+                  112,
+                  112
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "mine_code"
               }
+            ]
+          }
+        },
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "params",
+          "type": {
+            "defined": {
+              "name": "ApplyMineParams"
             }
           }
-        ]
-      },
-      {
-        "name": "approve_mine",
-        "discriminator": [
-          178,
-          63,
-          124,
-          103,
-          152,
-          8,
-          88,
-          160
-        ],
-        "accounts": [
-          {
-            "name": "application",
-            "writable": true,
-            "pda": {
-              "seeds": [
-                {
-                  "kind": "const",
-                  "value": [
-                    109,
-                    105,
-                    110,
-                    101,
-                    95,
-                    97,
-                    112,
-                    112
-                  ]
-                },
-                {
-                  "kind": "arg",
-                  "path": "mine_code"
-                }
-              ]
-            }
-          },
-          {
-            "name": "admin",
-            "signer": true
+        }
+      ]
+    },
+    {
+      "name": "approve_mine",
+      "discriminator": [
+        178,
+        63,
+        124,
+        103,
+        152,
+        8,
+        88,
+        160
+      ],
+      "accounts": [
+        {
+          "name": "application",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  105,
+                  110,
+                  101,
+                  95,
+                  97,
+                  112,
+                  112
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "mine_code"
+              }
+            ]
           }
-        ],
-        "args": [
+        },
+        {
+          "name": "admin",
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "mine_code",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "release",
+      "discriminator": [
+        253,
+        249,
+        15,
+        206,
+        28,
+        127,
+        193,
+        241
+      ],
+      "accounts": [
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  97,
+                  117,
+                  110,
+                  99,
+                  104,
+                  95,
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool.mine_code",
+                "account": "LaunchPool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "receiver",
+          "writable": true
+        },
+        {
+          "name": "vault",
+          "writable": true
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "pool"
+          ]
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "sign_mine",
+      "discriminator": [
+        112,
+        122,
+        151,
+        174,
+        91,
+        210,
+        160,
+        227
+      ],
+      "accounts": [
+        {
+          "name": "application",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  105,
+                  110,
+                  101,
+                  95,
+                  97,
+                  112,
+                  112
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "mine_code"
+              }
+            ]
+          }
+        },
+        {
+          "name": "owner",
+          "docs": [
+            "项目方签署人（前端用户）"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "launch_pool",
+          "docs": [
+            "launch_pool PDA，作为 vault authority"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  97,
+                  117,
+                  110,
+                  99,
+                  104,
+                  95,
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "mine_code"
+              }
+            ]
+          }
+        },
+        {
+          "name": "payment_vault",
+          "docs": [
+            "由 launch_pool（PDA）作为 authority 的资金池账户"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  97,
+                  121,
+                  109,
+                  101,
+                  110,
+                  116,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "mine_code"
+              }
+            ]
+          }
+        },
+        {
+          "name": "payment_mint",
+          "docs": [
+            "支付用的 Token（比如 USDC）"
+          ]
+        },
+        {
+          "name": "receiver",
+          "docs": [
+            "要模拟转账的目标账户（比如平台、测试收款人）"
+          ],
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "docs": [
+            "基础程序"
+          ],
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "mine_code",
+          "type": "string"
+        },
+        {
+          "name": "bump_launch_pool",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "stake",
+      "discriminator": [
+        206,
+        176,
+        202,
+        18,
+        200,
+        209,
+        179,
+        108
+      ],
+      "accounts": [
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  97,
+                  117,
+                  110,
+                  99,
+                  104,
+                  95,
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool.mine_code",
+                "account": "LaunchPool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "vault",
+          "docs": [
+            "动态选择金库账户"
+          ],
+          "writable": true
+        },
+        {
+          "name": "from",
+          "docs": [
+            "用户支付账户"
+          ],
+          "writable": true
+        },
+        {
+          "name": "record",
+          "docs": [
+            "投资记录PDA"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  116,
+                  97,
+                  107,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool.mine_code",
+                "account": "LaunchPool"
+              },
+              {
+                "kind": "account",
+                "path": "investor"
+              }
+            ]
+          }
+        },
+        {
+          "name": "investor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "params",
+          "type": {
+            "defined": {
+              "name": "StakeParams"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "LaunchPool",
+      "discriminator": [
+        29,
+        65,
+        189,
+        216,
+        67,
+        129,
+        179,
+        61
+      ]
+    },
+    {
+      "name": "MineApplication",
+      "discriminator": [
+        204,
+        74,
+        131,
+        0,
+        56,
+        52,
+        0,
+        194
+      ]
+    },
+    {
+      "name": "StakeRecord",
+      "discriminator": [
+        174,
+        163,
+        11,
+        208,
+        150,
+        236,
+        11,
+        205
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "FundsReleased",
+      "discriminator": [
+        178,
+        119,
+        252,
+        230,
+        131,
+        104,
+        210,
+        210
+      ]
+    },
+    {
+      "name": "FundsStaked",
+      "discriminator": [
+        147,
+        121,
+        141,
+        47,
+        234,
+        143,
+        248,
+        87
+      ]
+    },
+    {
+      "name": "MineApplied",
+      "discriminator": [
+        10,
+        194,
+        87,
+        176,
+        99,
+        202,
+        114,
+        39
+      ]
+    },
+    {
+      "name": "MineApproved",
+      "discriminator": [
+        0,
+        93,
+        222,
+        213,
+        112,
+        29,
+        150,
+        153
+      ]
+    },
+    {
+      "name": "MineSigned",
+      "discriminator": [
+        206,
+        89,
+        36,
+        10,
+        105,
+        87,
+        0,
+        201
+      ]
+    },
+    {
+      "name": "PoolInitialized",
+      "discriminator": [
+        100,
+        118,
+        173,
+        87,
+        12,
+        198,
+        254,
+        229
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "StartTimeInPast",
+      "msg": "Start time must be in the future"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidVaultAuthority",
+      "msg": "End time must be in the future"
+    },
+    {
+      "code": 6002,
+      "name": "InvalidVaultMint",
+      "msg": "Invalid vault authority"
+    },
+    {
+      "code": 6003,
+      "name": "InvalidTimeRange",
+      "msg": "End time must be after start time"
+    },
+    {
+      "code": 6004,
+      "name": "InvalidFrozenPeriod",
+      "msg": "Frozen period must be 1-36 months"
+    },
+    {
+      "code": 6005,
+      "name": "ApplicationAlreadySigned",
+      "msg": "Unauthorized"
+    },
+    {
+      "code": 6006,
+      "name": "ApplicationNotApproved",
+      "msg": "ApplicationNotApproved Unauthorized"
+    },
+    {
+      "code": 6007,
+      "name": "InvalidRate",
+      "msg": "Invalid rate (0-10000 allowed)"
+    },
+    {
+      "code": 6008,
+      "name": "CapExceeded",
+      "msg": "Hard cap exceeded"
+    },
+    {
+      "code": 6009,
+      "name": "NotInFundingPeriod",
+      "msg": "Funding period has ended"
+    },
+    {
+      "code": 6010,
+      "name": "ReleaseNotYet",
+      "msg": "Release time not reached"
+    },
+    {
+      "code": 6011,
+      "name": "NoFundsToRelease",
+      "msg": "No funds to release"
+    },
+    {
+      "code": 6012,
+      "name": "InvalidCoinType",
+      "msg": "Invalid stable coin type (USDC/USDT only)"
+    },
+    {
+      "code": 6013,
+      "name": "InvalidLength",
+      "msg": "String length exceeds limit"
+    },
+    {
+      "code": 6014,
+      "name": "MineNotApproved",
+      "msg": "Mine not approved"
+    },
+    {
+      "code": 6015,
+      "name": "NotApproved",
+      "msg": "Not approved"
+    },
+    {
+      "code": 6016,
+      "name": "AlreadyApproved",
+      "msg": "Already approved"
+    },
+    {
+      "code": 6017,
+      "name": "AlreadySigned",
+      "msg": "Already signed"
+    },
+    {
+      "code": 6018,
+      "name": "Unauthorized",
+      "msg": "Unauthorized access"
+    },
+    {
+      "code": 6019,
+      "name": "ArithmeticOverflow",
+      "msg": "Arithmetic overflow occurred"
+    }
+  ],
+  "types": [
+    {
+      "name": "ApplyMineParams",
+      "type": {
+        "kind": "struct",
+        "fields": [
           {
             "name": "mine_code",
             "type": "string"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "operator",
+            "type": "string"
+          },
+          {
+            "name": "relationship",
+            "type": "string"
+          },
+          {
+            "name": "scale",
+            "type": "string"
+          },
+          {
+            "name": "location",
+            "type": "string"
+          },
+          {
+            "name": "approval1",
+            "type": "string"
+          },
+          {
+            "name": "approval2",
+            "type": "string"
+          },
+          {
+            "name": "approval3",
+            "type": "string"
+          },
+          {
+            "name": "finance_scale",
+            "type": "u128"
+          },
+          {
+            "name": "currency",
+            "type": "string"
+          },
+          {
+            "name": "start_date",
+            "type": "i64"
+          },
+          {
+            "name": "end_date",
+            "type": "i64"
+          },
+          {
+            "name": "rate",
+            "type": "u32"
+          },
+          {
+            "name": "frozen_month",
+            "type": "u8"
           }
         ]
-      },
-      {
-        "name": "release",
-        "discriminator": [
-          253,
-          249,
-          15,
-          206,
-          28,
-          127,
-          193,
-          241
-        ],
-        "accounts": [
+      }
+    },
+    {
+      "name": "FundsReleased",
+      "type": {
+        "kind": "struct",
+        "fields": [
           {
             "name": "pool",
-            "writable": true,
-            "pda": {
-              "seeds": [
-                {
-                  "kind": "const",
-                  "value": [
-                    108,
-                    97,
-                    117,
-                    110,
-                    99,
-                    104,
-                    95,
-                    112,
-                    111,
-                    111,
-                    108
-                  ]
-                },
-                {
-                  "kind": "account",
-                  "path": "pool.mine_code",
-                  "account": "LaunchPool"
-                }
-              ]
-            }
+            "type": "pubkey"
           },
           {
             "name": "receiver",
-            "writable": true
+            "type": "pubkey"
           },
           {
-            "name": "vault",
-            "writable": true
+            "name": "amount",
+            "type": "u64"
           },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "FundsStaked",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "investor",
+            "type": "pubkey"
+          },
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "LaunchPool",
+      "type": {
+        "kind": "struct",
+        "fields": [
           {
             "name": "authority",
-            "writable": true,
-            "signer": true,
-            "relations": [
-              "pool"
-            ]
+            "type": "pubkey"
           },
           {
-            "name": "token_program",
-            "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
-          }
-        ],
-        "args": []
-      },
-      {
-        "name": "sign_mine",
-        "discriminator": [
-          112,
-          122,
-          151,
-          174,
-          91,
-          210,
-          160,
-          227
-        ],
-        "accounts": [
-          {
-            "name": "application",
-            "writable": true,
-            "pda": {
-              "seeds": [
-                {
-                  "kind": "const",
-                  "value": [
-                    109,
-                    105,
-                    110,
-                    101,
-                    95,
-                    97,
-                    112,
-                    112
-                  ]
-                },
-                {
-                  "kind": "arg",
-                  "path": "mine_code"
-                }
-              ]
-            }
+            "name": "price",
+            "type": "u64"
           },
           {
-            "name": "owner",
-            "writable": true,
-            "signer": true
+            "name": "cap",
+            "type": "u64"
           },
           {
-            "name": "launch_pool",
-            "docs": [
-              "CPI 创建 LaunchPool 所需的 PDA"
-            ],
-            "writable": true,
-            "pda": {
-              "seeds": [
-                {
-                  "kind": "const",
-                  "value": [
-                    108,
-                    97,
-                    117,
-                    110,
-                    99,
-                    104,
-                    95,
-                    112,
-                    111,
-                    111,
-                    108
-                  ]
-                },
-                {
-                  "kind": "arg",
-                  "path": "mine_code"
-                }
-              ]
-            }
+            "name": "raised",
+            "type": "u64"
           },
           {
-            "name": "payment_vault",
-            "docs": [
-              "支付代币的金库账户（示例：USDC）"
-            ],
-            "writable": true,
-            "signer": true
+            "name": "start_time",
+            "type": "i64"
           },
           {
-            "name": "payment_mint",
-            "docs": [
-              "支付代币的 Mint（示例：USDC Mint）"
-            ]
+            "name": "end_time",
+            "type": "i64"
           },
-          {
-            "name": "token_program",
-            "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
-          },
-          {
-            "name": "system_program",
-            "address": "11111111111111111111111111111111"
-          },
-          {
-            "name": "rent",
-            "address": "SysvarRent111111111111111111111111111111111"
-          }
-        ],
-        "args": [
           {
             "name": "mine_code",
             "type": "string"
+          },
+          {
+            "name": "rate",
+            "type": "u32"
+          },
+          {
+            "name": "frozen_month",
+            "type": "u8"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "usdc_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "usdc_vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "usdt_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "usdt_vault",
+            "type": "pubkey"
           }
         ]
-      },
-      {
-        "name": "stake",
-        "discriminator": [
-          206,
-          176,
-          202,
-          18,
-          200,
-          209,
-          179,
-          108
-        ],
-        "accounts": [
+      }
+    },
+    {
+      "name": "MineApplication",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "mine_code",
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "operator",
+            "type": "string"
+          },
+          {
+            "name": "relationship",
+            "type": "string"
+          },
+          {
+            "name": "approval1",
+            "type": "string"
+          },
+          {
+            "name": "approval2",
+            "type": "string"
+          },
+          {
+            "name": "approval3",
+            "type": "string"
+          },
+          {
+            "name": "scale",
+            "type": "string"
+          },
+          {
+            "name": "location",
+            "type": "string"
+          },
+          {
+            "name": "finance_scale",
+            "type": "u128"
+          },
+          {
+            "name": "currency",
+            "type": "string"
+          },
+          {
+            "name": "start_date",
+            "type": "i64"
+          },
+          {
+            "name": "end_date",
+            "type": "i64"
+          },
+          {
+            "name": "rate",
+            "type": "u32"
+          },
+          {
+            "name": "frozen_month",
+            "type": "u8"
+          },
+          {
+            "name": "audit_result",
+            "type": "bool"
+          },
+          {
+            "name": "is_signed",
+            "type": "bool"
+          },
+          {
+            "name": "sign_date",
+            "type": {
+              "option": "i64"
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MineApplied",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "mine_code",
+            "type": "string"
+          },
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MineApproved",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "mine_code",
+            "type": "string"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MineSigned",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "mine_code",
+            "type": "string"
+          },
+          {
+            "name": "pool_address",
+            "type": "pubkey"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PoolInitialized",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "mine_code",
+            "type": "string"
+          },
           {
             "name": "pool",
-            "writable": true,
-            "pda": {
-              "seeds": [
-                {
-                  "kind": "const",
-                  "value": [
-                    108,
-                    97,
-                    117,
-                    110,
-                    99,
-                    104,
-                    95,
-                    112,
-                    111,
-                    111,
-                    108
-                  ]
-                },
-                {
-                  "kind": "account",
-                  "path": "pool.mine_code",
-                  "account": "LaunchPool"
-                }
-              ]
-            }
+            "type": "pubkey"
           },
           {
-            "name": "vault",
-            "docs": [
-              "动态选择金库账户"
-            ],
-            "writable": true
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "StakeParams",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "amount",
+            "type": "u64"
           },
           {
-            "name": "from",
-            "docs": [
-              "用户支付账户"
-            ],
-            "writable": true
+            "name": "stable_coin",
+            "type": "string"
           },
           {
-            "name": "record",
-            "docs": [
-              "投资记录PDA"
-            ],
-            "writable": true,
-            "pda": {
-              "seeds": [
-                {
-                  "kind": "const",
-                  "value": [
-                    115,
-                    116,
-                    97,
-                    107,
-                    101
-                  ]
-                },
-                {
-                  "kind": "account",
-                  "path": "pool.mine_code",
-                  "account": "LaunchPool"
-                },
-                {
-                  "kind": "account",
-                  "path": "investor"
-                }
-              ]
-            }
-          },
+            "name": "txn_hash",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "StakeRecord",
+      "type": {
+        "kind": "struct",
+        "fields": [
           {
             "name": "investor",
-            "writable": true,
-            "signer": true
+            "type": "pubkey"
           },
           {
-            "name": "token_program",
-            "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+            "name": "mine_code",
+            "type": "string"
           },
           {
-            "name": "system_program",
-            "address": "11111111111111111111111111111111"
-          }
-        ],
-        "args": [
+            "name": "stable_coin",
+            "type": "string"
+          },
           {
-            "name": "params",
-            "type": {
-              "defined": {
-                "name": "StakeParams"
-              }
-            }
+            "name": "amount",
+            "type": "u128"
+          },
+          {
+            "name": "txn_hash",
+            "type": "string"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
           }
         ]
       }
-    ],
-    "accounts": [
-      {
-        "name": "LaunchPool",
-        "discriminator": [
-          29,
-          65,
-          189,
-          216,
-          67,
-          129,
-          179,
-          61
-        ]
-      },
-      {
-        "name": "MineApplication",
-        "discriminator": [
-          204,
-          74,
-          131,
-          0,
-          56,
-          52,
-          0,
-          194
-        ]
-      },
-      {
-        "name": "StakeRecord",
-        "discriminator": [
-          174,
-          163,
-          11,
-          208,
-          150,
-          236,
-          11,
-          205
-        ]
-      }
-    ],
-    "events": [
-      {
-        "name": "FundsReleased",
-        "discriminator": [
-          178,
-          119,
-          252,
-          230,
-          131,
-          104,
-          210,
-          210
-        ]
-      },
-      {
-        "name": "FundsStaked",
-        "discriminator": [
-          147,
-          121,
-          141,
-          47,
-          234,
-          143,
-          248,
-          87
-        ]
-      },
-      {
-        "name": "MineApplied",
-        "discriminator": [
-          10,
-          194,
-          87,
-          176,
-          99,
-          202,
-          114,
-          39
-        ]
-      },
-      {
-        "name": "MineApproved",
-        "discriminator": [
-          0,
-          93,
-          222,
-          213,
-          112,
-          29,
-          150,
-          153
-        ]
-      },
-      {
-        "name": "MineSigned",
-        "discriminator": [
-          206,
-          89,
-          36,
-          10,
-          105,
-          87,
-          0,
-          201
-        ]
-      },
-      {
-        "name": "PoolInitialized",
-        "discriminator": [
-          100,
-          118,
-          173,
-          87,
-          12,
-          198,
-          254,
-          229
-        ]
-      }
-    ],
-    "errors": [
-      {
-        "code": 6000,
-        "name": "StartTimeInPast",
-        "msg": "Start time must be in the future"
-      },
-      {
-        "code": 6001,
-        "name": "InvalidTimeRange",
-        "msg": "End time must be after start time"
-      },
-      {
-        "code": 6002,
-        "name": "InvalidFrozenPeriod",
-        "msg": "Frozen period must be 1-36 months"
-      },
-      {
-        "code": 6003,
-        "name": "InvalidRate",
-        "msg": "Invalid rate (0-10000 allowed)"
-      },
-      {
-        "code": 6004,
-        "name": "CapExceeded",
-        "msg": "Hard cap exceeded"
-      },
-      {
-        "code": 6005,
-        "name": "NotInFundingPeriod",
-        "msg": "Funding period has ended"
-      },
-      {
-        "code": 6006,
-        "name": "ReleaseNotYet",
-        "msg": "Release time not reached"
-      },
-      {
-        "code": 6007,
-        "name": "NoFundsToRelease",
-        "msg": "No funds to release"
-      },
-      {
-        "code": 6008,
-        "name": "InvalidCoinType",
-        "msg": "Invalid stable coin type (USDC/USDT only)"
-      },
-      {
-        "code": 6009,
-        "name": "InvalidLength",
-        "msg": "String length exceeds limit"
-      },
-      {
-        "code": 6010,
-        "name": "MineNotApproved",
-        "msg": "Mine not approved"
-      },
-      {
-        "code": 6011,
-        "name": "NotApproved",
-        "msg": "Not approved"
-      },
-      {
-        "code": 6012,
-        "name": "AlreadyApproved",
-        "msg": "Already approved"
-      },
-      {
-        "code": 6013,
-        "name": "AlreadySigned",
-        "msg": "Already signed"
-      },
-      {
-        "code": 6014,
-        "name": "Unauthorized",
-        "msg": "Unauthorized access"
-      },
-      {
-        "code": 6015,
-        "name": "ArithmeticOverflow",
-        "msg": "Arithmetic overflow occurred"
-      }
-    ],
-    "types": [
-      {
-        "name": "ApplyMineParams",
-        "type": {
-          "kind": "struct",
-          "fields": [
-            {
-              "name": "mine_code",
-              "type": "string"
-            },
-            {
-              "name": "name",
-              "type": "string"
-            },
-            {
-              "name": "operator",
-              "type": "string"
-            },
-            {
-              "name": "relationship",
-              "type": "string"
-            },
-            {
-              "name": "scale",
-              "type": "string"
-            },
-            {
-              "name": "location",
-              "type": "string"
-            },
-            {
-              "name": "approval1",
-              "type": "string"
-            },
-            {
-              "name": "approval2",
-              "type": "string"
-            },
-            {
-              "name": "approval3",
-              "type": "string"
-            },
-            {
-              "name": "finance_scale",
-              "type": "u128"
-            },
-            {
-              "name": "currency",
-              "type": "string"
-            },
-            {
-              "name": "start_date",
-              "type": "i64"
-            },
-            {
-              "name": "end_date",
-              "type": "i64"
-            },
-            {
-              "name": "rate",
-              "type": "u32"
-            },
-            {
-              "name": "frozen_month",
-              "type": "u8"
-            }
-          ]
-        }
-      },
-      {
-        "name": "FundsReleased",
-        "docs": [
-          "资金解仓事件"
-        ],
-        "type": {
-          "kind": "struct",
-          "fields": [
-            {
-              "name": "pool",
-              "type": "pubkey"
-            },
-            {
-              "name": "receiver",
-              "type": "pubkey"
-            },
-            {
-              "name": "amount",
-              "type": "u64"
-            },
-            {
-              "name": "timestamp",
-              "type": "i64"
-            }
-          ]
-        }
-      },
-      {
-        "name": "FundsStaked",
-        "docs": [
-          "用户投资事件"
-        ],
-        "type": {
-          "kind": "struct",
-          "fields": [
-            {
-              "name": "investor",
-              "type": "pubkey"
-            },
-            {
-              "name": "pool",
-              "type": "pubkey"
-            },
-            {
-              "name": "amount",
-              "type": "u64"
-            },
-            {
-              "name": "timestamp",
-              "type": "i64"
-            }
-          ]
-        }
-      },
-      {
-        "name": "LaunchPool",
-        "type": {
-          "kind": "struct",
-          "fields": [
-            {
-              "name": "authority",
-              "type": "pubkey"
-            },
-            {
-              "name": "price",
-              "type": "u64"
-            },
-            {
-              "name": "cap",
-              "type": "u64"
-            },
-            {
-              "name": "raised",
-              "type": "u64"
-            },
-            {
-              "name": "start_time",
-              "type": "i64"
-            },
-            {
-              "name": "end_time",
-              "type": "i64"
-            },
-            {
-              "name": "mine_code",
-              "type": "string"
-            },
-            {
-              "name": "rate",
-              "type": "u32"
-            },
-            {
-              "name": "frozen_month",
-              "type": "u8"
-            },
-            {
-              "name": "bump",
-              "type": "u8"
-            },
-            {
-              "name": "usdc_mint",
-              "type": "pubkey"
-            },
-            {
-              "name": "usdc_vault",
-              "type": "pubkey"
-            },
-            {
-              "name": "usdt_mint",
-              "type": "pubkey"
-            },
-            {
-              "name": "usdt_vault",
-              "type": "pubkey"
-            }
-          ]
-        }
-      },
-      {
-        "name": "MineApplication",
-        "type": {
-          "kind": "struct",
-          "fields": [
-            {
-              "name": "owner",
-              "type": "pubkey"
-            },
-            {
-              "name": "mine_code",
-              "type": "string"
-            },
-            {
-              "name": "name",
-              "type": "string"
-            },
-            {
-              "name": "operator",
-              "type": "string"
-            },
-            {
-              "name": "relationship",
-              "type": "string"
-            },
-            {
-              "name": "approval1",
-              "type": "string"
-            },
-            {
-              "name": "approval2",
-              "type": "string"
-            },
-            {
-              "name": "approval3",
-              "type": "string"
-            },
-            {
-              "name": "scale",
-              "type": "string"
-            },
-            {
-              "name": "location",
-              "type": "string"
-            },
-            {
-              "name": "finance_scale",
-              "type": "u128"
-            },
-            {
-              "name": "currency",
-              "type": "string"
-            },
-            {
-              "name": "start_date",
-              "type": "i64"
-            },
-            {
-              "name": "end_date",
-              "type": "i64"
-            },
-            {
-              "name": "rate",
-              "type": "u32"
-            },
-            {
-              "name": "frozen_month",
-              "type": "u8"
-            },
-            {
-              "name": "audit_result",
-              "type": "bool"
-            },
-            {
-              "name": "is_signed",
-              "type": "bool"
-            },
-            {
-              "name": "sign_date",
-              "type": {
-                "option": "i64"
-              }
-            },
-            {
-              "name": "bump",
-              "type": "u8"
-            }
-          ]
-        }
-      },
-      {
-        "name": "MineApplied",
-        "type": {
-          "kind": "struct",
-          "fields": [
-            {
-              "name": "mine_code",
-              "type": "string"
-            },
-            {
-              "name": "owner",
-              "type": "pubkey"
-            },
-            {
-              "name": "timestamp",
-              "type": "i64"
-            }
-          ]
-        }
-      },
-      {
-        "name": "MineApproved",
-        "type": {
-          "kind": "struct",
-          "fields": [
-            {
-              "name": "mine_code",
-              "type": "string"
-            },
-            {
-              "name": "timestamp",
-              "type": "i64"
-            }
-          ]
-        }
-      },
-      {
-        "name": "MineSigned",
-        "type": {
-          "kind": "struct",
-          "fields": [
-            {
-              "name": "mine_code",
-              "type": "string"
-            },
-            {
-              "name": "pool_address",
-              "type": "pubkey"
-            },
-            {
-              "name": "timestamp",
-              "type": "i64"
-            }
-          ]
-        }
-      },
-      {
-        "name": "PoolInitialized",
-        "docs": [
-          "资金池初始化事件"
-        ],
-        "type": {
-          "kind": "struct",
-          "fields": [
-            {
-              "name": "mine_code",
-              "type": "string"
-            },
-            {
-              "name": "pool",
-              "type": "pubkey"
-            },
-            {
-              "name": "timestamp",
-              "type": "i64"
-            }
-          ]
-        }
-      },
-      {
-        "name": "StakeParams",
-        "type": {
-          "kind": "struct",
-          "fields": [
-            {
-              "name": "amount",
-              "type": "u64"
-            },
-            {
-              "name": "stable_coin",
-              "type": "string"
-            },
-            {
-              "name": "txn_hash",
-              "type": "string"
-            }
-          ]
-        }
-      },
-      {
-        "name": "StakeRecord",
-        "type": {
-          "kind": "struct",
-          "fields": [
-            {
-              "name": "investor",
-              "type": "pubkey"
-            },
-            {
-              "name": "mine_code",
-              "type": "string"
-            },
-            {
-              "name": "stable_coin",
-              "type": "string"
-            },
-            {
-              "name": "amount",
-              "type": "u128"
-            },
-            {
-              "name": "txn_hash",
-              "type": "string"
-            },
-            {
-              "name": "timestamp",
-              "type": "i64"
-            },
-            {
-              "name": "bump",
-              "type": "u8"
-            }
-          ]
-        }
-      }
-    ]
-  }
-  
+    }
+  ]
+}

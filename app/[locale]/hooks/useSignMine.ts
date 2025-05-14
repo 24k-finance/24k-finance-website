@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-09 09:48:20
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-14 22:21:37
+ * @LastEditTime: 2025-05-15 00:56:28
  * @FilePath: /24k-finance-website/app/[locale]/hooks/useSignMine.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -34,18 +34,24 @@ export const useSignMine = () => {
         launchPoolPDA,
         true // allowOwnerOffCurve - 对 PDA 需要设置为 true
       );
+
+      const receiver = await getAssociatedTokenAddress(
+        usdcMint,
+        wallet.publicKey,
+        false
+      );
+
       console.log('使用的关联代币账户:', poolATA.toBase58(), mineCode, bumpLaunchPool);
-      // 创建一个新的 Keypair 作为临时签名者
-      // const vaultKeypair = Keypair.generate();
       const signMineIx = await program.methods
         .signMine(mineCode, bumpLaunchPool)
         .accounts({
           application: mineAppPDA,
           owner: wallet.publicKey,
           launchPool: launchPoolPDA,
-          paymentVault: poolATA, // 使用 PDA 而不是 keypair
+          paymentVault: poolATA, 
           paymentMint: usdcMint,
           tokenProgram: TOKEN_PROGRAM_ID,
+          receiver,
           systemProgram: SystemProgram.programId,
           rent: SYSVAR_RENT_PUBKEY
         })
@@ -54,7 +60,7 @@ export const useSignMine = () => {
         return {
           txSignature: signMineIx,
           launchPoolPDA,
-          vaultPDA: poolATA // 返回 PDA 而不是临时 keypair
+          vaultPDA: poolATA
         };
     } catch (err) {
       console.error('签署金矿失败:', err);

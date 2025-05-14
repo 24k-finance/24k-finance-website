@@ -106,6 +106,11 @@ export const goldmineFactoryIdl = {
             isSigner: true,
           },
           {
+            name: "receiver",
+            isMut: true,
+            isSigner: false,
+          },
+          {
             name: "paymentMint",
             isMut: false,
             isSigner: false,

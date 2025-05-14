@@ -3,7 +3,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-05 18:31:16
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-12 15:39:53
+ * @LastEditTime: 2025-05-15 00:52:14
  * @FilePath: /24k-finance-website/app/page.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -83,7 +83,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#0a0a10] text-white p-8 sm:p-16 font-[family-name:var(--font-geist-sans)]">
     <div className="max-w-6xl mx-auto">
-      {/* <IdlViewer programId="BS2oxuSzEscqnLEtDBQB44G5h8mZsBp7HBTUQkZSbhHD" /> */}
+      {/* <IdlViewer programId="twzXVjyX5rLv2aFAGw8tBTtvps4cvYaC9UFn95MHEJZ" /> */}
       <MiningPlatformHero />
       <div className="mt-8">
       <div className="flex justify-between items-center mb-8">
