@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-09 09:46:29
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-14 22:18:57
+ * @LastEditTime: 2025-05-15 12:23:45
  * @FilePath: /24k-finance-website/app/[locale]/hooks/useLaunchpadProgram.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -23,8 +23,9 @@ export const getProgramPDAs = (mineCode: string, userPublicKey?: PublicKey) => {
   );
   
   // 启动池 PDA
+  // Buffer.from(mineCode)
   const [launchPoolPDA, bumpLaunchPool] = findProgramAddressSync(
-    [Buffer.from("launch_pool"), Buffer.from(mineCode)], 
+    [Buffer.from("launch_pool")], 
     PROGRAM_ID
   );
   
