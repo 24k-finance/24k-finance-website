@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-09 09:48:20
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-15 11:39:50
+ * @LastEditTime: 2025-05-15 16:00:11
  * @FilePath: /24k-finance-website/app/[locale]/hooks/useSignMine.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -29,6 +29,7 @@ export const useSignMine = () => {
     setError(null);
     console.log('开始签署金矿:', wallet);
     try {
+      const pair = Keypair.generate();
       const { mineAppPDA, launchPoolPDA, bumpLaunchPool } = getProgramPDAs(mineCode);
 
       const poolATA = await getAssociatedTokenAddress(
@@ -50,17 +51,16 @@ export const useSignMine = () => {
           application: mineAppPDA,
           owner: wallet.publicKey,
           launchPool: launchPoolPDA,
-          paymentVault: poolATA, 
+          paymentVault: pair.publicKey, 
           paymentMint: usdcMint,
           tokenProgram: TOKEN_PROGRAM_ID,
           receiver,
           systemProgram: SystemProgram.programId,
           rent: SYSVAR_RENT_PUBKEY
         })
-        // .signers([
-        //   connection,
-        //   wallet.publicKey
-        // ])
+        .signers([
+          pair,
+        ])
         .rpc();
         
         return {
