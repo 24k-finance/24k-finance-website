@@ -182,26 +182,26 @@ export default function StakingIndex() {
         return;
 
         // 调用质押函数
-        const result = await stake(
-          pool.mineCode,
-          stakeParams,
-          userTokenAccount,
-          USDT_MINT
-        );
+        // const result = await stake(
+        //   pool.mineCode,
+        //   stakeParams,
+        //   userTokenAccount,
+        //   USDT_MINT
+        // );
 
         
         
-        if (result) {
-          toast.success(t('success'));
-          console.log("质押交易签名:", result.txSignature);
+        // if (result) {
+        //   toast.success(t('success'));
+        //   console.log("质押交易签名:", result.txSignature);
           
-          // 重置表单
-          setStakeAmount("");
-          setSelectedPool(null);
+        //   // 重置表单
+        //   setStakeAmount("");
+        //   setSelectedPool(null);
           
-          // 可以在这里刷新用户的质押数据
-          // 例如重新获取矿池数据或用户质押记录
-        }
+        //   // 可以在这里刷新用户的质押数据
+        //   // 例如重新获取矿池数据或用户质押记录
+        // }
       } catch (error) {
         console.error("质押失败:", error);
         toast.error(error instanceof Error ? error.message : String(error));
