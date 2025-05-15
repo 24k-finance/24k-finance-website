@@ -178,7 +178,9 @@ export default function StakingIndex() {
           publicKey! // 用户的钱包地址
         );
         
-        
+        alert("staking success: " + amountInSmallestUnit);
+        return;
+
         // 调用质押函数
         const result = await stake(
           pool.mineCode,

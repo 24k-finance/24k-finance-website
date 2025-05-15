@@ -105,11 +105,11 @@ export const goldmineFactoryIdl = {
             isMut: true,
             isSigner: true,
           },
-          {
-            name: "receiver",
-            isMut: true,
-            isSigner: false,
-          },
+          // {
+          //   name: "receiver",
+          //   isMut: true,
+          //   isSigner: false,
+          // },
           {
             name: "paymentMint",
             isMut: false,
@@ -136,10 +136,10 @@ export const goldmineFactoryIdl = {
             name: "mineCode",
             type: "string",
           },
-          {
-            name: "bumpLaunchPool",
-            type: "u8",
-          },
+          // {
+          //   name: "bumpLaunchPool",
+          //   type: "u8",
+          // },
         ],
       },
       {

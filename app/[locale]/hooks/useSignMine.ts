@@ -2,7 +2,7 @@
  * @Author: leelongxi leelongxi@foxmail.com
  * @Date: 2025-05-09 09:48:20
  * @LastEditors: leelongxi leelongxi@foxmail.com
- * @LastEditTime: 2025-05-15 16:00:11
+ * @LastEditTime: 2025-05-15 16:08:26
  * @FilePath: /24k-finance-website/app/[locale]/hooks/useSignMine.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -46,7 +46,7 @@ export const useSignMine = () => {
 
       console.log('使用的关联代币账户:', poolATA.toBase58(), mineCode, bumpLaunchPool);
       const signMineIx = await program.methods
-        .signMine(mineCode, bumpLaunchPool)
+        .signMine(mineCode)
         .accounts({
           application: mineAppPDA,
           owner: wallet.publicKey,
@@ -54,7 +54,7 @@ export const useSignMine = () => {
           paymentVault: pair.publicKey, 
           paymentMint: usdcMint,
           tokenProgram: TOKEN_PROGRAM_ID,
-          receiver,
+          // receiver,
           systemProgram: SystemProgram.programId,
           rent: SYSVAR_RENT_PUBKEY
         })
